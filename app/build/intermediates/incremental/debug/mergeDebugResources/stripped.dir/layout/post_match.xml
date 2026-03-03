@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_general"
+    android:padding="@dimen/padding"
+    tools:context=".MatchActivity"
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/IDBargeZone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/futura_medium_condensed_bt"
+        android:text="@string/BargeZoneHeader"
+        android:textColor="@drawable/text_subead_states"
+        android:textSize="@dimen/subheader_text_size"
+        app:layout_constraintStart_toStartOf="@+id/IDEndgameDirections"
+        app:layout_constraintTop_toBottomOf="@+id/IDEndgameDirections" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/stageTabs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/bg_general"
+        app:layout_constraintStart_toStartOf="@+id/IDHangedDirections"
+        app:layout_constraintTop_toBottomOf="@+id/IDHangedDirections"
+        app:tabBackground="@drawable/button_states"
+        app:tabIndicatorColor="@color/rust"
+        app:tabTextColor="@color/ice">
+
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/ShallowTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Shallow" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/DeepTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/toggle_left_states"
+            android:text="@string/Deep"
+            app:tabBackground="@drawable/toggle_left_states" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <TextView
+        android:id="@+id/IDEndgame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/futura_medium_condensed_bt"
+        android:text="@string/EndGameTitle"
+        android:textColor="@drawable/text_header_states"
+        android:textSize="@dimen/header_text_size"
+        app:layout_constraintStart_toStartOf="@+id/IDEndgameDirections"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/IDEndgameDirections"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/open_sans_italic"
+        android:text="@string/PostMatchDirections"
+        android:textColor="@drawable/text_states"
+        android:textSize="@dimen/instruction_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDEndgame" />
+
+    <TextView
+        android:id="@+id/IDBargeZoneDirections"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/open_sans_italic"
+        android:text="@string/MiscDirections"
+        android:textColor="@drawable/text_states"
+        android:textSize="@dimen/instruction_text_size"
+        app:layout_constraintStart_toStartOf="@+id/IDBargeZone"
+        app:layout_constraintTop_toBottomOf="@+id/IDBargeZone" />
+
+    <TextView
+        android:id="@+id/IDHangedDirections"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/open_sans_italic"
+        android:text="@string/HangedDirections"
+        android:textColor="@color/text_states"
+        android:textSize="@dimen/instruction_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hangSwitch" />
+
+    <TextView
+        android:id="@+id/IDHanged"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/Hanged"
+        android:textColor="@drawable/text_states"
+        android:textSize="@dimen/input_label_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/hangSwitch"
+        app:layout_constraintStart_toEndOf="@+id/hangSwitch"
+        app:layout_constraintTop_toTopOf="@+id/hangSwitch" />
+
+    <TextView
+        android:id="@+id/IDPark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/Park"
+        android:textColor="@drawable/text_states"
+        android:textSize="@dimen/input_label_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/parkSwitch"
+        app:layout_constraintStart_toEndOf="@+id/parkSwitch"
+        app:layout_constraintTop_toTopOf="@+id/parkSwitch" />
+
+    <Switch
+        android:id="@+id/hangSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@drawable/text_states"
+        android:thumb="@drawable/thumb_states"
+        android:track="@drawable/track_states"
+        app:layout_constraintStart_toStartOf="@+id/parkSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/parkSwitch" />
+
+    <Switch
+        android:id="@+id/parkSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@drawable/text_states"
+        android:thumb="@drawable/thumb_states"
+        android:track="@drawable/track_states"
+        app:layout_constraintStart_toStartOf="@+id/IDBargeZoneDirections"
+        app:layout_constraintTop_toBottomOf="@+id/IDBargeZoneDirections" />
+
+    <Button
+        android:id="@+id/GenerateQRButton"
+        android:layout_width="560dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_large_active"
+        android:drawableStart="@drawable/qr"
+        android:drawablePadding="@dimen/bootstrap_alert_paddings"
+        android:paddingLeft="@dimen/generate_qr_button_padding"
+        android:paddingRight="@dimen/generate_qr_button_padding"
+        android:text="@string/GenerateQRCode"
+        android:textColor="@color/ice"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

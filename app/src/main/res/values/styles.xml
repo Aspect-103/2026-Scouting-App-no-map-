@@ -1,0 +1,112 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/melon</item>
+        <item name="colorPrimaryDark">@color/bg_general</item>
+        <item name="colorAccent">@color/heading_active</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="LoadingDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:background">@color/darkgray</item>
+    </style>
+
+    <!-- TEXT -->
+    <style name="HeaderText">
+        <item name="android:textColor">@color/melon</item>
+        <item name="android:fontFamily">@font/barlow_condensed_medium</item>
+        <item name="android:textSize">@dimen/header_text_size</item>
+    </style>
+
+    <style name="AltHeaderText">
+        <item name="android:textColor">@color/sky</item>
+        <item name="android:fontFamily">@font/barlow_condensed_medium</item>
+        <item name="android:textSize">@dimen/alt_header_text_size</item>
+    </style>
+
+    <style name="SubheaderText">
+        <item name="android:textColor">@color/sky</item>
+        <item name="android:fontFamily">@font/barlow_condensed_medium</item>
+        <item name="android:textSize">@dimen/subheader_text_size</item>
+    </style>
+
+    <style name="AltSubheaderText">
+        <item name="android:textColor">@color/cloud</item>
+        <item name="android:fontFamily">@font/barlow_condensed_medium</item>
+        <item name="android:textSize">@dimen/alt_subheader_text_size</item>
+    </style>
+
+    <style name="InstructionText">
+        <item name="android:textColor">@color/cloud</item>
+        <item name="android:fontFamily">@font/open_sans_italic</item>
+        <item name="android:textSize">@dimen/instruction_text_size</item>
+    </style>
+
+    <style name="InstructionSmallText">
+        <item name="android:textColor">@color/cloud</item>
+        <item name="android:fontFamily">@font/open_sans_italic</item>
+        <item name="android:textSize">@dimen/instruction_small_text_size</item>
+    </style>
+
+    <style name="ButtonText">
+        <item name="android:textColor">@color/ice</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
+    <style name="InputFieldLabelText">
+        <item name="android:textColor">@color/cloud</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textSize">@dimen/input_label_text_size</item>
+    </style>
+
+    <style name="InputFieldText">
+        <item name="android:textColor">@color/charcoal</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textSize">@dimen/input_text_text_size</item>
+    </style>
+
+    <style name="ToggleLabelText">
+        <item name="android:textColor">@color/cloud</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textSize">@dimen/toggle_label_text_size</item>
+    </style>
+
+    <style name="CounterLabelText">
+        <item name="android:textColor">@color/cloud</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textSize">@dimen/counter_label_text_size</item>
+    </style>
+
+    <style name="CounterText">
+        <item name="android:textColor">@color/cloud</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textSize">@dimen/counter_text_size</item>
+    </style>
+
+    <style name="AutonCountdownLabel">
+        <item name="android:textColor">@color/sky</item>
+        <item name="android:fontFamily">@font/barlow_condensed_medium</item>
+        <item name="android:textSize">@dimen/auton_countdown_label_text_size</item>
+    </style>
+
+    <style name="WarningText">
+        <item name="android:textColor">@color/banana</item>
+        <item name="android:fontFamily">@font/barlow_condensed_medium</item>
+        <item name="android:textSize">@dimen/warning_text</item>
+    </style>
+
+</resources>

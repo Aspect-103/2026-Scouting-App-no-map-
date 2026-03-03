@@ -1,0 +1,2 @@
+rootProject.name = 'Mercury 1089 Scouting App'
+include ':app'

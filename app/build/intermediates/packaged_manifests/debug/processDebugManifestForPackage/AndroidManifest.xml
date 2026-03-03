@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mercury1089.scoutingapp2025"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="35" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:extractNativeLibs="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/team_logo_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/team_logo_icon_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.mercury1089.Scouting_App_2026.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.mercury1089.Scouting_App_2026.PregameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.mercury1089.Scouting_App_2026.MatchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.mercury1089.Scouting_App_2026.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+             <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        -->
+    </application>
+
+</manifest>

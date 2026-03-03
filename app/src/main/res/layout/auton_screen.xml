@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/autonFieldContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/charcoal">
+
+    <TextView
+        android:id="@+id/IDPossessionDirections"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Possession Information"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NextTeleopButton" />
+
+    <!-- FIELD BACKGROUND IMAGE -->
+    <ImageView
+        android:id="@+id/fieldBackgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/field_2026_horizontal"
+        android:contentDescription="FRC Field 2026"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/autonTimerBar" />
+
+    <!-- RED ALLIANCE GRID LAYOUT (LEFT SIDE) -->
+    <GridLayout
+        android:id="@+id/redAllianceGrid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="6"
+        android:rowCount="5"
+        app:layout_constraintStart_toStartOf="@+id/fieldBackgroundImage"
+        app:layout_constraintEnd_toStartOf="@+id/blueAllianceGrid"
+        app:layout_constraintTop_toTopOf="@+id/fieldBackgroundImage"
+        app:layout_constraintBottom_toBottomOf="@+id/fieldBackgroundImage">
+
+        <!-- Row 0 -->
+        <ImageButton android:id="@+id/red_0_0" android:tag="red_0_0" android:layout_row="0" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 0 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_0_1" android:tag="red_0_1" android:layout_row="0" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 0 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_0_2" android:tag="red_0_2" android:layout_row="0" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 0 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_0_3" android:tag="red_0_3" android:layout_row="0" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 0 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_0_4" android:tag="red_0_4" android:layout_row="0" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 0 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_0_5" android:tag="red_0_5" android:layout_row="0" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 0 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+
+        <!-- Row 1 -->
+        <ImageButton android:id="@+id/red_1_0" android:tag="red_1_0" android:layout_row="1" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 1 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_1_1" android:tag="red_1_1" android:layout_row="1" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 1 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_1_2" android:tag="red_1_2" android:layout_row="1" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 1 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_1_3" android:tag="red_1_3" android:layout_row="1" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 1 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_1_4" android:tag="red_1_4" android:layout_row="1" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 1 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_1_5" android:tag="red_1_5" android:layout_row="1" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 1 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+
+        <!-- Row 2 -->
+        <ImageButton android:id="@+id/red_2_0" android:tag="red_2_0" android:layout_row="2" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 2 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_2_1" android:tag="red_2_1" android:layout_row="2" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 2 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_2_2" android:tag="red_2_2" android:layout_row="2" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 2 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_2_3" android:tag="red_2_3" android:layout_row="2" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 2 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_2_4" android:tag="red_2_4" android:layout_row="2" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 2 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_2_5" android:tag="red_2_5" android:layout_row="2" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 2 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+
+        <!-- Row 3 -->
+        <ImageButton android:id="@+id/red_3_0" android:tag="red_3_0" android:layout_row="3" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 3 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_3_1" android:tag="red_3_1" android:layout_row="3" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 3 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_3_2" android:tag="red_3_2" android:layout_row="3" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 3 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_3_3" android:tag="red_3_3" android:layout_row="3" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 3 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_3_4" android:tag="red_3_4" android:layout_row="3" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 3 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_3_5" android:tag="red_3_5" android:layout_row="3" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 3 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+
+        <!-- Row 4 -->
+        <ImageButton android:id="@+id/red_4_0" android:tag="red_4_0" android:layout_row="4" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 4 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_4_1" android:tag="red_4_1" android:layout_row="4" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 4 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_4_2" android:tag="red_4_2" android:layout_row="4" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 4 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_4_3" android:tag="red_4_3" android:layout_row="4" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 4 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_4_4" android:tag="red_4_4" android:layout_row="4" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 4 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/red_4_5" android:tag="red_4_5" android:layout_row="4" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Red Position Row 4 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+    </GridLayout>
+
+    <!-- BLUE ALLIANCE GRID LAYOUT (RIGHT SIDE) -->
+    <GridLayout
+        android:id="@+id/blueAllianceGrid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="6"
+        android:rowCount="5"
+        app:layout_constraintStart_toEndOf="@+id/redAllianceGrid"
+        app:layout_constraintEnd_toEndOf="@+id/fieldBackgroundImage"
+        app:layout_constraintTop_toTopOf="@+id/fieldBackgroundImage"
+        app:layout_constraintBottom_toBottomOf="@+id/fieldBackgroundImage">
+
+        <!-- Row 0 -->
+        <ImageButton android:id="@+id/blue_0_0" android:tag="blue_0_0" android:layout_row="0" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 0 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_0_1" android:tag="blue_0_1" android:layout_row="0" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 0 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_0_2" android:tag="blue_0_2" android:layout_row="0" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 0 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_0_3" android:tag="blue_0_3" android:layout_row="0" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 0 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_0_4" android:tag="blue_0_4" android:layout_row="0" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 0 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_0_5" android:tag="blue_0_5" android:layout_row="0" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 0 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+
+        <!-- Row 1 -->
+        <ImageButton android:id="@+id/blue_1_0" android:tag="blue_1_0" android:layout_row="1" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 1 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_1_1" android:tag="blue_1_1" android:layout_row="1" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 1 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_1_2" android:tag="blue_1_2" android:layout_row="1" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 1 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_1_3" android:tag="blue_1_3" android:layout_row="1" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 1 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_1__4" android:tag="blue_1_4" android:layout_row="1" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 1 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_1_5" android:tag="blue_1_5" android:layout_row="1" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 1 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+
+        <!-- Row 2 -->
+        <ImageButton android:id="@+id/blue_2_0" android:tag="blue_2_0" android:layout_row="2" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 2 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_2_1" android:tag="blue_2_1" android:layout_row="2" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 2 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_2_2" android:tag="blue_2_2" android:layout_row="2" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 2 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_2_3" android:tag="blue_2_3" android:layout_row="2" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 2 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_2_4" android:tag="blue_2_4" android:layout_row="2" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 2 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_2_5" android:tag="blue_2_5" android:layout_row="2" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 2 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+
+        <!-- Row 3 -->
+        <ImageButton android:id="@+id/blue_3_0" android:tag="blue_3_0" android:layout_row="3" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 3 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_3_1" android:tag="blue_3_1" android:layout_row="3" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 3 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_3_2" android:tag="blue_3_2" android:layout_row="3" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 3 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_3_3" android:tag="blue_3_3" android:layout_row="3" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 3 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_3_4" android:tag="blue_3_4" android:layout_row="3" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 3 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_3_5" android:tag="blue_3_5" android:layout_row="3" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 3 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+
+        <!-- Row 4 -->
+        <ImageButton android:id="@+id/blue_4_0" android:tag="blue_4_0" android:layout_row="4" android:layout_column="0" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 4 Col 0" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_4_1" android:tag="blue_4_1" android:layout_row="4" android:layout_column="1" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 4 Col 1" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_4_2" android:tag="blue_4_2" android:layout_row="4" android:layout_column="2" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 4 Col 2" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_4_3" android:tag="blue_4_3" android:layout_row="4" android:layout_column="3" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 4 Col 3" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_4_4" android:tag="blue_4_4" android:layout_row="4" android:layout_column="4" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 4 Col 4" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+        <ImageButton android:id="@+id/blue_4_5" android:tag="blue_4_5" android:layout_row="4" android:layout_column="5" android:layout_width="0dp" android:layout_height="0dp" android:background="@drawable/position_box_outlined_neutral" android:scaleType="fitCenter" android:contentDescription="Blue Position Row 4 Col 5" android:src="@android:color/transparent" app:layout_columnWeight="1" app:layout_rowWeight="1" />
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/IDMiscDirections"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/futura_medium_condensed_bt"
+        android:text="Scoring Directions"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blueAllianceGrid" />
+
+    <LinearLayout
+        android:id="@+id/leaveSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDMiscDirections">
+
+        <TextView
+            android:id="@+id/IDLeave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Left Starting Area"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:gravity="center_vertical" />
+
+        <Switch
+            android:id="@+id/LeaveSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fellOverSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leaveSection">
+
+        <TextView
+            android:id="@+id/IDFellOver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fell Over"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:gravity="center_vertical" />
+
+        <Switch
+            android:id="@+id/FellOverSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+    <!-- TOP EDGE BAR -->
+    <ImageView
+        android:id="@+id/topEdgeBar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:visibility="gone"
+        android:background="@android:color/holo_yellow_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fellOverSection" />
+
+    <!-- BOTTOM EDGE BAR -->
+    <ImageView
+        android:id="@+id/bottomEdgeBar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:visibility="gone"
+        android:background="@android:color/holo_yellow_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/autonTimerBar" />
+
+    <!-- LEFT EDGE BAR -->
+    <ImageView
+        android:id="@+id/leftEdgeBar"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@android:color/holo_yellow_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fellOverSection"
+        app:layout_constraintBottom_toTopOf="@+id/autonTimerBar" />
+
+    <!-- RIGHT EDGE BAR -->
+    <ImageView
+        android:id="@+id/rightEdgeBar"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@android:color/holo_yellow_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fellOverSection"
+        app:layout_constraintBottom_toTopOf="@+id/autonTimerBar" />
+
+    <Button
+        android:id="@+id/NextTeleopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Next: Teleop Phase"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:background="@drawable/button_large_active"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/autonTimerBar" />
+
+    <!-- AUTON TIMER BAR -->
+    <LinearLayout
+        android:id="@+id/autonTimerBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_general"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/IDAutonSeconds1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auton Time:" />
+
+        <TextView
+            android:id="@+id/AutonSeconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20" />
+
+        <TextView
+            android:id="@+id/TeleopWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚠️ TELEOP STARTING!"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/timerIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/timer"
+            android:contentDescription="Timer" />
