@@ -2,21 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScoredPopupWindow"
-    android:layout_width="@dimen/field_tower_popup_width"
+    android:id="@+id/autonFieldContainer"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Contents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/bg_scoring_popup"
-        android:padding="@dimen/padding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    android:background="@color/night">
 
         <!-- ═════════════════════════════════════════
              COLLECTING SECTION
@@ -897,17 +886,3 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/CancelButton"
             app:layout_constraintTop_toBottomOf="@+id/MissedCounterToggle" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/carat"
-        android:layout_width="@dimen/carat_width"
-        android:layout_height="@dimen/carat_height"
-        android:layout_marginStart="32dp"
-        android:background="@drawable/carat"
-        android:rotation="180"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
