@@ -32,7 +32,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return Teleop.newInstance();
             case 2:
-                return EndGame.newInstance();
+                return Endgame.newInstance();
             default:
                 return Auton.newInstance();
         }

@@ -5,7 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -24,541 +25,301 @@ public final class TeleopScreenBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final RadioGroup AlgaePossessedButtonGroupTeleop;
+  public final RadioButton AchievedLevel1;
 
   @NonNull
-  public final RadioGroup CoralPossessedButtonGroupTeleop;
+  public final RadioGroup AttemptedClimbToggle;
 
   @NonNull
-  public final TextView IDAlgaePossessedTeleop;
+  public final Button CancelButton;
 
   @NonNull
-  public final TextView IDAlgaePossessionTeleop;
+  public final RadioButton Center;
 
   @NonNull
-  public final TextView IDAlgaeTeleop;
+  public final TextView ClimbingDesc;
 
   @NonNull
-  public final TextView IDCoralPossessedTeleop;
+  public final TextView ClimbingTitle;
 
   @NonNull
-  public final TextView IDCoralPossessionTeleop;
+  public final RadioButton Collecting0To25Fuel;
 
   @NonNull
-  public final TextView IDCoralTeleop;
+  public final RadioButton Collecting26To50Fuel;
 
   @NonNull
-  public final TextView IDDealgaefyingTeleop;
+  public final RadioButton Collecting51to755Fuel;
 
   @NonNull
-  public final TextView IDFellOverTeleop;
+  public final RadioGroup CollectingCounterToggle;
 
   @NonNull
-  public final TextView IDL1CoralTeleop;
+  public final TextView CollectingDesc;
 
   @NonNull
-  public final TextView IDL1MissedTeleop;
+  public final RadioButton CollectingMoreThan75Fuel;
 
   @NonNull
-  public final TextView IDL1ScoredTeleop;
+  public final TextView CollectingTitle;
 
   @NonNull
-  public final TextView IDL2AlgaeTeleop;
+  public final ConstraintLayout Contents;
 
   @NonNull
-  public final TextView IDL2AttemptedTeleop;
+  public final RadioButton DNA;
 
   @NonNull
-  public final TextView IDL2CoralTeleop;
+  public final RadioButton DidNotAttempt;
 
   @NonNull
-  public final TextView IDL2MissedTeleop;
+  public final TextView EndgameWarning;
 
   @NonNull
-  public final TextView IDL2RemovedTeleop;
+  public final TextView FellOverLabel;
 
   @NonNull
-  public final TextView IDL2ScoredTeleop;
+  public final RadioButton Ferrying0To25Fuel;
 
   @NonNull
-  public final TextView IDL3AlgaeTeleop;
+  public final RadioButton Ferrying26To50Fuel;
 
   @NonNull
-  public final TextView IDL3AttemptedTeleop;
+  public final RadioButton Ferrying51to755Fuel;
 
   @NonNull
-  public final TextView IDL3CoralTeleop;
+  public final RadioGroup FerryingCounterToggle;
 
   @NonNull
-  public final TextView IDL3MissedTeleop;
+  public final TextView FerryingDesc;
 
   @NonNull
-  public final TextView IDL3RemovedTeleop;
+  public final RadioButton FerryingMoreThan75Fuel;
 
   @NonNull
-  public final TextView IDL3ScoredTeleop;
+  public final TextView FerryingTitle;
 
   @NonNull
-  public final TextView IDL4CoralTeleop;
+  public final TextView IDTeleopSeconds1;
 
   @NonNull
-  public final TextView IDL4MissedTeleop;
+  public final RadioButton Left;
 
   @NonNull
-  public final TextView IDL4ScoredTeleop;
+  public final RadioButton Level1;
 
   @NonNull
-  public final TextView IDMiscDirectionsTeleop;
+  public final RadioButton Missed0To25Fuel;
 
   @NonNull
-  public final TextView IDNetMissedTeleop;
+  public final RadioButton Missed26To50Fuel;
 
   @NonNull
-  public final TextView IDNetScoredTeleop;
+  public final RadioButton Missed51to755Fuel;
 
   @NonNull
-  public final TextView IDNetTeleop;
+  public final RadioGroup MissedCounterToggle;
 
   @NonNull
-  public final TextView IDPlayedDefenseTeleop;
+  public final TextView MissedDesc;
 
   @NonNull
-  public final TextView IDPossessionDirectionsTeleop;
+  public final RadioButton MissedMoreThan75Fuel;
 
   @NonNull
-  public final TextView IDProcessorMissedTeleop;
+  public final TextView MissedTitle;
 
   @NonNull
-  public final TextView IDProcessorScoredTeleop;
+  public final Button NextButtonTeleop;
 
   @NonNull
-  public final TextView IDProcessorTeleop;
+  public final Switch NoShowSwitch;
 
   @NonNull
-  public final TextView IDReefTeleop;
+  public final RadioButton Right;
 
   @NonNull
-  public final RadioGroup L1MissedButtonGroupTeleop;
+  public final Button SaveButton;
 
   @NonNull
-  public final TextView L1MissedCounterTeleop;
+  public final ConstraintLayout ScoredPopupWindow;
 
   @NonNull
-  public final RadioGroup L1ScoredButtonGroupTeleop;
+  public final TextView ScoringTitle;
 
   @NonNull
-  public final TextView L1ScoredCounterTeleop;
+  public final RadioButton Start25;
 
   @NonNull
-  public final RadioGroup L2AttemptedButtonGroupTeleop;
+  public final RadioButton Start50;
 
   @NonNull
-  public final TextView L2AttemptedCounterTeleop;
+  public final RadioButton Start75;
 
   @NonNull
-  public final RadioGroup L2MissedButtonGroupTeleop;
+  public final TextView StartDesc;
 
   @NonNull
-  public final TextView L2MissedCounterTeleop;
+  public final RadioButton StartEmpty;
 
   @NonNull
-  public final RadioGroup L2RemovedButtonGroupTeleop;
+  public final RadioButton StartFull;
 
   @NonNull
-  public final TextView L2RemovedCounterTeleop;
+  public final RadioGroup StartLevelToggle;
 
   @NonNull
-  public final RadioGroup L2ScoredButtonGroupTeleop;
+  public final TextView StartTitle;
 
   @NonNull
-  public final TextView L2ScoredCounterTeleop;
+  public final RadioButton Stop25;
 
   @NonNull
-  public final RadioGroup L3AttemptedButtonGroupTeleop;
+  public final RadioButton Stop50;
 
   @NonNull
-  public final TextView L3AttemptedCounterTeleop;
+  public final RadioButton Stop75;
 
   @NonNull
-  public final RadioGroup L3MissedButtonGroupTeleop;
+  public final TextView StopDesc;
 
   @NonNull
-  public final TextView L3MissedCounterTeleop;
+  public final RadioButton StopEmpty;
 
   @NonNull
-  public final RadioGroup L3RemovedButtonGroupTeleop;
+  public final RadioButton StopFull;
 
   @NonNull
-  public final TextView L3RemovedCounterTeleop;
+  public final RadioGroup StopLevelToggle;
 
   @NonNull
-  public final RadioGroup L3ScoredButtonGroupTeleop;
+  public final TextView StopTitle;
 
   @NonNull
-  public final TextView L3ScoredCounterTeleop;
+  public final RadioGroup SuccessfulClimbed;
 
   @NonNull
-  public final RadioGroup L4MissedButtonGroupTeleop;
+  public final TextView SuccessfullyClimbed;
 
   @NonNull
-  public final TextView L4MissedCounterTeleop;
+  public final RadioGroup SuccessfullyClimbedLocation;
 
   @NonNull
-  public final RadioGroup L4ScoredButtonGroupTeleop;
+  public final TextView TeleopSeconds;
 
   @NonNull
-  public final TextView L4ScoredCounterTeleop;
+  public final TextView TowerClimbPlacement;
 
   @NonNull
-  public final RadioGroup NetMissedButtonGroupTeleop;
+  public final ImageView bottomEdgeBar;
 
   @NonNull
-  public final RadioGroup NetScoredButtonGroupTeleop;
+  public final ImageView leftEdgeBar;
 
   @NonNull
-  public final Button NextClimbButtonTeleop;
+  public final ImageView rightEdgeBar;
 
   @NonNull
-  public final RadioGroup ProcessorMissedButtonGroupTeleop;
-
-  @NonNull
-  public final TextView ProcessorMissedCounterTeleop;
-
-  @NonNull
-  public final RadioGroup ProcessorScoredButtonGroupTeleop;
-
-  @NonNull
-  public final TextView ProcessorScoredCounterTeleop;
-
-  @NonNull
-  public final ConstraintLayout algaeLayoutTeleop;
-
-  @NonNull
-  public final TextView algaePossessedCounterTeleop;
-
-  @NonNull
-  public final ConstraintLayout algaePossesssionLayoutTeleop;
-
-  @NonNull
-  public final ImageButton attemptedL2ButtonTeleop;
-
-  @NonNull
-  public final ImageButton attemptedL3ButtonTeleop;
-
-  @NonNull
-  public final ConstraintLayout coralLayoutTeleop;
-
-  @NonNull
-  public final TextView coralPossessedCounterTeleop;
-
-  @NonNull
-  public final ConstraintLayout coralPossessionLayoutTeleop;
-
-  @NonNull
-  public final Switch fellOverSwitchTeleop;
-
-  @NonNull
-  public final ImageButton missedL1ButtonTeleop;
-
-  @NonNull
-  public final ImageButton missedL2ButtonTeleop;
-
-  @NonNull
-  public final ImageButton missedL3ButtonTeleop;
-
-  @NonNull
-  public final ImageButton missedL4ButtonTeleop;
-
-  @NonNull
-  public final ImageButton missedNetButtonTeleop;
-
-  @NonNull
-  public final ImageButton missedProcessorButtonTeleop;
-
-  @NonNull
-  public final TextView netMissedCounterTeleop;
-
-  @NonNull
-  public final TextView netScoredCounterTeleop;
-
-  @NonNull
-  public final ImageButton notAttemptedL2ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notAttemptedL3ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notMissedL1ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notMissedL2ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notMissedL3ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notMissedL4ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notMissedNetButtonTeleop;
-
-  @NonNull
-  public final ImageButton notMissedProcessorButtonTeleop;
-
-  @NonNull
-  public final ImageButton notPossessedAlgaeButtonTeleop;
-
-  @NonNull
-  public final ImageButton notPossessedCoralButtonTeleop;
-
-  @NonNull
-  public final ImageButton notRemovedL2ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notRemovedL3ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notScoredL1ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notScoredL2ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notScoredL3ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notScoredL4ButtonTeleop;
-
-  @NonNull
-  public final ImageButton notScoredNetButtonTeleop;
-
-  @NonNull
-  public final ImageButton notScoredProcessorButtonTeleop;
-
-  @NonNull
-  public final Switch playedDefenseSwitchTeleop;
-
-  @NonNull
-  public final ImageButton possessedAlgaeButtonTeleop;
-
-  @NonNull
-  public final ImageButton possessedCoralButtonTeleop;
-
-  @NonNull
-  public final ConstraintLayout processorNetLayoutTeleop;
-
-  @NonNull
-  public final ImageButton removedL2ButtonTeleop;
-
-  @NonNull
-  public final ImageButton removedL3ButtonTeleop;
-
-  @NonNull
-  public final ImageButton scoredL1ButtonTeleop;
-
-  @NonNull
-  public final ImageButton scoredL2ButtonTeleop;
-
-  @NonNull
-  public final ImageButton scoredL3ButtonTeleop;
-
-  @NonNull
-  public final ImageButton scoredL4ButtonTeleop;
-
-  @NonNull
-  public final ImageButton scoredNetButtonTeleop;
-
-  @NonNull
-  public final ImageButton scoredProcessorButtonTeleop;
-
-  @NonNull
-  public final ConstraintLayout teleop;
+  public final ImageView topEdgeBar;
 
   private TeleopScreenBinding(@NonNull ConstraintLayout rootView,
-      @NonNull RadioGroup AlgaePossessedButtonGroupTeleop,
-      @NonNull RadioGroup CoralPossessedButtonGroupTeleop, @NonNull TextView IDAlgaePossessedTeleop,
-      @NonNull TextView IDAlgaePossessionTeleop, @NonNull TextView IDAlgaeTeleop,
-      @NonNull TextView IDCoralPossessedTeleop, @NonNull TextView IDCoralPossessionTeleop,
-      @NonNull TextView IDCoralTeleop, @NonNull TextView IDDealgaefyingTeleop,
-      @NonNull TextView IDFellOverTeleop, @NonNull TextView IDL1CoralTeleop,
-      @NonNull TextView IDL1MissedTeleop, @NonNull TextView IDL1ScoredTeleop,
-      @NonNull TextView IDL2AlgaeTeleop, @NonNull TextView IDL2AttemptedTeleop,
-      @NonNull TextView IDL2CoralTeleop, @NonNull TextView IDL2MissedTeleop,
-      @NonNull TextView IDL2RemovedTeleop, @NonNull TextView IDL2ScoredTeleop,
-      @NonNull TextView IDL3AlgaeTeleop, @NonNull TextView IDL3AttemptedTeleop,
-      @NonNull TextView IDL3CoralTeleop, @NonNull TextView IDL3MissedTeleop,
-      @NonNull TextView IDL3RemovedTeleop, @NonNull TextView IDL3ScoredTeleop,
-      @NonNull TextView IDL4CoralTeleop, @NonNull TextView IDL4MissedTeleop,
-      @NonNull TextView IDL4ScoredTeleop, @NonNull TextView IDMiscDirectionsTeleop,
-      @NonNull TextView IDNetMissedTeleop, @NonNull TextView IDNetScoredTeleop,
-      @NonNull TextView IDNetTeleop, @NonNull TextView IDPlayedDefenseTeleop,
-      @NonNull TextView IDPossessionDirectionsTeleop, @NonNull TextView IDProcessorMissedTeleop,
-      @NonNull TextView IDProcessorScoredTeleop, @NonNull TextView IDProcessorTeleop,
-      @NonNull TextView IDReefTeleop, @NonNull RadioGroup L1MissedButtonGroupTeleop,
-      @NonNull TextView L1MissedCounterTeleop, @NonNull RadioGroup L1ScoredButtonGroupTeleop,
-      @NonNull TextView L1ScoredCounterTeleop, @NonNull RadioGroup L2AttemptedButtonGroupTeleop,
-      @NonNull TextView L2AttemptedCounterTeleop, @NonNull RadioGroup L2MissedButtonGroupTeleop,
-      @NonNull TextView L2MissedCounterTeleop, @NonNull RadioGroup L2RemovedButtonGroupTeleop,
-      @NonNull TextView L2RemovedCounterTeleop, @NonNull RadioGroup L2ScoredButtonGroupTeleop,
-      @NonNull TextView L2ScoredCounterTeleop, @NonNull RadioGroup L3AttemptedButtonGroupTeleop,
-      @NonNull TextView L3AttemptedCounterTeleop, @NonNull RadioGroup L3MissedButtonGroupTeleop,
-      @NonNull TextView L3MissedCounterTeleop, @NonNull RadioGroup L3RemovedButtonGroupTeleop,
-      @NonNull TextView L3RemovedCounterTeleop, @NonNull RadioGroup L3ScoredButtonGroupTeleop,
-      @NonNull TextView L3ScoredCounterTeleop, @NonNull RadioGroup L4MissedButtonGroupTeleop,
-      @NonNull TextView L4MissedCounterTeleop, @NonNull RadioGroup L4ScoredButtonGroupTeleop,
-      @NonNull TextView L4ScoredCounterTeleop, @NonNull RadioGroup NetMissedButtonGroupTeleop,
-      @NonNull RadioGroup NetScoredButtonGroupTeleop, @NonNull Button NextClimbButtonTeleop,
-      @NonNull RadioGroup ProcessorMissedButtonGroupTeleop,
-      @NonNull TextView ProcessorMissedCounterTeleop,
-      @NonNull RadioGroup ProcessorScoredButtonGroupTeleop,
-      @NonNull TextView ProcessorScoredCounterTeleop, @NonNull ConstraintLayout algaeLayoutTeleop,
-      @NonNull TextView algaePossessedCounterTeleop,
-      @NonNull ConstraintLayout algaePossesssionLayoutTeleop,
-      @NonNull ImageButton attemptedL2ButtonTeleop, @NonNull ImageButton attemptedL3ButtonTeleop,
-      @NonNull ConstraintLayout coralLayoutTeleop, @NonNull TextView coralPossessedCounterTeleop,
-      @NonNull ConstraintLayout coralPossessionLayoutTeleop, @NonNull Switch fellOverSwitchTeleop,
-      @NonNull ImageButton missedL1ButtonTeleop, @NonNull ImageButton missedL2ButtonTeleop,
-      @NonNull ImageButton missedL3ButtonTeleop, @NonNull ImageButton missedL4ButtonTeleop,
-      @NonNull ImageButton missedNetButtonTeleop, @NonNull ImageButton missedProcessorButtonTeleop,
-      @NonNull TextView netMissedCounterTeleop, @NonNull TextView netScoredCounterTeleop,
-      @NonNull ImageButton notAttemptedL2ButtonTeleop,
-      @NonNull ImageButton notAttemptedL3ButtonTeleop, @NonNull ImageButton notMissedL1ButtonTeleop,
-      @NonNull ImageButton notMissedL2ButtonTeleop, @NonNull ImageButton notMissedL3ButtonTeleop,
-      @NonNull ImageButton notMissedL4ButtonTeleop, @NonNull ImageButton notMissedNetButtonTeleop,
-      @NonNull ImageButton notMissedProcessorButtonTeleop,
-      @NonNull ImageButton notPossessedAlgaeButtonTeleop,
-      @NonNull ImageButton notPossessedCoralButtonTeleop,
-      @NonNull ImageButton notRemovedL2ButtonTeleop, @NonNull ImageButton notRemovedL3ButtonTeleop,
-      @NonNull ImageButton notScoredL1ButtonTeleop, @NonNull ImageButton notScoredL2ButtonTeleop,
-      @NonNull ImageButton notScoredL3ButtonTeleop, @NonNull ImageButton notScoredL4ButtonTeleop,
-      @NonNull ImageButton notScoredNetButtonTeleop,
-      @NonNull ImageButton notScoredProcessorButtonTeleop,
-      @NonNull Switch playedDefenseSwitchTeleop, @NonNull ImageButton possessedAlgaeButtonTeleop,
-      @NonNull ImageButton possessedCoralButtonTeleop,
-      @NonNull ConstraintLayout processorNetLayoutTeleop,
-      @NonNull ImageButton removedL2ButtonTeleop, @NonNull ImageButton removedL3ButtonTeleop,
-      @NonNull ImageButton scoredL1ButtonTeleop, @NonNull ImageButton scoredL2ButtonTeleop,
-      @NonNull ImageButton scoredL3ButtonTeleop, @NonNull ImageButton scoredL4ButtonTeleop,
-      @NonNull ImageButton scoredNetButtonTeleop, @NonNull ImageButton scoredProcessorButtonTeleop,
-      @NonNull ConstraintLayout teleop) {
+      @NonNull RadioButton AchievedLevel1, @NonNull RadioGroup AttemptedClimbToggle,
+      @NonNull Button CancelButton, @NonNull RadioButton Center, @NonNull TextView ClimbingDesc,
+      @NonNull TextView ClimbingTitle, @NonNull RadioButton Collecting0To25Fuel,
+      @NonNull RadioButton Collecting26To50Fuel, @NonNull RadioButton Collecting51to755Fuel,
+      @NonNull RadioGroup CollectingCounterToggle, @NonNull TextView CollectingDesc,
+      @NonNull RadioButton CollectingMoreThan75Fuel, @NonNull TextView CollectingTitle,
+      @NonNull ConstraintLayout Contents, @NonNull RadioButton DNA,
+      @NonNull RadioButton DidNotAttempt, @NonNull TextView EndgameWarning,
+      @NonNull TextView FellOverLabel, @NonNull RadioButton Ferrying0To25Fuel,
+      @NonNull RadioButton Ferrying26To50Fuel, @NonNull RadioButton Ferrying51to755Fuel,
+      @NonNull RadioGroup FerryingCounterToggle, @NonNull TextView FerryingDesc,
+      @NonNull RadioButton FerryingMoreThan75Fuel, @NonNull TextView FerryingTitle,
+      @NonNull TextView IDTeleopSeconds1, @NonNull RadioButton Left, @NonNull RadioButton Level1,
+      @NonNull RadioButton Missed0To25Fuel, @NonNull RadioButton Missed26To50Fuel,
+      @NonNull RadioButton Missed51to755Fuel, @NonNull RadioGroup MissedCounterToggle,
+      @NonNull TextView MissedDesc, @NonNull RadioButton MissedMoreThan75Fuel,
+      @NonNull TextView MissedTitle, @NonNull Button NextButtonTeleop, @NonNull Switch NoShowSwitch,
+      @NonNull RadioButton Right, @NonNull Button SaveButton,
+      @NonNull ConstraintLayout ScoredPopupWindow, @NonNull TextView ScoringTitle,
+      @NonNull RadioButton Start25, @NonNull RadioButton Start50, @NonNull RadioButton Start75,
+      @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty, @NonNull RadioButton StartFull,
+      @NonNull RadioGroup StartLevelToggle, @NonNull TextView StartTitle,
+      @NonNull RadioButton Stop25, @NonNull RadioButton Stop50, @NonNull RadioButton Stop75,
+      @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty, @NonNull RadioButton StopFull,
+      @NonNull RadioGroup StopLevelToggle, @NonNull TextView StopTitle,
+      @NonNull RadioGroup SuccessfulClimbed, @NonNull TextView SuccessfullyClimbed,
+      @NonNull RadioGroup SuccessfullyClimbedLocation, @NonNull TextView TeleopSeconds,
+      @NonNull TextView TowerClimbPlacement, @NonNull ImageView bottomEdgeBar,
+      @NonNull ImageView leftEdgeBar, @NonNull ImageView rightEdgeBar,
+      @NonNull ImageView topEdgeBar) {
     this.rootView = rootView;
-    this.AlgaePossessedButtonGroupTeleop = AlgaePossessedButtonGroupTeleop;
-    this.CoralPossessedButtonGroupTeleop = CoralPossessedButtonGroupTeleop;
-    this.IDAlgaePossessedTeleop = IDAlgaePossessedTeleop;
-    this.IDAlgaePossessionTeleop = IDAlgaePossessionTeleop;
-    this.IDAlgaeTeleop = IDAlgaeTeleop;
-    this.IDCoralPossessedTeleop = IDCoralPossessedTeleop;
-    this.IDCoralPossessionTeleop = IDCoralPossessionTeleop;
-    this.IDCoralTeleop = IDCoralTeleop;
-    this.IDDealgaefyingTeleop = IDDealgaefyingTeleop;
-    this.IDFellOverTeleop = IDFellOverTeleop;
-    this.IDL1CoralTeleop = IDL1CoralTeleop;
-    this.IDL1MissedTeleop = IDL1MissedTeleop;
-    this.IDL1ScoredTeleop = IDL1ScoredTeleop;
-    this.IDL2AlgaeTeleop = IDL2AlgaeTeleop;
-    this.IDL2AttemptedTeleop = IDL2AttemptedTeleop;
-    this.IDL2CoralTeleop = IDL2CoralTeleop;
-    this.IDL2MissedTeleop = IDL2MissedTeleop;
-    this.IDL2RemovedTeleop = IDL2RemovedTeleop;
-    this.IDL2ScoredTeleop = IDL2ScoredTeleop;
-    this.IDL3AlgaeTeleop = IDL3AlgaeTeleop;
-    this.IDL3AttemptedTeleop = IDL3AttemptedTeleop;
-    this.IDL3CoralTeleop = IDL3CoralTeleop;
-    this.IDL3MissedTeleop = IDL3MissedTeleop;
-    this.IDL3RemovedTeleop = IDL3RemovedTeleop;
-    this.IDL3ScoredTeleop = IDL3ScoredTeleop;
-    this.IDL4CoralTeleop = IDL4CoralTeleop;
-    this.IDL4MissedTeleop = IDL4MissedTeleop;
-    this.IDL4ScoredTeleop = IDL4ScoredTeleop;
-    this.IDMiscDirectionsTeleop = IDMiscDirectionsTeleop;
-    this.IDNetMissedTeleop = IDNetMissedTeleop;
-    this.IDNetScoredTeleop = IDNetScoredTeleop;
-    this.IDNetTeleop = IDNetTeleop;
-    this.IDPlayedDefenseTeleop = IDPlayedDefenseTeleop;
-    this.IDPossessionDirectionsTeleop = IDPossessionDirectionsTeleop;
-    this.IDProcessorMissedTeleop = IDProcessorMissedTeleop;
-    this.IDProcessorScoredTeleop = IDProcessorScoredTeleop;
-    this.IDProcessorTeleop = IDProcessorTeleop;
-    this.IDReefTeleop = IDReefTeleop;
-    this.L1MissedButtonGroupTeleop = L1MissedButtonGroupTeleop;
-    this.L1MissedCounterTeleop = L1MissedCounterTeleop;
-    this.L1ScoredButtonGroupTeleop = L1ScoredButtonGroupTeleop;
-    this.L1ScoredCounterTeleop = L1ScoredCounterTeleop;
-    this.L2AttemptedButtonGroupTeleop = L2AttemptedButtonGroupTeleop;
-    this.L2AttemptedCounterTeleop = L2AttemptedCounterTeleop;
-    this.L2MissedButtonGroupTeleop = L2MissedButtonGroupTeleop;
-    this.L2MissedCounterTeleop = L2MissedCounterTeleop;
-    this.L2RemovedButtonGroupTeleop = L2RemovedButtonGroupTeleop;
-    this.L2RemovedCounterTeleop = L2RemovedCounterTeleop;
-    this.L2ScoredButtonGroupTeleop = L2ScoredButtonGroupTeleop;
-    this.L2ScoredCounterTeleop = L2ScoredCounterTeleop;
-    this.L3AttemptedButtonGroupTeleop = L3AttemptedButtonGroupTeleop;
-    this.L3AttemptedCounterTeleop = L3AttemptedCounterTeleop;
-    this.L3MissedButtonGroupTeleop = L3MissedButtonGroupTeleop;
-    this.L3MissedCounterTeleop = L3MissedCounterTeleop;
-    this.L3RemovedButtonGroupTeleop = L3RemovedButtonGroupTeleop;
-    this.L3RemovedCounterTeleop = L3RemovedCounterTeleop;
-    this.L3ScoredButtonGroupTeleop = L3ScoredButtonGroupTeleop;
-    this.L3ScoredCounterTeleop = L3ScoredCounterTeleop;
-    this.L4MissedButtonGroupTeleop = L4MissedButtonGroupTeleop;
-    this.L4MissedCounterTeleop = L4MissedCounterTeleop;
-    this.L4ScoredButtonGroupTeleop = L4ScoredButtonGroupTeleop;
-    this.L4ScoredCounterTeleop = L4ScoredCounterTeleop;
-    this.NetMissedButtonGroupTeleop = NetMissedButtonGroupTeleop;
-    this.NetScoredButtonGroupTeleop = NetScoredButtonGroupTeleop;
-    this.NextClimbButtonTeleop = NextClimbButtonTeleop;
-    this.ProcessorMissedButtonGroupTeleop = ProcessorMissedButtonGroupTeleop;
-    this.ProcessorMissedCounterTeleop = ProcessorMissedCounterTeleop;
-    this.ProcessorScoredButtonGroupTeleop = ProcessorScoredButtonGroupTeleop;
-    this.ProcessorScoredCounterTeleop = ProcessorScoredCounterTeleop;
-    this.algaeLayoutTeleop = algaeLayoutTeleop;
-    this.algaePossessedCounterTeleop = algaePossessedCounterTeleop;
-    this.algaePossesssionLayoutTeleop = algaePossesssionLayoutTeleop;
-    this.attemptedL2ButtonTeleop = attemptedL2ButtonTeleop;
-    this.attemptedL3ButtonTeleop = attemptedL3ButtonTeleop;
-    this.coralLayoutTeleop = coralLayoutTeleop;
-    this.coralPossessedCounterTeleop = coralPossessedCounterTeleop;
-    this.coralPossessionLayoutTeleop = coralPossessionLayoutTeleop;
-    this.fellOverSwitchTeleop = fellOverSwitchTeleop;
-    this.missedL1ButtonTeleop = missedL1ButtonTeleop;
-    this.missedL2ButtonTeleop = missedL2ButtonTeleop;
-    this.missedL3ButtonTeleop = missedL3ButtonTeleop;
-    this.missedL4ButtonTeleop = missedL4ButtonTeleop;
-    this.missedNetButtonTeleop = missedNetButtonTeleop;
-    this.missedProcessorButtonTeleop = missedProcessorButtonTeleop;
-    this.netMissedCounterTeleop = netMissedCounterTeleop;
-    this.netScoredCounterTeleop = netScoredCounterTeleop;
-    this.notAttemptedL2ButtonTeleop = notAttemptedL2ButtonTeleop;
-    this.notAttemptedL3ButtonTeleop = notAttemptedL3ButtonTeleop;
-    this.notMissedL1ButtonTeleop = notMissedL1ButtonTeleop;
-    this.notMissedL2ButtonTeleop = notMissedL2ButtonTeleop;
-    this.notMissedL3ButtonTeleop = notMissedL3ButtonTeleop;
-    this.notMissedL4ButtonTeleop = notMissedL4ButtonTeleop;
-    this.notMissedNetButtonTeleop = notMissedNetButtonTeleop;
-    this.notMissedProcessorButtonTeleop = notMissedProcessorButtonTeleop;
-    this.notPossessedAlgaeButtonTeleop = notPossessedAlgaeButtonTeleop;
-    this.notPossessedCoralButtonTeleop = notPossessedCoralButtonTeleop;
-    this.notRemovedL2ButtonTeleop = notRemovedL2ButtonTeleop;
-    this.notRemovedL3ButtonTeleop = notRemovedL3ButtonTeleop;
-    this.notScoredL1ButtonTeleop = notScoredL1ButtonTeleop;
-    this.notScoredL2ButtonTeleop = notScoredL2ButtonTeleop;
-    this.notScoredL3ButtonTeleop = notScoredL3ButtonTeleop;
-    this.notScoredL4ButtonTeleop = notScoredL4ButtonTeleop;
-    this.notScoredNetButtonTeleop = notScoredNetButtonTeleop;
-    this.notScoredProcessorButtonTeleop = notScoredProcessorButtonTeleop;
-    this.playedDefenseSwitchTeleop = playedDefenseSwitchTeleop;
-    this.possessedAlgaeButtonTeleop = possessedAlgaeButtonTeleop;
-    this.possessedCoralButtonTeleop = possessedCoralButtonTeleop;
-    this.processorNetLayoutTeleop = processorNetLayoutTeleop;
-    this.removedL2ButtonTeleop = removedL2ButtonTeleop;
-    this.removedL3ButtonTeleop = removedL3ButtonTeleop;
-    this.scoredL1ButtonTeleop = scoredL1ButtonTeleop;
-    this.scoredL2ButtonTeleop = scoredL2ButtonTeleop;
-    this.scoredL3ButtonTeleop = scoredL3ButtonTeleop;
-    this.scoredL4ButtonTeleop = scoredL4ButtonTeleop;
-    this.scoredNetButtonTeleop = scoredNetButtonTeleop;
-    this.scoredProcessorButtonTeleop = scoredProcessorButtonTeleop;
-    this.teleop = teleop;
+    this.AchievedLevel1 = AchievedLevel1;
+    this.AttemptedClimbToggle = AttemptedClimbToggle;
+    this.CancelButton = CancelButton;
+    this.Center = Center;
+    this.ClimbingDesc = ClimbingDesc;
+    this.ClimbingTitle = ClimbingTitle;
+    this.Collecting0To25Fuel = Collecting0To25Fuel;
+    this.Collecting26To50Fuel = Collecting26To50Fuel;
+    this.Collecting51to755Fuel = Collecting51to755Fuel;
+    this.CollectingCounterToggle = CollectingCounterToggle;
+    this.CollectingDesc = CollectingDesc;
+    this.CollectingMoreThan75Fuel = CollectingMoreThan75Fuel;
+    this.CollectingTitle = CollectingTitle;
+    this.Contents = Contents;
+    this.DNA = DNA;
+    this.DidNotAttempt = DidNotAttempt;
+    this.EndgameWarning = EndgameWarning;
+    this.FellOverLabel = FellOverLabel;
+    this.Ferrying0To25Fuel = Ferrying0To25Fuel;
+    this.Ferrying26To50Fuel = Ferrying26To50Fuel;
+    this.Ferrying51to755Fuel = Ferrying51to755Fuel;
+    this.FerryingCounterToggle = FerryingCounterToggle;
+    this.FerryingDesc = FerryingDesc;
+    this.FerryingMoreThan75Fuel = FerryingMoreThan75Fuel;
+    this.FerryingTitle = FerryingTitle;
+    this.IDTeleopSeconds1 = IDTeleopSeconds1;
+    this.Left = Left;
+    this.Level1 = Level1;
+    this.Missed0To25Fuel = Missed0To25Fuel;
+    this.Missed26To50Fuel = Missed26To50Fuel;
+    this.Missed51to755Fuel = Missed51to755Fuel;
+    this.MissedCounterToggle = MissedCounterToggle;
+    this.MissedDesc = MissedDesc;
+    this.MissedMoreThan75Fuel = MissedMoreThan75Fuel;
+    this.MissedTitle = MissedTitle;
+    this.NextButtonTeleop = NextButtonTeleop;
+    this.NoShowSwitch = NoShowSwitch;
+    this.Right = Right;
+    this.SaveButton = SaveButton;
+    this.ScoredPopupWindow = ScoredPopupWindow;
+    this.ScoringTitle = ScoringTitle;
+    this.Start25 = Start25;
+    this.Start50 = Start50;
+    this.Start75 = Start75;
+    this.StartDesc = StartDesc;
+    this.StartEmpty = StartEmpty;
+    this.StartFull = StartFull;
+    this.StartLevelToggle = StartLevelToggle;
+    this.StartTitle = StartTitle;
+    this.Stop25 = Stop25;
+    this.Stop50 = Stop50;
+    this.Stop75 = Stop75;
+    this.StopDesc = StopDesc;
+    this.StopEmpty = StopEmpty;
+    this.StopFull = StopFull;
+    this.StopLevelToggle = StopLevelToggle;
+    this.StopTitle = StopTitle;
+    this.SuccessfulClimbed = SuccessfulClimbed;
+    this.SuccessfullyClimbed = SuccessfullyClimbed;
+    this.SuccessfullyClimbedLocation = SuccessfullyClimbedLocation;
+    this.TeleopSeconds = TeleopSeconds;
+    this.TowerClimbPlacement = TowerClimbPlacement;
+    this.bottomEdgeBar = bottomEdgeBar;
+    this.leftEdgeBar = leftEdgeBar;
+    this.rightEdgeBar = rightEdgeBar;
+    this.topEdgeBar = topEdgeBar;
   }
 
   @Override
@@ -588,740 +349,411 @@ public final class TeleopScreenBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.AlgaePossessedButtonGroupTeleop;
-      RadioGroup AlgaePossessedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (AlgaePossessedButtonGroupTeleop == null) {
+      id = R.id.AchievedLevel1;
+      RadioButton AchievedLevel1 = ViewBindings.findChildViewById(rootView, id);
+      if (AchievedLevel1 == null) {
         break missingId;
       }
 
-      id = R.id.CoralPossessedButtonGroupTeleop;
-      RadioGroup CoralPossessedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (CoralPossessedButtonGroupTeleop == null) {
+      id = R.id.AttemptedClimbToggle;
+      RadioGroup AttemptedClimbToggle = ViewBindings.findChildViewById(rootView, id);
+      if (AttemptedClimbToggle == null) {
         break missingId;
       }
 
-      id = R.id.IDAlgaePossessedTeleop;
-      TextView IDAlgaePossessedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDAlgaePossessedTeleop == null) {
+      id = R.id.CancelButton;
+      Button CancelButton = ViewBindings.findChildViewById(rootView, id);
+      if (CancelButton == null) {
         break missingId;
       }
 
-      id = R.id.IDAlgaePossessionTeleop;
-      TextView IDAlgaePossessionTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDAlgaePossessionTeleop == null) {
+      id = R.id.Center;
+      RadioButton Center = ViewBindings.findChildViewById(rootView, id);
+      if (Center == null) {
         break missingId;
       }
 
-      id = R.id.IDAlgaeTeleop;
-      TextView IDAlgaeTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDAlgaeTeleop == null) {
+      id = R.id.ClimbingDesc;
+      TextView ClimbingDesc = ViewBindings.findChildViewById(rootView, id);
+      if (ClimbingDesc == null) {
         break missingId;
       }
 
-      id = R.id.IDCoralPossessedTeleop;
-      TextView IDCoralPossessedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDCoralPossessedTeleop == null) {
+      id = R.id.ClimbingTitle;
+      TextView ClimbingTitle = ViewBindings.findChildViewById(rootView, id);
+      if (ClimbingTitle == null) {
         break missingId;
       }
 
-      id = R.id.IDCoralPossessionTeleop;
-      TextView IDCoralPossessionTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDCoralPossessionTeleop == null) {
+      id = R.id.Collecting0To25Fuel;
+      RadioButton Collecting0To25Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Collecting0To25Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDCoralTeleop;
-      TextView IDCoralTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDCoralTeleop == null) {
+      id = R.id.Collecting26To50Fuel;
+      RadioButton Collecting26To50Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Collecting26To50Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDDealgaefyingTeleop;
-      TextView IDDealgaefyingTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDDealgaefyingTeleop == null) {
+      id = R.id.Collecting51to755Fuel;
+      RadioButton Collecting51to755Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Collecting51to755Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDFellOverTeleop;
-      TextView IDFellOverTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDFellOverTeleop == null) {
+      id = R.id.CollectingCounterToggle;
+      RadioGroup CollectingCounterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingCounterToggle == null) {
         break missingId;
       }
 
-      id = R.id.IDL1CoralTeleop;
-      TextView IDL1CoralTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL1CoralTeleop == null) {
+      id = R.id.CollectingDesc;
+      TextView CollectingDesc = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingDesc == null) {
         break missingId;
       }
 
-      id = R.id.IDL1MissedTeleop;
-      TextView IDL1MissedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL1MissedTeleop == null) {
+      id = R.id.CollectingMoreThan75Fuel;
+      RadioButton CollectingMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingMoreThan75Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDL1ScoredTeleop;
-      TextView IDL1ScoredTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL1ScoredTeleop == null) {
+      id = R.id.CollectingTitle;
+      TextView CollectingTitle = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingTitle == null) {
         break missingId;
       }
 
-      id = R.id.IDL2AlgaeTeleop;
-      TextView IDL2AlgaeTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2AlgaeTeleop == null) {
+      id = R.id.Contents;
+      ConstraintLayout Contents = ViewBindings.findChildViewById(rootView, id);
+      if (Contents == null) {
         break missingId;
       }
 
-      id = R.id.IDL2AttemptedTeleop;
-      TextView IDL2AttemptedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2AttemptedTeleop == null) {
+      id = R.id.DNA;
+      RadioButton DNA = ViewBindings.findChildViewById(rootView, id);
+      if (DNA == null) {
         break missingId;
       }
 
-      id = R.id.IDL2CoralTeleop;
-      TextView IDL2CoralTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2CoralTeleop == null) {
+      id = R.id.DidNotAttempt;
+      RadioButton DidNotAttempt = ViewBindings.findChildViewById(rootView, id);
+      if (DidNotAttempt == null) {
         break missingId;
       }
 
-      id = R.id.IDL2MissedTeleop;
-      TextView IDL2MissedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2MissedTeleop == null) {
+      id = R.id.EndgameWarning;
+      TextView EndgameWarning = ViewBindings.findChildViewById(rootView, id);
+      if (EndgameWarning == null) {
         break missingId;
       }
 
-      id = R.id.IDL2RemovedTeleop;
-      TextView IDL2RemovedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2RemovedTeleop == null) {
+      id = R.id.FellOverLabel;
+      TextView FellOverLabel = ViewBindings.findChildViewById(rootView, id);
+      if (FellOverLabel == null) {
         break missingId;
       }
 
-      id = R.id.IDL2ScoredTeleop;
-      TextView IDL2ScoredTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2ScoredTeleop == null) {
+      id = R.id.Ferrying0To25Fuel;
+      RadioButton Ferrying0To25Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Ferrying0To25Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDL3AlgaeTeleop;
-      TextView IDL3AlgaeTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3AlgaeTeleop == null) {
+      id = R.id.Ferrying26To50Fuel;
+      RadioButton Ferrying26To50Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Ferrying26To50Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDL3AttemptedTeleop;
-      TextView IDL3AttemptedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3AttemptedTeleop == null) {
+      id = R.id.Ferrying51to755Fuel;
+      RadioButton Ferrying51to755Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Ferrying51to755Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDL3CoralTeleop;
-      TextView IDL3CoralTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3CoralTeleop == null) {
+      id = R.id.FerryingCounterToggle;
+      RadioGroup FerryingCounterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingCounterToggle == null) {
         break missingId;
       }
 
-      id = R.id.IDL3MissedTeleop;
-      TextView IDL3MissedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3MissedTeleop == null) {
+      id = R.id.FerryingDesc;
+      TextView FerryingDesc = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingDesc == null) {
         break missingId;
       }
 
-      id = R.id.IDL3RemovedTeleop;
-      TextView IDL3RemovedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3RemovedTeleop == null) {
+      id = R.id.FerryingMoreThan75Fuel;
+      RadioButton FerryingMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingMoreThan75Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDL3ScoredTeleop;
-      TextView IDL3ScoredTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3ScoredTeleop == null) {
+      id = R.id.FerryingTitle;
+      TextView FerryingTitle = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingTitle == null) {
         break missingId;
       }
 
-      id = R.id.IDL4CoralTeleop;
-      TextView IDL4CoralTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL4CoralTeleop == null) {
+      id = R.id.IDTeleopSeconds1;
+      TextView IDTeleopSeconds1 = ViewBindings.findChildViewById(rootView, id);
+      if (IDTeleopSeconds1 == null) {
         break missingId;
       }
 
-      id = R.id.IDL4MissedTeleop;
-      TextView IDL4MissedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL4MissedTeleop == null) {
+      id = R.id.Left;
+      RadioButton Left = ViewBindings.findChildViewById(rootView, id);
+      if (Left == null) {
         break missingId;
       }
 
-      id = R.id.IDL4ScoredTeleop;
-      TextView IDL4ScoredTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDL4ScoredTeleop == null) {
+      id = R.id.Level1;
+      RadioButton Level1 = ViewBindings.findChildViewById(rootView, id);
+      if (Level1 == null) {
         break missingId;
       }
 
-      id = R.id.IDMiscDirectionsTeleop;
-      TextView IDMiscDirectionsTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDMiscDirectionsTeleop == null) {
+      id = R.id.Missed0To25Fuel;
+      RadioButton Missed0To25Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Missed0To25Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDNetMissedTeleop;
-      TextView IDNetMissedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDNetMissedTeleop == null) {
+      id = R.id.Missed26To50Fuel;
+      RadioButton Missed26To50Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Missed26To50Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDNetScoredTeleop;
-      TextView IDNetScoredTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDNetScoredTeleop == null) {
+      id = R.id.Missed51to755Fuel;
+      RadioButton Missed51to755Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Missed51to755Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDNetTeleop;
-      TextView IDNetTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDNetTeleop == null) {
+      id = R.id.MissedCounterToggle;
+      RadioGroup MissedCounterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (MissedCounterToggle == null) {
         break missingId;
       }
 
-      id = R.id.IDPlayedDefenseTeleop;
-      TextView IDPlayedDefenseTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDPlayedDefenseTeleop == null) {
+      id = R.id.MissedDesc;
+      TextView MissedDesc = ViewBindings.findChildViewById(rootView, id);
+      if (MissedDesc == null) {
         break missingId;
       }
 
-      id = R.id.IDPossessionDirectionsTeleop;
-      TextView IDPossessionDirectionsTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDPossessionDirectionsTeleop == null) {
+      id = R.id.MissedMoreThan75Fuel;
+      RadioButton MissedMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (MissedMoreThan75Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDProcessorMissedTeleop;
-      TextView IDProcessorMissedTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDProcessorMissedTeleop == null) {
+      id = R.id.MissedTitle;
+      TextView MissedTitle = ViewBindings.findChildViewById(rootView, id);
+      if (MissedTitle == null) {
         break missingId;
       }
 
-      id = R.id.IDProcessorScoredTeleop;
-      TextView IDProcessorScoredTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDProcessorScoredTeleop == null) {
+      id = R.id.NextButtonTeleop;
+      Button NextButtonTeleop = ViewBindings.findChildViewById(rootView, id);
+      if (NextButtonTeleop == null) {
         break missingId;
       }
 
-      id = R.id.IDProcessorTeleop;
-      TextView IDProcessorTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDProcessorTeleop == null) {
+      id = R.id.NoShowSwitch;
+      Switch NoShowSwitch = ViewBindings.findChildViewById(rootView, id);
+      if (NoShowSwitch == null) {
         break missingId;
       }
 
-      id = R.id.IDReefTeleop;
-      TextView IDReefTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (IDReefTeleop == null) {
+      id = R.id.Right;
+      RadioButton Right = ViewBindings.findChildViewById(rootView, id);
+      if (Right == null) {
         break missingId;
       }
 
-      id = R.id.L1MissedButtonGroupTeleop;
-      RadioGroup L1MissedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L1MissedButtonGroupTeleop == null) {
+      id = R.id.SaveButton;
+      Button SaveButton = ViewBindings.findChildViewById(rootView, id);
+      if (SaveButton == null) {
         break missingId;
       }
 
-      id = R.id.L1MissedCounterTeleop;
-      TextView L1MissedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L1MissedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L1ScoredButtonGroupTeleop;
-      RadioGroup L1ScoredButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L1ScoredButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L1ScoredCounterTeleop;
-      TextView L1ScoredCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L1ScoredCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L2AttemptedButtonGroupTeleop;
-      RadioGroup L2AttemptedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L2AttemptedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L2AttemptedCounterTeleop;
-      TextView L2AttemptedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L2AttemptedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L2MissedButtonGroupTeleop;
-      RadioGroup L2MissedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L2MissedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L2MissedCounterTeleop;
-      TextView L2MissedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L2MissedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L2RemovedButtonGroupTeleop;
-      RadioGroup L2RemovedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L2RemovedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L2RemovedCounterTeleop;
-      TextView L2RemovedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L2RemovedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L2ScoredButtonGroupTeleop;
-      RadioGroup L2ScoredButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L2ScoredButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L2ScoredCounterTeleop;
-      TextView L2ScoredCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L2ScoredCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L3AttemptedButtonGroupTeleop;
-      RadioGroup L3AttemptedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L3AttemptedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L3AttemptedCounterTeleop;
-      TextView L3AttemptedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L3AttemptedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L3MissedButtonGroupTeleop;
-      RadioGroup L3MissedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L3MissedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L3MissedCounterTeleop;
-      TextView L3MissedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L3MissedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L3RemovedButtonGroupTeleop;
-      RadioGroup L3RemovedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L3RemovedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L3RemovedCounterTeleop;
-      TextView L3RemovedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L3RemovedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L3ScoredButtonGroupTeleop;
-      RadioGroup L3ScoredButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L3ScoredButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L3ScoredCounterTeleop;
-      TextView L3ScoredCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L3ScoredCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L4MissedButtonGroupTeleop;
-      RadioGroup L4MissedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L4MissedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L4MissedCounterTeleop;
-      TextView L4MissedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L4MissedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L4ScoredButtonGroupTeleop;
-      RadioGroup L4ScoredButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L4ScoredButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.L4ScoredCounterTeleop;
-      TextView L4ScoredCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (L4ScoredCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.NetMissedButtonGroupTeleop;
-      RadioGroup NetMissedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (NetMissedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.NetScoredButtonGroupTeleop;
-      RadioGroup NetScoredButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (NetScoredButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.NextClimbButtonTeleop;
-      Button NextClimbButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (NextClimbButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.ProcessorMissedButtonGroupTeleop;
-      RadioGroup ProcessorMissedButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (ProcessorMissedButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.ProcessorMissedCounterTeleop;
-      TextView ProcessorMissedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (ProcessorMissedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.ProcessorScoredButtonGroupTeleop;
-      RadioGroup ProcessorScoredButtonGroupTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (ProcessorScoredButtonGroupTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.ProcessorScoredCounterTeleop;
-      TextView ProcessorScoredCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (ProcessorScoredCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.algaeLayoutTeleop;
-      ConstraintLayout algaeLayoutTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (algaeLayoutTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.algaePossessedCounterTeleop;
-      TextView algaePossessedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (algaePossessedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.algaePossesssionLayoutTeleop;
-      ConstraintLayout algaePossesssionLayoutTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (algaePossesssionLayoutTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.attemptedL2ButtonTeleop;
-      ImageButton attemptedL2ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (attemptedL2ButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.attemptedL3ButtonTeleop;
-      ImageButton attemptedL3ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (attemptedL3ButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.coralLayoutTeleop;
-      ConstraintLayout coralLayoutTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (coralLayoutTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.coralPossessedCounterTeleop;
-      TextView coralPossessedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (coralPossessedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.coralPossessionLayoutTeleop;
-      ConstraintLayout coralPossessionLayoutTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (coralPossessionLayoutTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.fellOverSwitchTeleop;
-      Switch fellOverSwitchTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (fellOverSwitchTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.missedL1ButtonTeleop;
-      ImageButton missedL1ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (missedL1ButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.missedL2ButtonTeleop;
-      ImageButton missedL2ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (missedL2ButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.missedL3ButtonTeleop;
-      ImageButton missedL3ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (missedL3ButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.missedL4ButtonTeleop;
-      ImageButton missedL4ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (missedL4ButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.missedNetButtonTeleop;
-      ImageButton missedNetButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (missedNetButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.missedProcessorButtonTeleop;
-      ImageButton missedProcessorButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (missedProcessorButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.netMissedCounterTeleop;
-      TextView netMissedCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (netMissedCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.netScoredCounterTeleop;
-      TextView netScoredCounterTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (netScoredCounterTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.notAttemptedL2ButtonTeleop;
-      ImageButton notAttemptedL2ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notAttemptedL2ButtonTeleop == null) {
-        break missingId;
-      }
+      ConstraintLayout ScoredPopupWindow = (ConstraintLayout) rootView;
 
-      id = R.id.notAttemptedL3ButtonTeleop;
-      ImageButton notAttemptedL3ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notAttemptedL3ButtonTeleop == null) {
+      id = R.id.ScoringTitle;
+      TextView ScoringTitle = ViewBindings.findChildViewById(rootView, id);
+      if (ScoringTitle == null) {
         break missingId;
       }
 
-      id = R.id.notMissedL1ButtonTeleop;
-      ImageButton notMissedL1ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedL1ButtonTeleop == null) {
+      id = R.id.Start25;
+      RadioButton Start25 = ViewBindings.findChildViewById(rootView, id);
+      if (Start25 == null) {
         break missingId;
       }
 
-      id = R.id.notMissedL2ButtonTeleop;
-      ImageButton notMissedL2ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedL2ButtonTeleop == null) {
+      id = R.id.Start50;
+      RadioButton Start50 = ViewBindings.findChildViewById(rootView, id);
+      if (Start50 == null) {
         break missingId;
       }
 
-      id = R.id.notMissedL3ButtonTeleop;
-      ImageButton notMissedL3ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedL3ButtonTeleop == null) {
+      id = R.id.Start75;
+      RadioButton Start75 = ViewBindings.findChildViewById(rootView, id);
+      if (Start75 == null) {
         break missingId;
       }
 
-      id = R.id.notMissedL4ButtonTeleop;
-      ImageButton notMissedL4ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedL4ButtonTeleop == null) {
+      id = R.id.StartDesc;
+      TextView StartDesc = ViewBindings.findChildViewById(rootView, id);
+      if (StartDesc == null) {
         break missingId;
       }
 
-      id = R.id.notMissedNetButtonTeleop;
-      ImageButton notMissedNetButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedNetButtonTeleop == null) {
+      id = R.id.StartEmpty;
+      RadioButton StartEmpty = ViewBindings.findChildViewById(rootView, id);
+      if (StartEmpty == null) {
         break missingId;
       }
 
-      id = R.id.notMissedProcessorButtonTeleop;
-      ImageButton notMissedProcessorButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedProcessorButtonTeleop == null) {
+      id = R.id.StartFull;
+      RadioButton StartFull = ViewBindings.findChildViewById(rootView, id);
+      if (StartFull == null) {
         break missingId;
       }
 
-      id = R.id.notPossessedAlgaeButtonTeleop;
-      ImageButton notPossessedAlgaeButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notPossessedAlgaeButtonTeleop == null) {
+      id = R.id.StartLevelToggle;
+      RadioGroup StartLevelToggle = ViewBindings.findChildViewById(rootView, id);
+      if (StartLevelToggle == null) {
         break missingId;
       }
 
-      id = R.id.notPossessedCoralButtonTeleop;
-      ImageButton notPossessedCoralButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notPossessedCoralButtonTeleop == null) {
+      id = R.id.StartTitle;
+      TextView StartTitle = ViewBindings.findChildViewById(rootView, id);
+      if (StartTitle == null) {
         break missingId;
       }
 
-      id = R.id.notRemovedL2ButtonTeleop;
-      ImageButton notRemovedL2ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notRemovedL2ButtonTeleop == null) {
+      id = R.id.Stop25;
+      RadioButton Stop25 = ViewBindings.findChildViewById(rootView, id);
+      if (Stop25 == null) {
         break missingId;
       }
 
-      id = R.id.notRemovedL3ButtonTeleop;
-      ImageButton notRemovedL3ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notRemovedL3ButtonTeleop == null) {
+      id = R.id.Stop50;
+      RadioButton Stop50 = ViewBindings.findChildViewById(rootView, id);
+      if (Stop50 == null) {
         break missingId;
       }
 
-      id = R.id.notScoredL1ButtonTeleop;
-      ImageButton notScoredL1ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredL1ButtonTeleop == null) {
+      id = R.id.Stop75;
+      RadioButton Stop75 = ViewBindings.findChildViewById(rootView, id);
+      if (Stop75 == null) {
         break missingId;
       }
 
-      id = R.id.notScoredL2ButtonTeleop;
-      ImageButton notScoredL2ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredL2ButtonTeleop == null) {
+      id = R.id.StopDesc;
+      TextView StopDesc = ViewBindings.findChildViewById(rootView, id);
+      if (StopDesc == null) {
         break missingId;
       }
 
-      id = R.id.notScoredL3ButtonTeleop;
-      ImageButton notScoredL3ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredL3ButtonTeleop == null) {
+      id = R.id.StopEmpty;
+      RadioButton StopEmpty = ViewBindings.findChildViewById(rootView, id);
+      if (StopEmpty == null) {
         break missingId;
       }
 
-      id = R.id.notScoredL4ButtonTeleop;
-      ImageButton notScoredL4ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredL4ButtonTeleop == null) {
+      id = R.id.StopFull;
+      RadioButton StopFull = ViewBindings.findChildViewById(rootView, id);
+      if (StopFull == null) {
         break missingId;
       }
 
-      id = R.id.notScoredNetButtonTeleop;
-      ImageButton notScoredNetButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredNetButtonTeleop == null) {
+      id = R.id.StopLevelToggle;
+      RadioGroup StopLevelToggle = ViewBindings.findChildViewById(rootView, id);
+      if (StopLevelToggle == null) {
         break missingId;
       }
 
-      id = R.id.notScoredProcessorButtonTeleop;
-      ImageButton notScoredProcessorButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredProcessorButtonTeleop == null) {
+      id = R.id.StopTitle;
+      TextView StopTitle = ViewBindings.findChildViewById(rootView, id);
+      if (StopTitle == null) {
         break missingId;
       }
 
-      id = R.id.playedDefenseSwitchTeleop;
-      Switch playedDefenseSwitchTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (playedDefenseSwitchTeleop == null) {
+      id = R.id.SuccessfulClimbed;
+      RadioGroup SuccessfulClimbed = ViewBindings.findChildViewById(rootView, id);
+      if (SuccessfulClimbed == null) {
         break missingId;
       }
 
-      id = R.id.possessedAlgaeButtonTeleop;
-      ImageButton possessedAlgaeButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (possessedAlgaeButtonTeleop == null) {
+      id = R.id.SuccessfullyClimbed;
+      TextView SuccessfullyClimbed = ViewBindings.findChildViewById(rootView, id);
+      if (SuccessfullyClimbed == null) {
         break missingId;
       }
 
-      id = R.id.possessedCoralButtonTeleop;
-      ImageButton possessedCoralButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (possessedCoralButtonTeleop == null) {
+      id = R.id.SuccessfullyClimbedLocation;
+      RadioGroup SuccessfullyClimbedLocation = ViewBindings.findChildViewById(rootView, id);
+      if (SuccessfullyClimbedLocation == null) {
         break missingId;
       }
 
-      id = R.id.processorNetLayoutTeleop;
-      ConstraintLayout processorNetLayoutTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (processorNetLayoutTeleop == null) {
+      id = R.id.TeleopSeconds;
+      TextView TeleopSeconds = ViewBindings.findChildViewById(rootView, id);
+      if (TeleopSeconds == null) {
         break missingId;
       }
 
-      id = R.id.removedL2ButtonTeleop;
-      ImageButton removedL2ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (removedL2ButtonTeleop == null) {
+      id = R.id.TowerClimbPlacement;
+      TextView TowerClimbPlacement = ViewBindings.findChildViewById(rootView, id);
+      if (TowerClimbPlacement == null) {
         break missingId;
       }
 
-      id = R.id.removedL3ButtonTeleop;
-      ImageButton removedL3ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (removedL3ButtonTeleop == null) {
+      id = R.id.bottomEdgeBar;
+      ImageView bottomEdgeBar = ViewBindings.findChildViewById(rootView, id);
+      if (bottomEdgeBar == null) {
         break missingId;
       }
 
-      id = R.id.scoredL1ButtonTeleop;
-      ImageButton scoredL1ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (scoredL1ButtonTeleop == null) {
+      id = R.id.leftEdgeBar;
+      ImageView leftEdgeBar = ViewBindings.findChildViewById(rootView, id);
+      if (leftEdgeBar == null) {
         break missingId;
       }
 
-      id = R.id.scoredL2ButtonTeleop;
-      ImageButton scoredL2ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (scoredL2ButtonTeleop == null) {
+      id = R.id.rightEdgeBar;
+      ImageView rightEdgeBar = ViewBindings.findChildViewById(rootView, id);
+      if (rightEdgeBar == null) {
         break missingId;
       }
 
-      id = R.id.scoredL3ButtonTeleop;
-      ImageButton scoredL3ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (scoredL3ButtonTeleop == null) {
+      id = R.id.topEdgeBar;
+      ImageView topEdgeBar = ViewBindings.findChildViewById(rootView, id);
+      if (topEdgeBar == null) {
         break missingId;
       }
-
-      id = R.id.scoredL4ButtonTeleop;
-      ImageButton scoredL4ButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (scoredL4ButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.scoredNetButtonTeleop;
-      ImageButton scoredNetButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (scoredNetButtonTeleop == null) {
-        break missingId;
-      }
-
-      id = R.id.scoredProcessorButtonTeleop;
-      ImageButton scoredProcessorButtonTeleop = ViewBindings.findChildViewById(rootView, id);
-      if (scoredProcessorButtonTeleop == null) {
-        break missingId;
-      }
-
-      ConstraintLayout teleop = (ConstraintLayout) rootView;
 
-      return new TeleopScreenBinding((ConstraintLayout) rootView, AlgaePossessedButtonGroupTeleop,
-          CoralPossessedButtonGroupTeleop, IDAlgaePossessedTeleop, IDAlgaePossessionTeleop,
-          IDAlgaeTeleop, IDCoralPossessedTeleop, IDCoralPossessionTeleop, IDCoralTeleop,
-          IDDealgaefyingTeleop, IDFellOverTeleop, IDL1CoralTeleop, IDL1MissedTeleop,
-          IDL1ScoredTeleop, IDL2AlgaeTeleop, IDL2AttemptedTeleop, IDL2CoralTeleop, IDL2MissedTeleop,
-          IDL2RemovedTeleop, IDL2ScoredTeleop, IDL3AlgaeTeleop, IDL3AttemptedTeleop,
-          IDL3CoralTeleop, IDL3MissedTeleop, IDL3RemovedTeleop, IDL3ScoredTeleop, IDL4CoralTeleop,
-          IDL4MissedTeleop, IDL4ScoredTeleop, IDMiscDirectionsTeleop, IDNetMissedTeleop,
-          IDNetScoredTeleop, IDNetTeleop, IDPlayedDefenseTeleop, IDPossessionDirectionsTeleop,
-          IDProcessorMissedTeleop, IDProcessorScoredTeleop, IDProcessorTeleop, IDReefTeleop,
-          L1MissedButtonGroupTeleop, L1MissedCounterTeleop, L1ScoredButtonGroupTeleop,
-          L1ScoredCounterTeleop, L2AttemptedButtonGroupTeleop, L2AttemptedCounterTeleop,
-          L2MissedButtonGroupTeleop, L2MissedCounterTeleop, L2RemovedButtonGroupTeleop,
-          L2RemovedCounterTeleop, L2ScoredButtonGroupTeleop, L2ScoredCounterTeleop,
-          L3AttemptedButtonGroupTeleop, L3AttemptedCounterTeleop, L3MissedButtonGroupTeleop,
-          L3MissedCounterTeleop, L3RemovedButtonGroupTeleop, L3RemovedCounterTeleop,
-          L3ScoredButtonGroupTeleop, L3ScoredCounterTeleop, L4MissedButtonGroupTeleop,
-          L4MissedCounterTeleop, L4ScoredButtonGroupTeleop, L4ScoredCounterTeleop,
-          NetMissedButtonGroupTeleop, NetScoredButtonGroupTeleop, NextClimbButtonTeleop,
-          ProcessorMissedButtonGroupTeleop, ProcessorMissedCounterTeleop,
-          ProcessorScoredButtonGroupTeleop, ProcessorScoredCounterTeleop, algaeLayoutTeleop,
-          algaePossessedCounterTeleop, algaePossesssionLayoutTeleop, attemptedL2ButtonTeleop,
-          attemptedL3ButtonTeleop, coralLayoutTeleop, coralPossessedCounterTeleop,
-          coralPossessionLayoutTeleop, fellOverSwitchTeleop, missedL1ButtonTeleop,
-          missedL2ButtonTeleop, missedL3ButtonTeleop, missedL4ButtonTeleop, missedNetButtonTeleop,
-          missedProcessorButtonTeleop, netMissedCounterTeleop, netScoredCounterTeleop,
-          notAttemptedL2ButtonTeleop, notAttemptedL3ButtonTeleop, notMissedL1ButtonTeleop,
-          notMissedL2ButtonTeleop, notMissedL3ButtonTeleop, notMissedL4ButtonTeleop,
-          notMissedNetButtonTeleop, notMissedProcessorButtonTeleop, notPossessedAlgaeButtonTeleop,
-          notPossessedCoralButtonTeleop, notRemovedL2ButtonTeleop, notRemovedL3ButtonTeleop,
-          notScoredL1ButtonTeleop, notScoredL2ButtonTeleop, notScoredL3ButtonTeleop,
-          notScoredL4ButtonTeleop, notScoredNetButtonTeleop, notScoredProcessorButtonTeleop,
-          playedDefenseSwitchTeleop, possessedAlgaeButtonTeleop, possessedCoralButtonTeleop,
-          processorNetLayoutTeleop, removedL2ButtonTeleop, removedL3ButtonTeleop,
-          scoredL1ButtonTeleop, scoredL2ButtonTeleop, scoredL3ButtonTeleop, scoredL4ButtonTeleop,
-          scoredNetButtonTeleop, scoredProcessorButtonTeleop, teleop);
+      return new TeleopScreenBinding((ConstraintLayout) rootView, AchievedLevel1,
+          AttemptedClimbToggle, CancelButton, Center, ClimbingDesc, ClimbingTitle,
+          Collecting0To25Fuel, Collecting26To50Fuel, Collecting51to755Fuel, CollectingCounterToggle,
+          CollectingDesc, CollectingMoreThan75Fuel, CollectingTitle, Contents, DNA, DidNotAttempt,
+          EndgameWarning, FellOverLabel, Ferrying0To25Fuel, Ferrying26To50Fuel, Ferrying51to755Fuel,
+          FerryingCounterToggle, FerryingDesc, FerryingMoreThan75Fuel, FerryingTitle,
+          IDTeleopSeconds1, Left, Level1, Missed0To25Fuel, Missed26To50Fuel, Missed51to755Fuel,
+          MissedCounterToggle, MissedDesc, MissedMoreThan75Fuel, MissedTitle, NextButtonTeleop,
+          NoShowSwitch, Right, SaveButton, ScoredPopupWindow, ScoringTitle, Start25, Start50,
+          Start75, StartDesc, StartEmpty, StartFull, StartLevelToggle, StartTitle, Stop25, Stop50,
+          Stop75, StopDesc, StopEmpty, StopFull, StopLevelToggle, StopTitle, SuccessfulClimbed,
+          SuccessfullyClimbed, SuccessfullyClimbedLocation, TeleopSeconds, TowerClimbPlacement,
+          bottomEdgeBar, leftEdgeBar, rightEdgeBar, topEdgeBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -32,6 +32,9 @@ public final class ActivityMatchBinding implements ViewBinding {
   public final TabItem climbTab;
 
   @NonNull
+  public final TabItem matchSetupTab;
+
+  @NonNull
   public final TabLayout tabs;
 
   @NonNull
@@ -45,12 +48,13 @@ public final class ActivityMatchBinding implements ViewBinding {
 
   private ActivityMatchBinding(@NonNull ConstraintLayout rootView,
       @NonNull ConstraintLayout TitleBar, @NonNull TabItem autonTab, @NonNull TabItem climbTab,
-      @NonNull TabLayout tabs, @NonNull TabItem teleopTab, @NonNull TextView title,
-      @NonNull ViewPager viewPager) {
+      @NonNull TabItem matchSetupTab, @NonNull TabLayout tabs, @NonNull TabItem teleopTab,
+      @NonNull TextView title, @NonNull ViewPager viewPager) {
     this.rootView = rootView;
     this.TitleBar = TitleBar;
     this.autonTab = autonTab;
     this.climbTab = climbTab;
+    this.matchSetupTab = matchSetupTab;
     this.tabs = tabs;
     this.teleopTab = teleopTab;
     this.title = title;
@@ -102,6 +106,12 @@ public final class ActivityMatchBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.matchSetupTab;
+      TabItem matchSetupTab = ViewBindings.findChildViewById(rootView, id);
+      if (matchSetupTab == null) {
+        break missingId;
+      }
+
       id = R.id.tabs;
       TabLayout tabs = ViewBindings.findChildViewById(rootView, id);
       if (tabs == null) {
@@ -127,7 +137,7 @@ public final class ActivityMatchBinding implements ViewBinding {
       }
 
       return new ActivityMatchBinding((ConstraintLayout) rootView, TitleBar, autonTab, climbTab,
-          tabs, teleopTab, title, viewPager);
+          matchSetupTab, tabs, teleopTab, title, viewPager);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

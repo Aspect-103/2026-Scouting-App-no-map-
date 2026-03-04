@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -25,560 +25,299 @@ public final class AutonScreenBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final RadioGroup AlgaePossessedButtonGroup;
+  public final RadioButton AchievedLevel1;
+
+  @NonNull
+  public final RadioGroup AttemptedClimbToggle;
 
   @NonNull
   public final TextView AutonSeconds;
 
   @NonNull
-  public final RadioGroup CoralPossessedButtonGroup;
+  public final Button CancelButton;
 
   @NonNull
-  public final Switch FellOverSwitch;
+  public final RadioButton Center;
 
   @NonNull
-  public final TextView IDAlgae;
+  public final TextView ClimbingDesc;
 
   @NonNull
-  public final TextView IDAlgaePossessed;
+  public final TextView ClimbingTitle;
 
   @NonNull
-  public final TextView IDAlgaePossession;
+  public final RadioButton Collecting0To25Fuel;
+
+  @NonNull
+  public final RadioButton Collecting26To50Fuel;
+
+  @NonNull
+  public final RadioButton Collecting51to755Fuel;
+
+  @NonNull
+  public final RadioGroup CollectingCounterToggle;
+
+  @NonNull
+  public final TextView CollectingDesc;
+
+  @NonNull
+  public final RadioButton CollectingMoreThan75Fuel;
+
+  @NonNull
+  public final TextView CollectingTitle;
+
+  @NonNull
+  public final ConstraintLayout Contents;
+
+  @NonNull
+  public final RadioButton DNA;
+
+  @NonNull
+  public final RadioButton DidNotAttempt;
+
+  @NonNull
+  public final TextView FellOverLabel;
+
+  @NonNull
+  public final RadioButton Ferrying0To25Fuel;
+
+  @NonNull
+  public final RadioButton Ferrying26To50Fuel;
+
+  @NonNull
+  public final RadioButton Ferrying51to755Fuel;
+
+  @NonNull
+  public final RadioGroup FerryingCounterToggle;
+
+  @NonNull
+  public final TextView FerryingDesc;
+
+  @NonNull
+  public final RadioButton FerryingMoreThan75Fuel;
+
+  @NonNull
+  public final TextView FerryingTitle;
 
   @NonNull
   public final TextView IDAutonSeconds1;
 
   @NonNull
-  public final TextView IDCoral;
+  public final RadioButton Left;
 
   @NonNull
-  public final TextView IDCoralPossessed;
+  public final RadioButton Level1;
 
   @NonNull
-  public final TextView IDCoralPossession;
+  public final RadioButton Missed0To25Fuel;
 
   @NonNull
-  public final TextView IDDealgaefying;
+  public final RadioButton Missed26To50Fuel;
 
   @NonNull
-  public final TextView IDFellOver;
+  public final RadioButton Missed51to755Fuel;
 
   @NonNull
-  public final TextView IDL1Coral;
+  public final RadioGroup MissedCounterToggle;
 
   @NonNull
-  public final TextView IDL1Missed;
+  public final TextView MissedDesc;
 
   @NonNull
-  public final TextView IDL1Scored;
+  public final RadioButton MissedMoreThan75Fuel;
 
   @NonNull
-  public final TextView IDL2Algae;
+  public final TextView MissedTitle;
 
   @NonNull
-  public final TextView IDL2Attempted;
+  public final Button NextButtonAuton;
 
   @NonNull
-  public final TextView IDL2Coral;
+  public final Switch NoShowSwitch;
 
   @NonNull
-  public final TextView IDL2Missed;
+  public final RadioButton Right;
 
   @NonNull
-  public final TextView IDL2Removed;
+  public final Button SaveButton;
 
   @NonNull
-  public final TextView IDL2Scored;
+  public final ConstraintLayout ScoredPopupWindow;
 
   @NonNull
-  public final TextView IDL3Algae;
+  public final TextView ScoringTitle;
 
   @NonNull
-  public final TextView IDL3Attempted;
+  public final RadioButton Start25;
 
   @NonNull
-  public final TextView IDL3Coral;
+  public final RadioButton Start50;
 
   @NonNull
-  public final TextView IDL3Missed;
+  public final RadioButton Start75;
 
   @NonNull
-  public final TextView IDL3Removed;
+  public final TextView StartDesc;
 
   @NonNull
-  public final TextView IDL3Scored;
+  public final RadioButton StartEmpty;
 
   @NonNull
-  public final TextView IDL4Coral;
+  public final RadioButton StartFull;
 
   @NonNull
-  public final TextView IDL4Missed;
+  public final RadioGroup StartLevelToggle;
 
   @NonNull
-  public final TextView IDL4Scored;
+  public final TextView StartTitle;
 
   @NonNull
-  public final TextView IDLeave;
+  public final RadioButton Stop25;
 
   @NonNull
-  public final TextView IDMiscDirections;
+  public final RadioButton Stop50;
 
   @NonNull
-  public final TextView IDNet;
+  public final RadioButton Stop75;
 
   @NonNull
-  public final TextView IDNetMissed;
+  public final TextView StopDesc;
 
   @NonNull
-  public final TextView IDNetScored;
+  public final RadioButton StopEmpty;
 
   @NonNull
-  public final TextView IDPossessionDirections;
+  public final RadioButton StopFull;
 
   @NonNull
-  public final TextView IDProcessor;
+  public final RadioGroup StopLevelToggle;
 
   @NonNull
-  public final TextView IDProcessorMissed;
+  public final TextView StopTitle;
 
   @NonNull
-  public final TextView IDProcessorScored;
+  public final RadioGroup SuccessfulClimbed;
 
   @NonNull
-  public final TextView IDReef;
+  public final TextView SuccessfullyClimbed;
 
   @NonNull
-  public final RadioGroup L1MissedButtonGroup;
-
-  @NonNull
-  public final TextView L1MissedCounter;
-
-  @NonNull
-  public final RadioGroup L1ScoredButtonGroup;
-
-  @NonNull
-  public final TextView L1ScoredCounter;
-
-  @NonNull
-  public final RadioGroup L2AttemptedButtonGroup;
-
-  @NonNull
-  public final TextView L2AttemptedCounter;
-
-  @NonNull
-  public final RadioGroup L2MissedButtonGroup;
-
-  @NonNull
-  public final TextView L2MissedCounter;
-
-  @NonNull
-  public final RadioGroup L2RemovedButtonGroup;
-
-  @NonNull
-  public final TextView L2RemovedCounter;
-
-  @NonNull
-  public final RadioGroup L2ScoredButtonGroup;
-
-  @NonNull
-  public final TextView L2ScoredCounter;
-
-  @NonNull
-  public final RadioGroup L3AttemptedButtonGroup;
-
-  @NonNull
-  public final TextView L3AttemptedCounter;
-
-  @NonNull
-  public final RadioGroup L3MissedButtonGroup;
-
-  @NonNull
-  public final TextView L3MissedCounter;
-
-  @NonNull
-  public final RadioGroup L3RemovedButtonGroup;
-
-  @NonNull
-  public final TextView L3RemovedCounter;
-
-  @NonNull
-  public final RadioGroup L3ScoredButtonGroup;
-
-  @NonNull
-  public final TextView L3ScoredCounter;
-
-  @NonNull
-  public final RadioGroup L4MissedButtonGroup;
-
-  @NonNull
-  public final TextView L4MissedCounter;
-
-  @NonNull
-  public final RadioGroup L4ScoredButtonGroup;
-
-  @NonNull
-  public final TextView L4ScoredCounter;
-
-  @NonNull
-  public final Switch LeaveSwitch;
-
-  @NonNull
-  public final RadioGroup NetMissedButtonGroup;
-
-  @NonNull
-  public final RadioGroup NetScoredButtonGroup;
-
-  @NonNull
-  public final Button NextTeleopButton;
-
-  @NonNull
-  public final RadioGroup ProcessorMissedButtonGroup;
-
-  @NonNull
-  public final TextView ProcessorMissedCounter;
-
-  @NonNull
-  public final RadioGroup ProcessorScoredButtonGroup;
-
-  @NonNull
-  public final TextView ProcessorScoredCounter;
+  public final RadioGroup SuccessfullyClimbedLocation;
 
   @NonNull
   public final TextView TeleopWarning;
 
   @NonNull
-  public final ConstraintLayout algaeLayout;
-
-  @NonNull
-  public final TextView algaePossessedCounter;
-
-  @NonNull
-  public final ConstraintLayout algaePossesssionLayout;
-
-  @NonNull
-  public final ImageButton attemptedL2Button;
-
-  @NonNull
-  public final ImageButton attemptedL3Button;
-
-  @NonNull
-  public final ConstraintLayout auton;
+  public final TextView TowerClimbPlacement;
 
   @NonNull
   public final ImageView bottomEdgeBar;
 
   @NonNull
-  public final ConstraintLayout coralLayout;
-
-  @NonNull
-  public final TextView coralPossessedCounter;
-
-  @NonNull
-  public final ConstraintLayout coralPossessionLayout;
-
-  @NonNull
   public final ImageView leftEdgeBar;
-
-  @NonNull
-  public final ImageButton missedL1Button;
-
-  @NonNull
-  public final ImageButton missedL2Button;
-
-  @NonNull
-  public final ImageButton missedL3Button;
-
-  @NonNull
-  public final ImageButton missedL4Button;
-
-  @NonNull
-  public final ImageButton missedNetButton;
-
-  @NonNull
-  public final ImageButton missedProcessorButton;
-
-  @NonNull
-  public final TextView netMissedCounter;
-
-  @NonNull
-  public final TextView netScoredCounter;
-
-  @NonNull
-  public final ImageButton notAttemptedL2Button;
-
-  @NonNull
-  public final ImageButton notAttemptedL3Button;
-
-  @NonNull
-  public final ImageButton notMissedL1Button;
-
-  @NonNull
-  public final ImageButton notMissedL2Button;
-
-  @NonNull
-  public final ImageButton notMissedL3Button;
-
-  @NonNull
-  public final ImageButton notMissedL4Button;
-
-  @NonNull
-  public final ImageButton notMissedNetButton;
-
-  @NonNull
-  public final ImageButton notMissedProcessorButton;
-
-  @NonNull
-  public final ImageButton notPossessedAlgaeButton;
-
-  @NonNull
-  public final ImageButton notPossessedCoralButton;
-
-  @NonNull
-  public final ImageButton notRemovedL2Button;
-
-  @NonNull
-  public final ImageButton notRemovedL3Button;
-
-  @NonNull
-  public final ImageButton notScoredL1Button;
-
-  @NonNull
-  public final ImageButton notScoredL2Button;
-
-  @NonNull
-  public final ImageButton notScoredL3Button;
-
-  @NonNull
-  public final ImageButton notScoredL4Button;
-
-  @NonNull
-  public final ImageButton notScoredNetButton;
-
-  @NonNull
-  public final ImageButton notScoredProcessorButton;
-
-  @NonNull
-  public final ImageButton possessedAlgaeButton;
-
-  @NonNull
-  public final ImageButton possessedCoralButton;
-
-  @NonNull
-  public final ConstraintLayout processorNetLayout;
-
-  @NonNull
-  public final ImageButton removedL2Button;
-
-  @NonNull
-  public final ImageButton removedL3Button;
 
   @NonNull
   public final ImageView rightEdgeBar;
 
   @NonNull
-  public final ImageButton scoredL1Button;
-
-  @NonNull
-  public final ImageButton scoredL2Button;
-
-  @NonNull
-  public final ImageButton scoredL3Button;
-
-  @NonNull
-  public final ImageButton scoredL4Button;
-
-  @NonNull
-  public final ImageButton scoredNetButton;
-
-  @NonNull
-  public final ImageButton scoredProcessorButton;
-
-  @NonNull
   public final ImageView topEdgeBar;
 
   private AutonScreenBinding(@NonNull ConstraintLayout rootView,
-      @NonNull RadioGroup AlgaePossessedButtonGroup, @NonNull TextView AutonSeconds,
-      @NonNull RadioGroup CoralPossessedButtonGroup, @NonNull Switch FellOverSwitch,
-      @NonNull TextView IDAlgae, @NonNull TextView IDAlgaePossessed,
-      @NonNull TextView IDAlgaePossession, @NonNull TextView IDAutonSeconds1,
-      @NonNull TextView IDCoral, @NonNull TextView IDCoralPossessed,
-      @NonNull TextView IDCoralPossession, @NonNull TextView IDDealgaefying,
-      @NonNull TextView IDFellOver, @NonNull TextView IDL1Coral, @NonNull TextView IDL1Missed,
-      @NonNull TextView IDL1Scored, @NonNull TextView IDL2Algae, @NonNull TextView IDL2Attempted,
-      @NonNull TextView IDL2Coral, @NonNull TextView IDL2Missed, @NonNull TextView IDL2Removed,
-      @NonNull TextView IDL2Scored, @NonNull TextView IDL3Algae, @NonNull TextView IDL3Attempted,
-      @NonNull TextView IDL3Coral, @NonNull TextView IDL3Missed, @NonNull TextView IDL3Removed,
-      @NonNull TextView IDL3Scored, @NonNull TextView IDL4Coral, @NonNull TextView IDL4Missed,
-      @NonNull TextView IDL4Scored, @NonNull TextView IDLeave, @NonNull TextView IDMiscDirections,
-      @NonNull TextView IDNet, @NonNull TextView IDNetMissed, @NonNull TextView IDNetScored,
-      @NonNull TextView IDPossessionDirections, @NonNull TextView IDProcessor,
-      @NonNull TextView IDProcessorMissed, @NonNull TextView IDProcessorScored,
-      @NonNull TextView IDReef, @NonNull RadioGroup L1MissedButtonGroup,
-      @NonNull TextView L1MissedCounter, @NonNull RadioGroup L1ScoredButtonGroup,
-      @NonNull TextView L1ScoredCounter, @NonNull RadioGroup L2AttemptedButtonGroup,
-      @NonNull TextView L2AttemptedCounter, @NonNull RadioGroup L2MissedButtonGroup,
-      @NonNull TextView L2MissedCounter, @NonNull RadioGroup L2RemovedButtonGroup,
-      @NonNull TextView L2RemovedCounter, @NonNull RadioGroup L2ScoredButtonGroup,
-      @NonNull TextView L2ScoredCounter, @NonNull RadioGroup L3AttemptedButtonGroup,
-      @NonNull TextView L3AttemptedCounter, @NonNull RadioGroup L3MissedButtonGroup,
-      @NonNull TextView L3MissedCounter, @NonNull RadioGroup L3RemovedButtonGroup,
-      @NonNull TextView L3RemovedCounter, @NonNull RadioGroup L3ScoredButtonGroup,
-      @NonNull TextView L3ScoredCounter, @NonNull RadioGroup L4MissedButtonGroup,
-      @NonNull TextView L4MissedCounter, @NonNull RadioGroup L4ScoredButtonGroup,
-      @NonNull TextView L4ScoredCounter, @NonNull Switch LeaveSwitch,
-      @NonNull RadioGroup NetMissedButtonGroup, @NonNull RadioGroup NetScoredButtonGroup,
-      @NonNull Button NextTeleopButton, @NonNull RadioGroup ProcessorMissedButtonGroup,
-      @NonNull TextView ProcessorMissedCounter, @NonNull RadioGroup ProcessorScoredButtonGroup,
-      @NonNull TextView ProcessorScoredCounter, @NonNull TextView TeleopWarning,
-      @NonNull ConstraintLayout algaeLayout, @NonNull TextView algaePossessedCounter,
-      @NonNull ConstraintLayout algaePossesssionLayout, @NonNull ImageButton attemptedL2Button,
-      @NonNull ImageButton attemptedL3Button, @NonNull ConstraintLayout auton,
-      @NonNull ImageView bottomEdgeBar, @NonNull ConstraintLayout coralLayout,
-      @NonNull TextView coralPossessedCounter, @NonNull ConstraintLayout coralPossessionLayout,
-      @NonNull ImageView leftEdgeBar, @NonNull ImageButton missedL1Button,
-      @NonNull ImageButton missedL2Button, @NonNull ImageButton missedL3Button,
-      @NonNull ImageButton missedL4Button, @NonNull ImageButton missedNetButton,
-      @NonNull ImageButton missedProcessorButton, @NonNull TextView netMissedCounter,
-      @NonNull TextView netScoredCounter, @NonNull ImageButton notAttemptedL2Button,
-      @NonNull ImageButton notAttemptedL3Button, @NonNull ImageButton notMissedL1Button,
-      @NonNull ImageButton notMissedL2Button, @NonNull ImageButton notMissedL3Button,
-      @NonNull ImageButton notMissedL4Button, @NonNull ImageButton notMissedNetButton,
-      @NonNull ImageButton notMissedProcessorButton, @NonNull ImageButton notPossessedAlgaeButton,
-      @NonNull ImageButton notPossessedCoralButton, @NonNull ImageButton notRemovedL2Button,
-      @NonNull ImageButton notRemovedL3Button, @NonNull ImageButton notScoredL1Button,
-      @NonNull ImageButton notScoredL2Button, @NonNull ImageButton notScoredL3Button,
-      @NonNull ImageButton notScoredL4Button, @NonNull ImageButton notScoredNetButton,
-      @NonNull ImageButton notScoredProcessorButton, @NonNull ImageButton possessedAlgaeButton,
-      @NonNull ImageButton possessedCoralButton, @NonNull ConstraintLayout processorNetLayout,
-      @NonNull ImageButton removedL2Button, @NonNull ImageButton removedL3Button,
-      @NonNull ImageView rightEdgeBar, @NonNull ImageButton scoredL1Button,
-      @NonNull ImageButton scoredL2Button, @NonNull ImageButton scoredL3Button,
-      @NonNull ImageButton scoredL4Button, @NonNull ImageButton scoredNetButton,
-      @NonNull ImageButton scoredProcessorButton, @NonNull ImageView topEdgeBar) {
+      @NonNull RadioButton AchievedLevel1, @NonNull RadioGroup AttemptedClimbToggle,
+      @NonNull TextView AutonSeconds, @NonNull Button CancelButton, @NonNull RadioButton Center,
+      @NonNull TextView ClimbingDesc, @NonNull TextView ClimbingTitle,
+      @NonNull RadioButton Collecting0To25Fuel, @NonNull RadioButton Collecting26To50Fuel,
+      @NonNull RadioButton Collecting51to755Fuel, @NonNull RadioGroup CollectingCounterToggle,
+      @NonNull TextView CollectingDesc, @NonNull RadioButton CollectingMoreThan75Fuel,
+      @NonNull TextView CollectingTitle, @NonNull ConstraintLayout Contents,
+      @NonNull RadioButton DNA, @NonNull RadioButton DidNotAttempt, @NonNull TextView FellOverLabel,
+      @NonNull RadioButton Ferrying0To25Fuel, @NonNull RadioButton Ferrying26To50Fuel,
+      @NonNull RadioButton Ferrying51to755Fuel, @NonNull RadioGroup FerryingCounterToggle,
+      @NonNull TextView FerryingDesc, @NonNull RadioButton FerryingMoreThan75Fuel,
+      @NonNull TextView FerryingTitle, @NonNull TextView IDAutonSeconds1, @NonNull RadioButton Left,
+      @NonNull RadioButton Level1, @NonNull RadioButton Missed0To25Fuel,
+      @NonNull RadioButton Missed26To50Fuel, @NonNull RadioButton Missed51to755Fuel,
+      @NonNull RadioGroup MissedCounterToggle, @NonNull TextView MissedDesc,
+      @NonNull RadioButton MissedMoreThan75Fuel, @NonNull TextView MissedTitle,
+      @NonNull Button NextButtonAuton, @NonNull Switch NoShowSwitch, @NonNull RadioButton Right,
+      @NonNull Button SaveButton, @NonNull ConstraintLayout ScoredPopupWindow,
+      @NonNull TextView ScoringTitle, @NonNull RadioButton Start25, @NonNull RadioButton Start50,
+      @NonNull RadioButton Start75, @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty,
+      @NonNull RadioButton StartFull, @NonNull RadioGroup StartLevelToggle,
+      @NonNull TextView StartTitle, @NonNull RadioButton Stop25, @NonNull RadioButton Stop50,
+      @NonNull RadioButton Stop75, @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty,
+      @NonNull RadioButton StopFull, @NonNull RadioGroup StopLevelToggle,
+      @NonNull TextView StopTitle, @NonNull RadioGroup SuccessfulClimbed,
+      @NonNull TextView SuccessfullyClimbed, @NonNull RadioGroup SuccessfullyClimbedLocation,
+      @NonNull TextView TeleopWarning, @NonNull TextView TowerClimbPlacement,
+      @NonNull ImageView bottomEdgeBar, @NonNull ImageView leftEdgeBar,
+      @NonNull ImageView rightEdgeBar, @NonNull ImageView topEdgeBar) {
     this.rootView = rootView;
-    this.AlgaePossessedButtonGroup = AlgaePossessedButtonGroup;
+    this.AchievedLevel1 = AchievedLevel1;
+    this.AttemptedClimbToggle = AttemptedClimbToggle;
     this.AutonSeconds = AutonSeconds;
-    this.CoralPossessedButtonGroup = CoralPossessedButtonGroup;
-    this.FellOverSwitch = FellOverSwitch;
-    this.IDAlgae = IDAlgae;
-    this.IDAlgaePossessed = IDAlgaePossessed;
-    this.IDAlgaePossession = IDAlgaePossession;
+    this.CancelButton = CancelButton;
+    this.Center = Center;
+    this.ClimbingDesc = ClimbingDesc;
+    this.ClimbingTitle = ClimbingTitle;
+    this.Collecting0To25Fuel = Collecting0To25Fuel;
+    this.Collecting26To50Fuel = Collecting26To50Fuel;
+    this.Collecting51to755Fuel = Collecting51to755Fuel;
+    this.CollectingCounterToggle = CollectingCounterToggle;
+    this.CollectingDesc = CollectingDesc;
+    this.CollectingMoreThan75Fuel = CollectingMoreThan75Fuel;
+    this.CollectingTitle = CollectingTitle;
+    this.Contents = Contents;
+    this.DNA = DNA;
+    this.DidNotAttempt = DidNotAttempt;
+    this.FellOverLabel = FellOverLabel;
+    this.Ferrying0To25Fuel = Ferrying0To25Fuel;
+    this.Ferrying26To50Fuel = Ferrying26To50Fuel;
+    this.Ferrying51to755Fuel = Ferrying51to755Fuel;
+    this.FerryingCounterToggle = FerryingCounterToggle;
+    this.FerryingDesc = FerryingDesc;
+    this.FerryingMoreThan75Fuel = FerryingMoreThan75Fuel;
+    this.FerryingTitle = FerryingTitle;
     this.IDAutonSeconds1 = IDAutonSeconds1;
-    this.IDCoral = IDCoral;
-    this.IDCoralPossessed = IDCoralPossessed;
-    this.IDCoralPossession = IDCoralPossession;
-    this.IDDealgaefying = IDDealgaefying;
-    this.IDFellOver = IDFellOver;
-    this.IDL1Coral = IDL1Coral;
-    this.IDL1Missed = IDL1Missed;
-    this.IDL1Scored = IDL1Scored;
-    this.IDL2Algae = IDL2Algae;
-    this.IDL2Attempted = IDL2Attempted;
-    this.IDL2Coral = IDL2Coral;
-    this.IDL2Missed = IDL2Missed;
-    this.IDL2Removed = IDL2Removed;
-    this.IDL2Scored = IDL2Scored;
-    this.IDL3Algae = IDL3Algae;
-    this.IDL3Attempted = IDL3Attempted;
-    this.IDL3Coral = IDL3Coral;
-    this.IDL3Missed = IDL3Missed;
-    this.IDL3Removed = IDL3Removed;
-    this.IDL3Scored = IDL3Scored;
-    this.IDL4Coral = IDL4Coral;
-    this.IDL4Missed = IDL4Missed;
-    this.IDL4Scored = IDL4Scored;
-    this.IDLeave = IDLeave;
-    this.IDMiscDirections = IDMiscDirections;
-    this.IDNet = IDNet;
-    this.IDNetMissed = IDNetMissed;
-    this.IDNetScored = IDNetScored;
-    this.IDPossessionDirections = IDPossessionDirections;
-    this.IDProcessor = IDProcessor;
-    this.IDProcessorMissed = IDProcessorMissed;
-    this.IDProcessorScored = IDProcessorScored;
-    this.IDReef = IDReef;
-    this.L1MissedButtonGroup = L1MissedButtonGroup;
-    this.L1MissedCounter = L1MissedCounter;
-    this.L1ScoredButtonGroup = L1ScoredButtonGroup;
-    this.L1ScoredCounter = L1ScoredCounter;
-    this.L2AttemptedButtonGroup = L2AttemptedButtonGroup;
-    this.L2AttemptedCounter = L2AttemptedCounter;
-    this.L2MissedButtonGroup = L2MissedButtonGroup;
-    this.L2MissedCounter = L2MissedCounter;
-    this.L2RemovedButtonGroup = L2RemovedButtonGroup;
-    this.L2RemovedCounter = L2RemovedCounter;
-    this.L2ScoredButtonGroup = L2ScoredButtonGroup;
-    this.L2ScoredCounter = L2ScoredCounter;
-    this.L3AttemptedButtonGroup = L3AttemptedButtonGroup;
-    this.L3AttemptedCounter = L3AttemptedCounter;
-    this.L3MissedButtonGroup = L3MissedButtonGroup;
-    this.L3MissedCounter = L3MissedCounter;
-    this.L3RemovedButtonGroup = L3RemovedButtonGroup;
-    this.L3RemovedCounter = L3RemovedCounter;
-    this.L3ScoredButtonGroup = L3ScoredButtonGroup;
-    this.L3ScoredCounter = L3ScoredCounter;
-    this.L4MissedButtonGroup = L4MissedButtonGroup;
-    this.L4MissedCounter = L4MissedCounter;
-    this.L4ScoredButtonGroup = L4ScoredButtonGroup;
-    this.L4ScoredCounter = L4ScoredCounter;
-    this.LeaveSwitch = LeaveSwitch;
-    this.NetMissedButtonGroup = NetMissedButtonGroup;
-    this.NetScoredButtonGroup = NetScoredButtonGroup;
-    this.NextTeleopButton = NextTeleopButton;
-    this.ProcessorMissedButtonGroup = ProcessorMissedButtonGroup;
-    this.ProcessorMissedCounter = ProcessorMissedCounter;
-    this.ProcessorScoredButtonGroup = ProcessorScoredButtonGroup;
-    this.ProcessorScoredCounter = ProcessorScoredCounter;
+    this.Left = Left;
+    this.Level1 = Level1;
+    this.Missed0To25Fuel = Missed0To25Fuel;
+    this.Missed26To50Fuel = Missed26To50Fuel;
+    this.Missed51to755Fuel = Missed51to755Fuel;
+    this.MissedCounterToggle = MissedCounterToggle;
+    this.MissedDesc = MissedDesc;
+    this.MissedMoreThan75Fuel = MissedMoreThan75Fuel;
+    this.MissedTitle = MissedTitle;
+    this.NextButtonAuton = NextButtonAuton;
+    this.NoShowSwitch = NoShowSwitch;
+    this.Right = Right;
+    this.SaveButton = SaveButton;
+    this.ScoredPopupWindow = ScoredPopupWindow;
+    this.ScoringTitle = ScoringTitle;
+    this.Start25 = Start25;
+    this.Start50 = Start50;
+    this.Start75 = Start75;
+    this.StartDesc = StartDesc;
+    this.StartEmpty = StartEmpty;
+    this.StartFull = StartFull;
+    this.StartLevelToggle = StartLevelToggle;
+    this.StartTitle = StartTitle;
+    this.Stop25 = Stop25;
+    this.Stop50 = Stop50;
+    this.Stop75 = Stop75;
+    this.StopDesc = StopDesc;
+    this.StopEmpty = StopEmpty;
+    this.StopFull = StopFull;
+    this.StopLevelToggle = StopLevelToggle;
+    this.StopTitle = StopTitle;
+    this.SuccessfulClimbed = SuccessfulClimbed;
+    this.SuccessfullyClimbed = SuccessfullyClimbed;
+    this.SuccessfullyClimbedLocation = SuccessfullyClimbedLocation;
     this.TeleopWarning = TeleopWarning;
-    this.algaeLayout = algaeLayout;
-    this.algaePossessedCounter = algaePossessedCounter;
-    this.algaePossesssionLayout = algaePossesssionLayout;
-    this.attemptedL2Button = attemptedL2Button;
-    this.attemptedL3Button = attemptedL3Button;
-    this.auton = auton;
+    this.TowerClimbPlacement = TowerClimbPlacement;
     this.bottomEdgeBar = bottomEdgeBar;
-    this.coralLayout = coralLayout;
-    this.coralPossessedCounter = coralPossessedCounter;
-    this.coralPossessionLayout = coralPossessionLayout;
     this.leftEdgeBar = leftEdgeBar;
-    this.missedL1Button = missedL1Button;
-    this.missedL2Button = missedL2Button;
-    this.missedL3Button = missedL3Button;
-    this.missedL4Button = missedL4Button;
-    this.missedNetButton = missedNetButton;
-    this.missedProcessorButton = missedProcessorButton;
-    this.netMissedCounter = netMissedCounter;
-    this.netScoredCounter = netScoredCounter;
-    this.notAttemptedL2Button = notAttemptedL2Button;
-    this.notAttemptedL3Button = notAttemptedL3Button;
-    this.notMissedL1Button = notMissedL1Button;
-    this.notMissedL2Button = notMissedL2Button;
-    this.notMissedL3Button = notMissedL3Button;
-    this.notMissedL4Button = notMissedL4Button;
-    this.notMissedNetButton = notMissedNetButton;
-    this.notMissedProcessorButton = notMissedProcessorButton;
-    this.notPossessedAlgaeButton = notPossessedAlgaeButton;
-    this.notPossessedCoralButton = notPossessedCoralButton;
-    this.notRemovedL2Button = notRemovedL2Button;
-    this.notRemovedL3Button = notRemovedL3Button;
-    this.notScoredL1Button = notScoredL1Button;
-    this.notScoredL2Button = notScoredL2Button;
-    this.notScoredL3Button = notScoredL3Button;
-    this.notScoredL4Button = notScoredL4Button;
-    this.notScoredNetButton = notScoredNetButton;
-    this.notScoredProcessorButton = notScoredProcessorButton;
-    this.possessedAlgaeButton = possessedAlgaeButton;
-    this.possessedCoralButton = possessedCoralButton;
-    this.processorNetLayout = processorNetLayout;
-    this.removedL2Button = removedL2Button;
-    this.removedL3Button = removedL3Button;
     this.rightEdgeBar = rightEdgeBar;
-    this.scoredL1Button = scoredL1Button;
-    this.scoredL2Button = scoredL2Button;
-    this.scoredL3Button = scoredL3Button;
-    this.scoredL4Button = scoredL4Button;
-    this.scoredNetButton = scoredNetButton;
-    this.scoredProcessorButton = scoredProcessorButton;
     this.topEdgeBar = topEdgeBar;
   }
 
@@ -609,9 +348,15 @@ public final class AutonScreenBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.AlgaePossessedButtonGroup;
-      RadioGroup AlgaePossessedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (AlgaePossessedButtonGroup == null) {
+      id = R.id.AchievedLevel1;
+      RadioButton AchievedLevel1 = ViewBindings.findChildViewById(rootView, id);
+      if (AchievedLevel1 == null) {
+        break missingId;
+      }
+
+      id = R.id.AttemptedClimbToggle;
+      RadioGroup AttemptedClimbToggle = ViewBindings.findChildViewById(rootView, id);
+      if (AttemptedClimbToggle == null) {
         break missingId;
       }
 
@@ -621,33 +366,135 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.CoralPossessedButtonGroup;
-      RadioGroup CoralPossessedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (CoralPossessedButtonGroup == null) {
+      id = R.id.CancelButton;
+      Button CancelButton = ViewBindings.findChildViewById(rootView, id);
+      if (CancelButton == null) {
         break missingId;
       }
 
-      id = R.id.FellOverSwitch;
-      Switch FellOverSwitch = ViewBindings.findChildViewById(rootView, id);
-      if (FellOverSwitch == null) {
+      id = R.id.Center;
+      RadioButton Center = ViewBindings.findChildViewById(rootView, id);
+      if (Center == null) {
         break missingId;
       }
 
-      id = R.id.IDAlgae;
-      TextView IDAlgae = ViewBindings.findChildViewById(rootView, id);
-      if (IDAlgae == null) {
+      id = R.id.ClimbingDesc;
+      TextView ClimbingDesc = ViewBindings.findChildViewById(rootView, id);
+      if (ClimbingDesc == null) {
         break missingId;
       }
 
-      id = R.id.IDAlgaePossessed;
-      TextView IDAlgaePossessed = ViewBindings.findChildViewById(rootView, id);
-      if (IDAlgaePossessed == null) {
+      id = R.id.ClimbingTitle;
+      TextView ClimbingTitle = ViewBindings.findChildViewById(rootView, id);
+      if (ClimbingTitle == null) {
         break missingId;
       }
 
-      id = R.id.IDAlgaePossession;
-      TextView IDAlgaePossession = ViewBindings.findChildViewById(rootView, id);
-      if (IDAlgaePossession == null) {
+      id = R.id.Collecting0To25Fuel;
+      RadioButton Collecting0To25Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Collecting0To25Fuel == null) {
+        break missingId;
+      }
+
+      id = R.id.Collecting26To50Fuel;
+      RadioButton Collecting26To50Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Collecting26To50Fuel == null) {
+        break missingId;
+      }
+
+      id = R.id.Collecting51to755Fuel;
+      RadioButton Collecting51to755Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Collecting51to755Fuel == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingCounterToggle;
+      RadioGroup CollectingCounterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingCounterToggle == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingDesc;
+      TextView CollectingDesc = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingDesc == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingMoreThan75Fuel;
+      RadioButton CollectingMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingMoreThan75Fuel == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingTitle;
+      TextView CollectingTitle = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.Contents;
+      ConstraintLayout Contents = ViewBindings.findChildViewById(rootView, id);
+      if (Contents == null) {
+        break missingId;
+      }
+
+      id = R.id.DNA;
+      RadioButton DNA = ViewBindings.findChildViewById(rootView, id);
+      if (DNA == null) {
+        break missingId;
+      }
+
+      id = R.id.DidNotAttempt;
+      RadioButton DidNotAttempt = ViewBindings.findChildViewById(rootView, id);
+      if (DidNotAttempt == null) {
+        break missingId;
+      }
+
+      id = R.id.FellOverLabel;
+      TextView FellOverLabel = ViewBindings.findChildViewById(rootView, id);
+      if (FellOverLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.Ferrying0To25Fuel;
+      RadioButton Ferrying0To25Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Ferrying0To25Fuel == null) {
+        break missingId;
+      }
+
+      id = R.id.Ferrying26To50Fuel;
+      RadioButton Ferrying26To50Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Ferrying26To50Fuel == null) {
+        break missingId;
+      }
+
+      id = R.id.Ferrying51to755Fuel;
+      RadioButton Ferrying51to755Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Ferrying51to755Fuel == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingCounterToggle;
+      RadioGroup FerryingCounterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingCounterToggle == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingDesc;
+      TextView FerryingDesc = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingDesc == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingMoreThan75Fuel;
+      RadioButton FerryingMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingMoreThan75Fuel == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingTitle;
+      TextView FerryingTitle = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingTitle == null) {
         break missingId;
       }
 
@@ -657,393 +504,203 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.IDCoral;
-      TextView IDCoral = ViewBindings.findChildViewById(rootView, id);
-      if (IDCoral == null) {
+      id = R.id.Left;
+      RadioButton Left = ViewBindings.findChildViewById(rootView, id);
+      if (Left == null) {
         break missingId;
       }
 
-      id = R.id.IDCoralPossessed;
-      TextView IDCoralPossessed = ViewBindings.findChildViewById(rootView, id);
-      if (IDCoralPossessed == null) {
+      id = R.id.Level1;
+      RadioButton Level1 = ViewBindings.findChildViewById(rootView, id);
+      if (Level1 == null) {
         break missingId;
       }
 
-      id = R.id.IDCoralPossession;
-      TextView IDCoralPossession = ViewBindings.findChildViewById(rootView, id);
-      if (IDCoralPossession == null) {
+      id = R.id.Missed0To25Fuel;
+      RadioButton Missed0To25Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Missed0To25Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDDealgaefying;
-      TextView IDDealgaefying = ViewBindings.findChildViewById(rootView, id);
-      if (IDDealgaefying == null) {
+      id = R.id.Missed26To50Fuel;
+      RadioButton Missed26To50Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Missed26To50Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDFellOver;
-      TextView IDFellOver = ViewBindings.findChildViewById(rootView, id);
-      if (IDFellOver == null) {
+      id = R.id.Missed51to755Fuel;
+      RadioButton Missed51to755Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (Missed51to755Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDL1Coral;
-      TextView IDL1Coral = ViewBindings.findChildViewById(rootView, id);
-      if (IDL1Coral == null) {
+      id = R.id.MissedCounterToggle;
+      RadioGroup MissedCounterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (MissedCounterToggle == null) {
         break missingId;
       }
 
-      id = R.id.IDL1Missed;
-      TextView IDL1Missed = ViewBindings.findChildViewById(rootView, id);
-      if (IDL1Missed == null) {
+      id = R.id.MissedDesc;
+      TextView MissedDesc = ViewBindings.findChildViewById(rootView, id);
+      if (MissedDesc == null) {
         break missingId;
       }
 
-      id = R.id.IDL1Scored;
-      TextView IDL1Scored = ViewBindings.findChildViewById(rootView, id);
-      if (IDL1Scored == null) {
+      id = R.id.MissedMoreThan75Fuel;
+      RadioButton MissedMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
+      if (MissedMoreThan75Fuel == null) {
         break missingId;
       }
 
-      id = R.id.IDL2Algae;
-      TextView IDL2Algae = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2Algae == null) {
+      id = R.id.MissedTitle;
+      TextView MissedTitle = ViewBindings.findChildViewById(rootView, id);
+      if (MissedTitle == null) {
         break missingId;
       }
 
-      id = R.id.IDL2Attempted;
-      TextView IDL2Attempted = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2Attempted == null) {
+      id = R.id.NextButtonAuton;
+      Button NextButtonAuton = ViewBindings.findChildViewById(rootView, id);
+      if (NextButtonAuton == null) {
         break missingId;
       }
 
-      id = R.id.IDL2Coral;
-      TextView IDL2Coral = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2Coral == null) {
+      id = R.id.NoShowSwitch;
+      Switch NoShowSwitch = ViewBindings.findChildViewById(rootView, id);
+      if (NoShowSwitch == null) {
         break missingId;
       }
 
-      id = R.id.IDL2Missed;
-      TextView IDL2Missed = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2Missed == null) {
+      id = R.id.Right;
+      RadioButton Right = ViewBindings.findChildViewById(rootView, id);
+      if (Right == null) {
         break missingId;
       }
 
-      id = R.id.IDL2Removed;
-      TextView IDL2Removed = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2Removed == null) {
+      id = R.id.SaveButton;
+      Button SaveButton = ViewBindings.findChildViewById(rootView, id);
+      if (SaveButton == null) {
         break missingId;
       }
 
-      id = R.id.IDL2Scored;
-      TextView IDL2Scored = ViewBindings.findChildViewById(rootView, id);
-      if (IDL2Scored == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL3Algae;
-      TextView IDL3Algae = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3Algae == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL3Attempted;
-      TextView IDL3Attempted = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3Attempted == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL3Coral;
-      TextView IDL3Coral = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3Coral == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL3Missed;
-      TextView IDL3Missed = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3Missed == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL3Removed;
-      TextView IDL3Removed = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3Removed == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL3Scored;
-      TextView IDL3Scored = ViewBindings.findChildViewById(rootView, id);
-      if (IDL3Scored == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL4Coral;
-      TextView IDL4Coral = ViewBindings.findChildViewById(rootView, id);
-      if (IDL4Coral == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL4Missed;
-      TextView IDL4Missed = ViewBindings.findChildViewById(rootView, id);
-      if (IDL4Missed == null) {
-        break missingId;
-      }
-
-      id = R.id.IDL4Scored;
-      TextView IDL4Scored = ViewBindings.findChildViewById(rootView, id);
-      if (IDL4Scored == null) {
-        break missingId;
-      }
-
-      id = R.id.IDLeave;
-      TextView IDLeave = ViewBindings.findChildViewById(rootView, id);
-      if (IDLeave == null) {
-        break missingId;
-      }
-
-      id = R.id.IDMiscDirections;
-      TextView IDMiscDirections = ViewBindings.findChildViewById(rootView, id);
-      if (IDMiscDirections == null) {
-        break missingId;
-      }
-
-      id = R.id.IDNet;
-      TextView IDNet = ViewBindings.findChildViewById(rootView, id);
-      if (IDNet == null) {
-        break missingId;
-      }
-
-      id = R.id.IDNetMissed;
-      TextView IDNetMissed = ViewBindings.findChildViewById(rootView, id);
-      if (IDNetMissed == null) {
-        break missingId;
-      }
-
-      id = R.id.IDNetScored;
-      TextView IDNetScored = ViewBindings.findChildViewById(rootView, id);
-      if (IDNetScored == null) {
-        break missingId;
-      }
-
-      id = R.id.IDPossessionDirections;
-      TextView IDPossessionDirections = ViewBindings.findChildViewById(rootView, id);
-      if (IDPossessionDirections == null) {
-        break missingId;
-      }
-
-      id = R.id.IDProcessor;
-      TextView IDProcessor = ViewBindings.findChildViewById(rootView, id);
-      if (IDProcessor == null) {
-        break missingId;
-      }
-
-      id = R.id.IDProcessorMissed;
-      TextView IDProcessorMissed = ViewBindings.findChildViewById(rootView, id);
-      if (IDProcessorMissed == null) {
-        break missingId;
-      }
-
-      id = R.id.IDProcessorScored;
-      TextView IDProcessorScored = ViewBindings.findChildViewById(rootView, id);
-      if (IDProcessorScored == null) {
-        break missingId;
-      }
-
-      id = R.id.IDReef;
-      TextView IDReef = ViewBindings.findChildViewById(rootView, id);
-      if (IDReef == null) {
-        break missingId;
-      }
-
-      id = R.id.L1MissedButtonGroup;
-      RadioGroup L1MissedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L1MissedButtonGroup == null) {
-        break missingId;
-      }
-
-      id = R.id.L1MissedCounter;
-      TextView L1MissedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L1MissedCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.L1ScoredButtonGroup;
-      RadioGroup L1ScoredButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L1ScoredButtonGroup == null) {
-        break missingId;
-      }
-
-      id = R.id.L1ScoredCounter;
-      TextView L1ScoredCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L1ScoredCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.L2AttemptedButtonGroup;
-      RadioGroup L2AttemptedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L2AttemptedButtonGroup == null) {
-        break missingId;
-      }
-
-      id = R.id.L2AttemptedCounter;
-      TextView L2AttemptedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L2AttemptedCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.L2MissedButtonGroup;
-      RadioGroup L2MissedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L2MissedButtonGroup == null) {
-        break missingId;
-      }
-
-      id = R.id.L2MissedCounter;
-      TextView L2MissedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L2MissedCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.L2RemovedButtonGroup;
-      RadioGroup L2RemovedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L2RemovedButtonGroup == null) {
-        break missingId;
-      }
-
-      id = R.id.L2RemovedCounter;
-      TextView L2RemovedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L2RemovedCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.L2ScoredButtonGroup;
-      RadioGroup L2ScoredButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L2ScoredButtonGroup == null) {
-        break missingId;
-      }
-
-      id = R.id.L2ScoredCounter;
-      TextView L2ScoredCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L2ScoredCounter == null) {
-        break missingId;
-      }
+      ConstraintLayout ScoredPopupWindow = (ConstraintLayout) rootView;
 
-      id = R.id.L3AttemptedButtonGroup;
-      RadioGroup L3AttemptedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L3AttemptedButtonGroup == null) {
+      id = R.id.ScoringTitle;
+      TextView ScoringTitle = ViewBindings.findChildViewById(rootView, id);
+      if (ScoringTitle == null) {
         break missingId;
       }
 
-      id = R.id.L3AttemptedCounter;
-      TextView L3AttemptedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L3AttemptedCounter == null) {
+      id = R.id.Start25;
+      RadioButton Start25 = ViewBindings.findChildViewById(rootView, id);
+      if (Start25 == null) {
         break missingId;
       }
 
-      id = R.id.L3MissedButtonGroup;
-      RadioGroup L3MissedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L3MissedButtonGroup == null) {
+      id = R.id.Start50;
+      RadioButton Start50 = ViewBindings.findChildViewById(rootView, id);
+      if (Start50 == null) {
         break missingId;
       }
 
-      id = R.id.L3MissedCounter;
-      TextView L3MissedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L3MissedCounter == null) {
+      id = R.id.Start75;
+      RadioButton Start75 = ViewBindings.findChildViewById(rootView, id);
+      if (Start75 == null) {
         break missingId;
       }
 
-      id = R.id.L3RemovedButtonGroup;
-      RadioGroup L3RemovedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L3RemovedButtonGroup == null) {
+      id = R.id.StartDesc;
+      TextView StartDesc = ViewBindings.findChildViewById(rootView, id);
+      if (StartDesc == null) {
         break missingId;
       }
 
-      id = R.id.L3RemovedCounter;
-      TextView L3RemovedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L3RemovedCounter == null) {
+      id = R.id.StartEmpty;
+      RadioButton StartEmpty = ViewBindings.findChildViewById(rootView, id);
+      if (StartEmpty == null) {
         break missingId;
       }
 
-      id = R.id.L3ScoredButtonGroup;
-      RadioGroup L3ScoredButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L3ScoredButtonGroup == null) {
+      id = R.id.StartFull;
+      RadioButton StartFull = ViewBindings.findChildViewById(rootView, id);
+      if (StartFull == null) {
         break missingId;
       }
 
-      id = R.id.L3ScoredCounter;
-      TextView L3ScoredCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L3ScoredCounter == null) {
+      id = R.id.StartLevelToggle;
+      RadioGroup StartLevelToggle = ViewBindings.findChildViewById(rootView, id);
+      if (StartLevelToggle == null) {
         break missingId;
       }
 
-      id = R.id.L4MissedButtonGroup;
-      RadioGroup L4MissedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L4MissedButtonGroup == null) {
+      id = R.id.StartTitle;
+      TextView StartTitle = ViewBindings.findChildViewById(rootView, id);
+      if (StartTitle == null) {
         break missingId;
       }
 
-      id = R.id.L4MissedCounter;
-      TextView L4MissedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L4MissedCounter == null) {
+      id = R.id.Stop25;
+      RadioButton Stop25 = ViewBindings.findChildViewById(rootView, id);
+      if (Stop25 == null) {
         break missingId;
       }
 
-      id = R.id.L4ScoredButtonGroup;
-      RadioGroup L4ScoredButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (L4ScoredButtonGroup == null) {
+      id = R.id.Stop50;
+      RadioButton Stop50 = ViewBindings.findChildViewById(rootView, id);
+      if (Stop50 == null) {
         break missingId;
       }
 
-      id = R.id.L4ScoredCounter;
-      TextView L4ScoredCounter = ViewBindings.findChildViewById(rootView, id);
-      if (L4ScoredCounter == null) {
+      id = R.id.Stop75;
+      RadioButton Stop75 = ViewBindings.findChildViewById(rootView, id);
+      if (Stop75 == null) {
         break missingId;
       }
 
-      id = R.id.LeaveSwitch;
-      Switch LeaveSwitch = ViewBindings.findChildViewById(rootView, id);
-      if (LeaveSwitch == null) {
+      id = R.id.StopDesc;
+      TextView StopDesc = ViewBindings.findChildViewById(rootView, id);
+      if (StopDesc == null) {
         break missingId;
       }
 
-      id = R.id.NetMissedButtonGroup;
-      RadioGroup NetMissedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (NetMissedButtonGroup == null) {
+      id = R.id.StopEmpty;
+      RadioButton StopEmpty = ViewBindings.findChildViewById(rootView, id);
+      if (StopEmpty == null) {
         break missingId;
       }
 
-      id = R.id.NetScoredButtonGroup;
-      RadioGroup NetScoredButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (NetScoredButtonGroup == null) {
+      id = R.id.StopFull;
+      RadioButton StopFull = ViewBindings.findChildViewById(rootView, id);
+      if (StopFull == null) {
         break missingId;
       }
 
-      id = R.id.NextTeleopButton;
-      Button NextTeleopButton = ViewBindings.findChildViewById(rootView, id);
-      if (NextTeleopButton == null) {
+      id = R.id.StopLevelToggle;
+      RadioGroup StopLevelToggle = ViewBindings.findChildViewById(rootView, id);
+      if (StopLevelToggle == null) {
         break missingId;
       }
 
-      id = R.id.ProcessorMissedButtonGroup;
-      RadioGroup ProcessorMissedButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (ProcessorMissedButtonGroup == null) {
+      id = R.id.StopTitle;
+      TextView StopTitle = ViewBindings.findChildViewById(rootView, id);
+      if (StopTitle == null) {
         break missingId;
       }
 
-      id = R.id.ProcessorMissedCounter;
-      TextView ProcessorMissedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (ProcessorMissedCounter == null) {
+      id = R.id.SuccessfulClimbed;
+      RadioGroup SuccessfulClimbed = ViewBindings.findChildViewById(rootView, id);
+      if (SuccessfulClimbed == null) {
         break missingId;
       }
 
-      id = R.id.ProcessorScoredButtonGroup;
-      RadioGroup ProcessorScoredButtonGroup = ViewBindings.findChildViewById(rootView, id);
-      if (ProcessorScoredButtonGroup == null) {
+      id = R.id.SuccessfullyClimbed;
+      TextView SuccessfullyClimbed = ViewBindings.findChildViewById(rootView, id);
+      if (SuccessfullyClimbed == null) {
         break missingId;
       }
 
-      id = R.id.ProcessorScoredCounter;
-      TextView ProcessorScoredCounter = ViewBindings.findChildViewById(rootView, id);
-      if (ProcessorScoredCounter == null) {
+      id = R.id.SuccessfullyClimbedLocation;
+      RadioGroup SuccessfullyClimbedLocation = ViewBindings.findChildViewById(rootView, id);
+      if (SuccessfullyClimbedLocation == null) {
         break missingId;
       }
 
@@ -1053,59 +710,15 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.algaeLayout;
-      ConstraintLayout algaeLayout = ViewBindings.findChildViewById(rootView, id);
-      if (algaeLayout == null) {
+      id = R.id.TowerClimbPlacement;
+      TextView TowerClimbPlacement = ViewBindings.findChildViewById(rootView, id);
+      if (TowerClimbPlacement == null) {
         break missingId;
       }
-
-      id = R.id.algaePossessedCounter;
-      TextView algaePossessedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (algaePossessedCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.algaePossesssionLayout;
-      ConstraintLayout algaePossesssionLayout = ViewBindings.findChildViewById(rootView, id);
-      if (algaePossesssionLayout == null) {
-        break missingId;
-      }
-
-      id = R.id.attemptedL2Button;
-      ImageButton attemptedL2Button = ViewBindings.findChildViewById(rootView, id);
-      if (attemptedL2Button == null) {
-        break missingId;
-      }
-
-      id = R.id.attemptedL3Button;
-      ImageButton attemptedL3Button = ViewBindings.findChildViewById(rootView, id);
-      if (attemptedL3Button == null) {
-        break missingId;
-      }
-
-      ConstraintLayout auton = (ConstraintLayout) rootView;
 
       id = R.id.bottomEdgeBar;
       ImageView bottomEdgeBar = ViewBindings.findChildViewById(rootView, id);
       if (bottomEdgeBar == null) {
-        break missingId;
-      }
-
-      id = R.id.coralLayout;
-      ConstraintLayout coralLayout = ViewBindings.findChildViewById(rootView, id);
-      if (coralLayout == null) {
-        break missingId;
-      }
-
-      id = R.id.coralPossessedCounter;
-      TextView coralPossessedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (coralPossessedCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.coralPossessionLayout;
-      ConstraintLayout coralPossessionLayout = ViewBindings.findChildViewById(rootView, id);
-      if (coralPossessionLayout == null) {
         break missingId;
       }
 
@@ -1115,231 +728,9 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.missedL1Button;
-      ImageButton missedL1Button = ViewBindings.findChildViewById(rootView, id);
-      if (missedL1Button == null) {
-        break missingId;
-      }
-
-      id = R.id.missedL2Button;
-      ImageButton missedL2Button = ViewBindings.findChildViewById(rootView, id);
-      if (missedL2Button == null) {
-        break missingId;
-      }
-
-      id = R.id.missedL3Button;
-      ImageButton missedL3Button = ViewBindings.findChildViewById(rootView, id);
-      if (missedL3Button == null) {
-        break missingId;
-      }
-
-      id = R.id.missedL4Button;
-      ImageButton missedL4Button = ViewBindings.findChildViewById(rootView, id);
-      if (missedL4Button == null) {
-        break missingId;
-      }
-
-      id = R.id.missedNetButton;
-      ImageButton missedNetButton = ViewBindings.findChildViewById(rootView, id);
-      if (missedNetButton == null) {
-        break missingId;
-      }
-
-      id = R.id.missedProcessorButton;
-      ImageButton missedProcessorButton = ViewBindings.findChildViewById(rootView, id);
-      if (missedProcessorButton == null) {
-        break missingId;
-      }
-
-      id = R.id.netMissedCounter;
-      TextView netMissedCounter = ViewBindings.findChildViewById(rootView, id);
-      if (netMissedCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.netScoredCounter;
-      TextView netScoredCounter = ViewBindings.findChildViewById(rootView, id);
-      if (netScoredCounter == null) {
-        break missingId;
-      }
-
-      id = R.id.notAttemptedL2Button;
-      ImageButton notAttemptedL2Button = ViewBindings.findChildViewById(rootView, id);
-      if (notAttemptedL2Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notAttemptedL3Button;
-      ImageButton notAttemptedL3Button = ViewBindings.findChildViewById(rootView, id);
-      if (notAttemptedL3Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notMissedL1Button;
-      ImageButton notMissedL1Button = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedL1Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notMissedL2Button;
-      ImageButton notMissedL2Button = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedL2Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notMissedL3Button;
-      ImageButton notMissedL3Button = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedL3Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notMissedL4Button;
-      ImageButton notMissedL4Button = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedL4Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notMissedNetButton;
-      ImageButton notMissedNetButton = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedNetButton == null) {
-        break missingId;
-      }
-
-      id = R.id.notMissedProcessorButton;
-      ImageButton notMissedProcessorButton = ViewBindings.findChildViewById(rootView, id);
-      if (notMissedProcessorButton == null) {
-        break missingId;
-      }
-
-      id = R.id.notPossessedAlgaeButton;
-      ImageButton notPossessedAlgaeButton = ViewBindings.findChildViewById(rootView, id);
-      if (notPossessedAlgaeButton == null) {
-        break missingId;
-      }
-
-      id = R.id.notPossessedCoralButton;
-      ImageButton notPossessedCoralButton = ViewBindings.findChildViewById(rootView, id);
-      if (notPossessedCoralButton == null) {
-        break missingId;
-      }
-
-      id = R.id.notRemovedL2Button;
-      ImageButton notRemovedL2Button = ViewBindings.findChildViewById(rootView, id);
-      if (notRemovedL2Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notRemovedL3Button;
-      ImageButton notRemovedL3Button = ViewBindings.findChildViewById(rootView, id);
-      if (notRemovedL3Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notScoredL1Button;
-      ImageButton notScoredL1Button = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredL1Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notScoredL2Button;
-      ImageButton notScoredL2Button = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredL2Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notScoredL3Button;
-      ImageButton notScoredL3Button = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredL3Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notScoredL4Button;
-      ImageButton notScoredL4Button = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredL4Button == null) {
-        break missingId;
-      }
-
-      id = R.id.notScoredNetButton;
-      ImageButton notScoredNetButton = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredNetButton == null) {
-        break missingId;
-      }
-
-      id = R.id.notScoredProcessorButton;
-      ImageButton notScoredProcessorButton = ViewBindings.findChildViewById(rootView, id);
-      if (notScoredProcessorButton == null) {
-        break missingId;
-      }
-
-      id = R.id.possessedAlgaeButton;
-      ImageButton possessedAlgaeButton = ViewBindings.findChildViewById(rootView, id);
-      if (possessedAlgaeButton == null) {
-        break missingId;
-      }
-
-      id = R.id.possessedCoralButton;
-      ImageButton possessedCoralButton = ViewBindings.findChildViewById(rootView, id);
-      if (possessedCoralButton == null) {
-        break missingId;
-      }
-
-      id = R.id.processorNetLayout;
-      ConstraintLayout processorNetLayout = ViewBindings.findChildViewById(rootView, id);
-      if (processorNetLayout == null) {
-        break missingId;
-      }
-
-      id = R.id.removedL2Button;
-      ImageButton removedL2Button = ViewBindings.findChildViewById(rootView, id);
-      if (removedL2Button == null) {
-        break missingId;
-      }
-
-      id = R.id.removedL3Button;
-      ImageButton removedL3Button = ViewBindings.findChildViewById(rootView, id);
-      if (removedL3Button == null) {
-        break missingId;
-      }
-
       id = R.id.rightEdgeBar;
       ImageView rightEdgeBar = ViewBindings.findChildViewById(rootView, id);
       if (rightEdgeBar == null) {
-        break missingId;
-      }
-
-      id = R.id.scoredL1Button;
-      ImageButton scoredL1Button = ViewBindings.findChildViewById(rootView, id);
-      if (scoredL1Button == null) {
-        break missingId;
-      }
-
-      id = R.id.scoredL2Button;
-      ImageButton scoredL2Button = ViewBindings.findChildViewById(rootView, id);
-      if (scoredL2Button == null) {
-        break missingId;
-      }
-
-      id = R.id.scoredL3Button;
-      ImageButton scoredL3Button = ViewBindings.findChildViewById(rootView, id);
-      if (scoredL3Button == null) {
-        break missingId;
-      }
-
-      id = R.id.scoredL4Button;
-      ImageButton scoredL4Button = ViewBindings.findChildViewById(rootView, id);
-      if (scoredL4Button == null) {
-        break missingId;
-      }
-
-      id = R.id.scoredNetButton;
-      ImageButton scoredNetButton = ViewBindings.findChildViewById(rootView, id);
-      if (scoredNetButton == null) {
-        break missingId;
-      }
-
-      id = R.id.scoredProcessorButton;
-      ImageButton scoredProcessorButton = ViewBindings.findChildViewById(rootView, id);
-      if (scoredProcessorButton == null) {
         break missingId;
       }
 
@@ -1349,34 +740,19 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      return new AutonScreenBinding((ConstraintLayout) rootView, AlgaePossessedButtonGroup,
-          AutonSeconds, CoralPossessedButtonGroup, FellOverSwitch, IDAlgae, IDAlgaePossessed,
-          IDAlgaePossession, IDAutonSeconds1, IDCoral, IDCoralPossessed, IDCoralPossession,
-          IDDealgaefying, IDFellOver, IDL1Coral, IDL1Missed, IDL1Scored, IDL2Algae, IDL2Attempted,
-          IDL2Coral, IDL2Missed, IDL2Removed, IDL2Scored, IDL3Algae, IDL3Attempted, IDL3Coral,
-          IDL3Missed, IDL3Removed, IDL3Scored, IDL4Coral, IDL4Missed, IDL4Scored, IDLeave,
-          IDMiscDirections, IDNet, IDNetMissed, IDNetScored, IDPossessionDirections, IDProcessor,
-          IDProcessorMissed, IDProcessorScored, IDReef, L1MissedButtonGroup, L1MissedCounter,
-          L1ScoredButtonGroup, L1ScoredCounter, L2AttemptedButtonGroup, L2AttemptedCounter,
-          L2MissedButtonGroup, L2MissedCounter, L2RemovedButtonGroup, L2RemovedCounter,
-          L2ScoredButtonGroup, L2ScoredCounter, L3AttemptedButtonGroup, L3AttemptedCounter,
-          L3MissedButtonGroup, L3MissedCounter, L3RemovedButtonGroup, L3RemovedCounter,
-          L3ScoredButtonGroup, L3ScoredCounter, L4MissedButtonGroup, L4MissedCounter,
-          L4ScoredButtonGroup, L4ScoredCounter, LeaveSwitch, NetMissedButtonGroup,
-          NetScoredButtonGroup, NextTeleopButton, ProcessorMissedButtonGroup,
-          ProcessorMissedCounter, ProcessorScoredButtonGroup, ProcessorScoredCounter, TeleopWarning,
-          algaeLayout, algaePossessedCounter, algaePossesssionLayout, attemptedL2Button,
-          attemptedL3Button, auton, bottomEdgeBar, coralLayout, coralPossessedCounter,
-          coralPossessionLayout, leftEdgeBar, missedL1Button, missedL2Button, missedL3Button,
-          missedL4Button, missedNetButton, missedProcessorButton, netMissedCounter,
-          netScoredCounter, notAttemptedL2Button, notAttemptedL3Button, notMissedL1Button,
-          notMissedL2Button, notMissedL3Button, notMissedL4Button, notMissedNetButton,
-          notMissedProcessorButton, notPossessedAlgaeButton, notPossessedCoralButton,
-          notRemovedL2Button, notRemovedL3Button, notScoredL1Button, notScoredL2Button,
-          notScoredL3Button, notScoredL4Button, notScoredNetButton, notScoredProcessorButton,
-          possessedAlgaeButton, possessedCoralButton, processorNetLayout, removedL2Button,
-          removedL3Button, rightEdgeBar, scoredL1Button, scoredL2Button, scoredL3Button,
-          scoredL4Button, scoredNetButton, scoredProcessorButton, topEdgeBar);
+      return new AutonScreenBinding((ConstraintLayout) rootView, AchievedLevel1,
+          AttemptedClimbToggle, AutonSeconds, CancelButton, Center, ClimbingDesc, ClimbingTitle,
+          Collecting0To25Fuel, Collecting26To50Fuel, Collecting51to755Fuel, CollectingCounterToggle,
+          CollectingDesc, CollectingMoreThan75Fuel, CollectingTitle, Contents, DNA, DidNotAttempt,
+          FellOverLabel, Ferrying0To25Fuel, Ferrying26To50Fuel, Ferrying51to755Fuel,
+          FerryingCounterToggle, FerryingDesc, FerryingMoreThan75Fuel, FerryingTitle,
+          IDAutonSeconds1, Left, Level1, Missed0To25Fuel, Missed26To50Fuel, Missed51to755Fuel,
+          MissedCounterToggle, MissedDesc, MissedMoreThan75Fuel, MissedTitle, NextButtonAuton,
+          NoShowSwitch, Right, SaveButton, ScoredPopupWindow, ScoringTitle, Start25, Start50,
+          Start75, StartDesc, StartEmpty, StartFull, StartLevelToggle, StartTitle, Stop25, Stop50,
+          Stop75, StopDesc, StopEmpty, StopFull, StopLevelToggle, StopTitle, SuccessfulClimbed,
+          SuccessfullyClimbed, SuccessfullyClimbedLocation, TeleopWarning, TowerClimbPlacement,
+          bottomEdgeBar, leftEdgeBar, rightEdgeBar, topEdgeBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
