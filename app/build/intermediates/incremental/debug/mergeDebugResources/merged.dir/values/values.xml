@@ -2775,7 +2775,7 @@
     <string name="DNA">DID NOT ATTEMPT</string>
     <string name="DefaultValue">000</string>
     <string name="Done">DONE</string>
-    <string name="EndGame">Teleop</string>
+    <string name="EndGame">END GAME</string>
     <string name="EndGameError">Switch to End Game as soon as possible!</string>
     <string name="EndGameSeconds">END GAME SECONDS REMAINING</string>
     <string name="EndGameTitle">POST-MATCH</string>
