@@ -33,8 +33,8 @@
         tools:layout="@layout/teleop_screen" />
 
     <fragment
-        android:id="@+id/Climb"
-        android:name="com.mercury1089.Scouting_App_2026.EndGame"
+        android:id="@+id/EndGame"
+        android:name="com.mercury1089.Scouting_App_2026.Endgame"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs"
         app:layout_constraintVertical_bias="1.0"
-        tools:layout="@layout/post_match" />
+        tools:layout="@layout/endgame_screen" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/TitleBar"
@@ -81,6 +81,13 @@
         app:tabBackground="@drawable/button_states"
         app:tabTextColor="@color/ice">
 
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/matchSetupTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/toggle_left_states"
+            android:text="@string/Setup"
+            app:tabBackground="@drawable/toggle_left_states" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/autonTab"
@@ -101,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/toggle_right_states"
-            android:text="@string/PostMatch"
+            android:text="@string/EndGame"
             app:tabBackground="@drawable/toggle_right_states" />
     </com.google.android.material.tabs.TabLayout>
 

@@ -25,7 +25,7 @@
         <string name="Setup">Setup</string>
         <string name="Auton">Auton</string>
         <string name="Teleop">Teleop</string>
-        <string name="EndGame">Teleop</string>
+        <string name="EndGame">END GAME</string>
         <string name="PostMatch">Post-Match</string>
 
 
