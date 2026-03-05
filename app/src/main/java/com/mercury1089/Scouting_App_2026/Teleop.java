@@ -47,6 +47,7 @@ public class Teleop extends Fragment implements UpdateListener {
     // Other controls
     private Switch noShowSwitch;
     private Button saveButton;
+    private Button nextButtonEndGame;
 
     // Timer & animation
     private TextView timerID;
@@ -101,6 +102,7 @@ public class Teleop extends Fragment implements UpdateListener {
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
         noShowSwitch                     = getView().findViewById(R.id.NoShowSwitch);
         saveButton                       = getView().findViewById(R.id.SaveButton);
+        nextButtonEndGame                = getView().findViewById(R.id.NextButtonEndGame);
         timerID                          = getView().findViewById(R.id.IDTeleopSeconds1);
         secondsRemaining                 = getView().findViewById(R.id.TeleopSeconds);
         endgameWarning                   = getView().findViewById(R.id.EndgameWarning);
@@ -232,6 +234,11 @@ public class Teleop extends Fragment implements UpdateListener {
         saveButton.setOnClickListener(v -> {
             appendTeleopSnapshot();
             Toast.makeText(context, "Snapshot saved", Toast.LENGTH_SHORT).show();
+        });
+
+        nextButtonEndGame.setOnClickListener(v -> {
+            saveTeleopData();
+            context.tabs.getTabAt(2).select();
         });
     }
 
