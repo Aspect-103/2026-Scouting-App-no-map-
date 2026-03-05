@@ -91,6 +91,9 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final TextView FerryingTitle;
 
   @NonNull
+  public final Button GenerateQRButton;
+
+  @NonNull
   public final TextView IDEndGameSeconds1;
 
   @NonNull
@@ -116,9 +119,6 @@ public final class EndgameScreenBinding implements ViewBinding {
 
   @NonNull
   public final TextView MissedTitle;
-
-  @NonNull
-  public final Button NextButtonEndGame;
 
   @NonNull
   public final Switch NoShowSwitch;
@@ -227,12 +227,12 @@ public final class EndgameScreenBinding implements ViewBinding {
       @NonNull RadioButton Ferrying0To25Fuel, @NonNull RadioButton Ferrying26To50Fuel,
       @NonNull RadioButton Ferrying51to755Fuel, @NonNull RadioGroup FerryingCounterToggle,
       @NonNull TextView FerryingDesc, @NonNull RadioButton FerryingMoreThan75Fuel,
-      @NonNull TextView FerryingTitle, @NonNull TextView IDEndGameSeconds1,
-      @NonNull RadioButton Left, @NonNull RadioButton Missed0To25Fuel,
-      @NonNull RadioButton Missed26To50Fuel, @NonNull RadioButton Missed51to755Fuel,
-      @NonNull RadioGroup MissedCounterToggle, @NonNull TextView MissedDesc,
-      @NonNull RadioButton MissedMoreThan75Fuel, @NonNull TextView MissedTitle,
-      @NonNull Button NextButtonEndGame, @NonNull Switch NoShowSwitch,
+      @NonNull TextView FerryingTitle, @NonNull Button GenerateQRButton,
+      @NonNull TextView IDEndGameSeconds1, @NonNull RadioButton Left,
+      @NonNull RadioButton Missed0To25Fuel, @NonNull RadioButton Missed26To50Fuel,
+      @NonNull RadioButton Missed51to755Fuel, @NonNull RadioGroup MissedCounterToggle,
+      @NonNull TextView MissedDesc, @NonNull RadioButton MissedMoreThan75Fuel,
+      @NonNull TextView MissedTitle, @NonNull Switch NoShowSwitch,
       @NonNull TextView PostMatchWarning, @NonNull RadioButton Right, @NonNull Button SaveButton,
       @NonNull TextView ScoringTitle, @NonNull RadioButton Start25, @NonNull RadioButton Start50,
       @NonNull RadioButton Start75, @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty,
@@ -269,6 +269,7 @@ public final class EndgameScreenBinding implements ViewBinding {
     this.FerryingDesc = FerryingDesc;
     this.FerryingMoreThan75Fuel = FerryingMoreThan75Fuel;
     this.FerryingTitle = FerryingTitle;
+    this.GenerateQRButton = GenerateQRButton;
     this.IDEndGameSeconds1 = IDEndGameSeconds1;
     this.Left = Left;
     this.Missed0To25Fuel = Missed0To25Fuel;
@@ -278,7 +279,6 @@ public final class EndgameScreenBinding implements ViewBinding {
     this.MissedDesc = MissedDesc;
     this.MissedMoreThan75Fuel = MissedMoreThan75Fuel;
     this.MissedTitle = MissedTitle;
-    this.NextButtonEndGame = NextButtonEndGame;
     this.NoShowSwitch = NoShowSwitch;
     this.PostMatchWarning = PostMatchWarning;
     this.Right = Right;
@@ -472,6 +472,12 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.GenerateQRButton;
+      Button GenerateQRButton = ViewBindings.findChildViewById(rootView, id);
+      if (GenerateQRButton == null) {
+        break missingId;
+      }
+
       id = R.id.IDEndGameSeconds1;
       TextView IDEndGameSeconds1 = ViewBindings.findChildViewById(rootView, id);
       if (IDEndGameSeconds1 == null) {
@@ -523,12 +529,6 @@ public final class EndgameScreenBinding implements ViewBinding {
       id = R.id.MissedTitle;
       TextView MissedTitle = ViewBindings.findChildViewById(rootView, id);
       if (MissedTitle == null) {
-        break missingId;
-      }
-
-      id = R.id.NextButtonEndGame;
-      Button NextButtonEndGame = ViewBindings.findChildViewById(rootView, id);
-      if (NextButtonEndGame == null) {
         break missingId;
       }
 
@@ -725,12 +725,12 @@ public final class EndgameScreenBinding implements ViewBinding {
           Collecting26To50Fuel, Collecting51to755Fuel, CollectingCounterToggle, CollectingDesc,
           CollectingMoreThan75Fuel, CollectingTitle, DidNotAttempt, EndGameSeconds, FellOverLabel,
           Ferrying0To25Fuel, Ferrying26To50Fuel, Ferrying51to755Fuel, FerryingCounterToggle,
-          FerryingDesc, FerryingMoreThan75Fuel, FerryingTitle, IDEndGameSeconds1, Left,
-          Missed0To25Fuel, Missed26To50Fuel, Missed51to755Fuel, MissedCounterToggle, MissedDesc,
-          MissedMoreThan75Fuel, MissedTitle, NextButtonEndGame, NoShowSwitch, PostMatchWarning,
-          Right, SaveButton, ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty,
-          StartFull, StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc, StopEmpty,
-          StopFull, StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfulNo, SuccessfulYes,
+          FerryingDesc, FerryingMoreThan75Fuel, FerryingTitle, GenerateQRButton, IDEndGameSeconds1,
+          Left, Missed0To25Fuel, Missed26To50Fuel, Missed51to755Fuel, MissedCounterToggle,
+          MissedDesc, MissedMoreThan75Fuel, MissedTitle, NoShowSwitch, PostMatchWarning, Right,
+          SaveButton, ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
+          StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc, StopEmpty, StopFull,
+          StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfulNo, SuccessfulYes,
           SuccessfullyClimbed, SuccessfullyClimbedLocation, TowerClimbPlacement, bottomEdgeBar,
           leftEdgeBar, rightEdgeBar, teleopFieldContainer, topEdgeBar);
     }

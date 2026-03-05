@@ -737,29 +737,30 @@
         android:id="@+id/SaveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="776dp"
+        android:layout_marginTop="140dp"
         android:background="@drawable/button_large_active"
         android:text="@string/Save"
         android:textColor="@drawable/text_states"
         android:textSize="@dimen/button_text_size"
-        android:layout_marginStart="550dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbedLocation" />
 
     <Button
-        android:id="@+id/NextButtonEndGame"
+        android:id="@+id/GenerateQRButton"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/button_next_states"
-        android:drawableEnd="@drawable/right_states"
         android:paddingStart="150dp"
         android:paddingEnd="150dp"
-        android:text="@string/EndGame"
-        android:textColor="@drawable/text_states"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_large_active"
+        android:drawableStart="@drawable/qr"
+        android:drawablePadding="@dimen/bootstrap_alert_paddings"
+        android:paddingLeft="@dimen/generate_qr_button_padding"
+        android:paddingRight="@dimen/generate_qr_button_padding"
+        android:text="@string/GenerateQRCode"
+        android:textColor="@color/ice"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -814,22 +815,22 @@
         app:layout_constraintStart_toStartOf="@+id/leftEdgeBar" />
 
     <!-- TIMER LABEL -->
+
+    <!-- TIMER COUNTDOWN DISPLAY -->
     <TextView
         android:id="@+id/IDEndGameSeconds1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:drawableStart="@drawable/timer"
         android:drawablePadding="@dimen/drawable_padding"
         android:fontFamily="@font/futura_medium_condensed_bt"
         android:text="@string/EndGameSeconds"
         android:textColor="@color/sky"
         android:textSize="@dimen/instruction_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/NextButtonEndGame"
         app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
-        app:layout_constraintStart_toEndOf="@+id/leftEdgeBar" />
+        app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
+        tools:layout_editor_absoluteY="606dp" />
 
-    <!-- TIMER COUNTDOWN DISPLAY -->
     <TextView
         android:id="@+id/EndGameSeconds"
         android:layout_width="35dp"
@@ -848,6 +849,7 @@
         android:id="@+id/PostMatchWarning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="596dp"
         android:background="@drawable/teleop_warning"
         android:fontFamily="@font/open_sans"
         android:gravity="center"
@@ -856,6 +858,7 @@
         android:textSize="@dimen/input_label_text_size"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
         app:layout_constraintTop_toTopOf="@+id/ScoringTitle" />
 

@@ -737,10 +737,8 @@
         android:id="@+id/SaveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="605dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="780dp"
+        android:layout_marginTop="176dp"
         android:background="@drawable/button_large_active"
         android:text="@string/Save"
         android:textColor="@drawable/text_states"
@@ -748,8 +746,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbedLocation" />
 
-        <Button
-            android:id="@+id/NextButtonTeleop"
+    <Button
+            android:id="@+id/NextButtonEndGame"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
@@ -758,7 +756,7 @@
             android:drawableEnd="@drawable/right_states"
             android:paddingStart="150dp"
             android:paddingEnd="150dp"
-            android:text="@string/Teleop"
+            android:text="@string/EndGame"
             android:textColor="@drawable/text_states"
             android:textSize="@dimen/button_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -814,49 +812,53 @@
             app:layout_constraintStart_toStartOf="@+id/leftEdgeBar" />
 
         <!-- TIMER LABEL -->
-        <TextView
-            android:id="@+id/IDTeleopSeconds1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:drawableStart="@drawable/timer"
-            android:drawablePadding="@dimen/drawable_padding"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/TeleopSeconds"
-            android:textColor="@color/sky"
-            android:textSize="@dimen/instruction_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/NextButtonTeleop"
-            app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
-            app:layout_constraintStart_toEndOf="@+id/leftEdgeBar" />
 
-        <!-- TIMER COUNTDOWN DISPLAY -->
-        <TextView
-            android:id="@+id/TeleopSeconds"
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/instruction_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/IDTeleopSeconds1"
-            app:layout_constraintStart_toEndOf="@+id/IDTeleopSeconds1"
-            app:layout_constraintTop_toTopOf="@+id/IDTeleopSeconds1" />
+    <!-- TIMER COUNTDOWN DISPLAY -->
 
-        <!-- TELEOP WARNING MESSAGE -->
-        <TextView
-            android:id="@+id/EndgameWarning"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/teleop_warning"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/TeleopWarning"
-            android:textColor="@color/bg_general"
-            android:textSize="@dimen/input_label_text_size"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
-            app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
-            app:layout_constraintTop_toTopOf="@+id/ScoringTitle" />
+    <TextView
+        android:id="@+id/IDTeleopSeconds1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/timer"
+        android:drawablePadding="@dimen/drawable_padding"
+        android:fontFamily="@font/futura_medium_condensed_bt"
+        android:text="@string/TeleopSeconds"
+        android:textColor="@color/sky"
+        android:textSize="@dimen/instruction_text_size"
+        app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
+        tools:layout_editor_absoluteY="685dp" />
+
+    <TextView
+        android:id="@+id/TeleopSeconds"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="@string/DefaultValue"
+        android:textColor="@drawable/text_states"
+        android:textSize="@dimen/instruction_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/IDTeleopSeconds1"
+        app:layout_constraintStart_toEndOf="@+id/IDTeleopSeconds1"
+        app:layout_constraintTop_toTopOf="@+id/IDTeleopSeconds1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- TELEOP WARNING MESSAGE -->
+    <TextView
+        android:id="@+id/EndgameWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="680dp"
+        android:background="@drawable/teleop_warning"
+        android:fontFamily="@font/open_sans"
+        android:gravity="center"
+        android:text="@string/TeleopWarning"
+        android:textColor="@color/bg_general"
+        android:textSize="@dimen/input_label_text_size"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
+        app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
+        app:layout_constraintTop_toTopOf="@+id/ScoringTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
