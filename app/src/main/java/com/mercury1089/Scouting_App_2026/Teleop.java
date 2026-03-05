@@ -47,7 +47,6 @@ public class Teleop extends Fragment implements UpdateListener {
     // Other controls
     private Switch noShowSwitch;
     private Button saveButton;
-    private Button cancelButton;
 
     // Timer & animation
     private TextView timerID;
@@ -102,7 +101,6 @@ public class Teleop extends Fragment implements UpdateListener {
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
         noShowSwitch                     = getView().findViewById(R.id.NoShowSwitch);
         saveButton                       = getView().findViewById(R.id.SaveButton);
-        cancelButton                     = getView().findViewById(R.id.CancelButton);
         timerID                          = getView().findViewById(R.id.IDTeleopSeconds1);
         secondsRemaining                 = getView().findViewById(R.id.TeleopSeconds);
         endgameWarning                   = getView().findViewById(R.id.EndgameWarning);
@@ -114,6 +112,7 @@ public class Teleop extends Fragment implements UpdateListener {
         loadTeleopData();
         setupCounterListeners();
         setupCascadingListeners();
+        setupButtonListeners();
         setupTimer();
     }
 
@@ -231,8 +230,8 @@ public class Teleop extends Fragment implements UpdateListener {
 
     private void setupButtonListeners() {
         saveButton.setOnClickListener(v -> {
-            saveTeleopData();
-            Toast.makeText(context, "Data saved", Toast.LENGTH_SHORT).show();
+            appendTeleopSnapshot();
+            Toast.makeText(context, "Snapshot saved", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -331,6 +330,24 @@ public class Teleop extends Fragment implements UpdateListener {
     // DATA PERSISTENCE
     // ─────────────────────────────────────────
 
+    private static final String KEY_TELEOP_SAVE_INDEX = "TeleopSaveIndex";
+    private static final String SNAP_SEP = "__";
+
+    private int nextTeleopSaveIndex() {
+        String cur = teleopHashMap.get(KEY_TELEOP_SAVE_INDEX);
+        int idx = 0;
+        try { idx = (cur == null) ? 0 : Integer.parseInt(cur); }
+        catch (NumberFormatException ignored) { idx = 0; }
+
+        idx += 1;
+        teleopHashMap.put(KEY_TELEOP_SAVE_INDEX, String.valueOf(idx));
+        return idx;
+    }
+
+    private String snapKey(String baseKey, int idx) {
+        return baseKey + SNAP_SEP + idx;
+    }
+
     private void loadTeleopData() {
         collectingCount = parseCount(hm("Collecting", "0"));
         ferryingCount   = parseCount(hm("Ferrying",   "0"));
@@ -363,6 +380,26 @@ public class Teleop extends Fragment implements UpdateListener {
         teleopHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           "None"));
         teleopHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, "LEFT"));
         teleopHashMap.put("RobotFellOver",     noShowSwitch.isChecked() ? "Y" : "N");
+        HashMapManager.putTeleopHashMap(teleopHashMap);
+    }
+
+    private void appendTeleopSnapshot() {
+        saveTeleopData();
+
+        int idx = nextTeleopSaveIndex();
+
+        teleopHashMap.put(snapKey("ts", idx), String.valueOf(System.currentTimeMillis()));
+
+        teleopHashMap.put(snapKey("Collecting", idx),        String.valueOf(collectingCount));
+        teleopHashMap.put(snapKey("Ferrying", idx),          String.valueOf(ferryingCount));
+        teleopHashMap.put(snapKey("Missed", idx),            String.valueOf(missedCount));
+        teleopHashMap.put(snapKey("StartLevel", idx),        getLevelValue(startLevelToggle));
+        teleopHashMap.put(snapKey("StopLevel", idx),         getLevelValue(stopLevelToggle));
+        teleopHashMap.put(snapKey("AttemptedClimb", idx),    getSelectedText(attemptedClimbToggle,               "DID NOT ATTEMPT"));
+        teleopHashMap.put(snapKey("SuccessfulClimbed", idx), getSelectedText(successfulClimbedToggle,            "None"));
+        teleopHashMap.put(snapKey("ClimbLocation", idx),     getSelectedText(successfullyClimbedLocationToggle,  "LEFT"));
+        teleopHashMap.put(snapKey("RobotFellOver", idx),     noShowSwitch.isChecked() ? "Y" : "N");
+
         HashMapManager.putTeleopHashMap(teleopHashMap);
     }
 

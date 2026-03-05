@@ -259,15 +259,15 @@ public class Auton extends Fragment implements UpdateListener {
             Toast.makeText(context, "Snapshot saved", Toast.LENGTH_SHORT).show();
         });
 
-        //nextButtonAuton.setOnClickListener(v -> {
-            // OPTION A (recommended): only save current state (no extra snapshots)
-            // saveAutonData(); // <-- keep as overwrite-only
+        nextButtonAuton.setOnClickListener(v -> {
+            //OPTION A (recommended): only save current state (no extra snapshots)
+            saveAutonData(); // <-- keep as overwrite-only
             //
-            // OPTION B: if you want Next to also create a snapshot, use this instead:
-            //appendAutonSnapshot(); // <-- COMMENT OUT if you don’t want Next to append
+            //OPTION B: if you want Next to also create a snapshot, use this instead:
+            appendAutonSnapshot(); // <-- COMMENT OUT if you don’t want Next to append
 
-            //context.tabs.getTabAt(1).select();
-       // });
+            context.tabs.getTabAt(1).select();
+        });
     }
 
     // ─────────────────────────────────────────

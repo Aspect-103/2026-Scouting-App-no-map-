@@ -1450,7 +1450,6 @@ int id MissedZero 0x7f0a0077
 int id MuteButton 0x7f0a0078
 int id NextButtonAuton 0x7f0a0079
 int id NextButtonEndGame 0x7f0a007a
-int id NextButtonTeleop 0x7f0a007b
 int id NoShowSwitch 0x7f0a007c
 int id OuterDecrement 0x7f0a007d
 int id OuterID 0x7f0a007e
@@ -1589,7 +1588,6 @@ int id center_vertical 0x7f0a0102
 int id chains 0x7f0a0103
 int id checkbox 0x7f0a0104
 int id chronometer 0x7f0a0105
-int id climbTab 0x7f0a0106
 int id clip_horizontal 0x7f0a0107
 int id clip_vertical 0x7f0a0108
 int id collapseActionView 0x7f0a0109
@@ -1617,6 +1615,7 @@ int id down 0x7f0a011e
 int id edit_query 0x7f0a011f
 int id end 0x7f0a0120
 int id end_padder 0x7f0a0121
+int id endgametab 0x7f0a0981
 int id enterAlways 0x7f0a0122
 int id enterAlwaysCollapsed 0x7f0a0123
 int id exitUntilCollapsed 0x7f0a0124

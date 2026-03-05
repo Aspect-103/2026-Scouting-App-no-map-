@@ -29,7 +29,7 @@ public final class ActivityMatchBinding implements ViewBinding {
   public final TabItem autonTab;
 
   @NonNull
-  public final TabItem climbTab;
+  public final TabItem endgametab;
 
   @NonNull
   public final TabItem matchSetupTab;
@@ -47,13 +47,13 @@ public final class ActivityMatchBinding implements ViewBinding {
   public final ViewPager viewPager;
 
   private ActivityMatchBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ConstraintLayout TitleBar, @NonNull TabItem autonTab, @NonNull TabItem climbTab,
+      @NonNull ConstraintLayout TitleBar, @NonNull TabItem autonTab, @NonNull TabItem endgametab,
       @NonNull TabItem matchSetupTab, @NonNull TabLayout tabs, @NonNull TabItem teleopTab,
       @NonNull TextView title, @NonNull ViewPager viewPager) {
     this.rootView = rootView;
     this.TitleBar = TitleBar;
     this.autonTab = autonTab;
-    this.climbTab = climbTab;
+    this.endgametab = endgametab;
     this.matchSetupTab = matchSetupTab;
     this.tabs = tabs;
     this.teleopTab = teleopTab;
@@ -100,9 +100,9 @@ public final class ActivityMatchBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.climbTab;
-      TabItem climbTab = ViewBindings.findChildViewById(rootView, id);
-      if (climbTab == null) {
+      id = R.id.endgametab;
+      TabItem endgametab = ViewBindings.findChildViewById(rootView, id);
+      if (endgametab == null) {
         break missingId;
       }
 
@@ -136,7 +136,7 @@ public final class ActivityMatchBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMatchBinding((ConstraintLayout) rootView, TitleBar, autonTab, climbTab,
+      return new ActivityMatchBinding((ConstraintLayout) rootView, TitleBar, autonTab, endgametab,
           matchSetupTab, tabs, teleopTab, title, viewPager);
     }
     String missingId = rootView.getResources().getResourceName(id);

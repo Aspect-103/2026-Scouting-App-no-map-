@@ -1451,7 +1451,6 @@ id MissedZero
 id MuteButton
 id NextButtonAuton
 id NextButtonEndGame
-id NextButtonTeleop
 id NoShowSwitch
 id OuterDecrement
 id OuterID
@@ -1590,7 +1589,6 @@ id center_vertical
 id chains
 id checkbox
 id chronometer
-id climbTab
 id clip_horizontal
 id clip_vertical
 id collapseActionView
@@ -1618,6 +1616,7 @@ id down
 id edit_query
 id end
 id end_padder
+id endgametab
 id enterAlways
 id enterAlwaysCollapsed
 id exitUntilCollapsed
