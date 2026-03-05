@@ -1363,7 +1363,6 @@ id CollectingTitle
 id ConfirmButton
 id Contents
 id CreditWhereCreditsDue
-id DNA
 id DidNotAttempt
 id DoneButton
 id EndGame
@@ -1424,7 +1423,6 @@ id InnerIncrementDecrementContainer
 id InnerScore
 id Left
 id LeftBound
-id Level1
 id LightningBolt
 id LocalStorageResetButton
 id LowerDecrement
@@ -1576,6 +1574,7 @@ id all
 id always
 id async
 id auto
+id autonFieldContainer
 id autonTab
 id barrier
 id beginning
@@ -3380,6 +3379,7 @@ id tag_screen_reader_focusable
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
+id teleopFieldContainer
 id teleopTab
 id text
 id text2

@@ -34,9 +34,6 @@ public final class AutonScreenBinding implements ViewBinding {
   public final TextView AutonSeconds;
 
   @NonNull
-  public final Button CancelButton;
-
-  @NonNull
   public final RadioButton Center;
 
   @NonNull
@@ -74,9 +71,6 @@ public final class AutonScreenBinding implements ViewBinding {
 
   @NonNull
   public final TextView CollectingTitle;
-
-  @NonNull
-  public final ConstraintLayout Contents;
 
   @NonNull
   public final RadioButton DidNotAttempt;
@@ -163,9 +157,6 @@ public final class AutonScreenBinding implements ViewBinding {
   public final Button SaveButton;
 
   @NonNull
-  public final ConstraintLayout ScoredPopupWindow;
-
-  @NonNull
   public final TextView ScoringTitle;
 
   @NonNull
@@ -238,6 +229,9 @@ public final class AutonScreenBinding implements ViewBinding {
   public final TextView TowerClimbPlacement;
 
   @NonNull
+  public final ConstraintLayout autonFieldContainer;
+
+  @NonNull
   public final ImageView bottomEdgeBar;
 
   @NonNull
@@ -251,14 +245,13 @@ public final class AutonScreenBinding implements ViewBinding {
 
   private AutonScreenBinding(@NonNull ConstraintLayout rootView,
       @NonNull RadioButton AchievedLevel1, @NonNull RadioGroup AttemptedClimbToggle,
-      @NonNull TextView AutonSeconds, @NonNull Button CancelButton, @NonNull RadioButton Center,
-      @NonNull TextView ClimbingDesc, @NonNull TextView ClimbingTitle,
-      @NonNull RadioButton CollectingCounter, @NonNull RadioGroup CollectingCounterToggle,
-      @NonNull TextView CollectingDesc, @NonNull RadioButton CollectingMinus,
-      @NonNull RadioButton CollectingMinus10, @NonNull RadioButton CollectingMinus5,
-      @NonNull RadioButton CollectingPlus, @NonNull RadioButton CollectingPlus10,
-      @NonNull RadioButton CollectingPlus5, @NonNull TextView CollectingTitle,
-      @NonNull ConstraintLayout Contents, @NonNull RadioButton DidNotAttempt,
+      @NonNull TextView AutonSeconds, @NonNull RadioButton Center, @NonNull TextView ClimbingDesc,
+      @NonNull TextView ClimbingTitle, @NonNull RadioButton CollectingCounter,
+      @NonNull RadioGroup CollectingCounterToggle, @NonNull TextView CollectingDesc,
+      @NonNull RadioButton CollectingMinus, @NonNull RadioButton CollectingMinus10,
+      @NonNull RadioButton CollectingMinus5, @NonNull RadioButton CollectingPlus,
+      @NonNull RadioButton CollectingPlus10, @NonNull RadioButton CollectingPlus5,
+      @NonNull TextView CollectingTitle, @NonNull RadioButton DidNotAttempt,
       @NonNull TextView FellOverLabel, @NonNull RadioGroup FerryingCounterToggle,
       @NonNull TextView FerryingDesc, @NonNull RadioButton FerryingMinus,
       @NonNull RadioButton FerryingMinus10, @NonNull RadioButton FerryingMinus5,
@@ -272,24 +265,23 @@ public final class AutonScreenBinding implements ViewBinding {
       @NonNull RadioButton MissedPlus5, @NonNull TextView MissedTitle,
       @NonNull RadioButton MissedZero, @NonNull Button NextButtonAuton,
       @NonNull Switch NoShowSwitch, @NonNull RadioButton Right, @NonNull Button SaveButton,
-      @NonNull ConstraintLayout ScoredPopupWindow, @NonNull TextView ScoringTitle,
-      @NonNull RadioButton Start25, @NonNull RadioButton Start50, @NonNull RadioButton Start75,
-      @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty, @NonNull RadioButton StartFull,
-      @NonNull RadioGroup StartLevelToggle, @NonNull TextView StartTitle,
-      @NonNull RadioButton Stop25, @NonNull RadioButton Stop50, @NonNull RadioButton Stop75,
-      @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty, @NonNull RadioButton StopFull,
-      @NonNull RadioGroup StopLevelToggle, @NonNull TextView StopTitle,
-      @NonNull RadioGroup SuccessfulClimbed, @NonNull RadioButton SuccessfulNo,
-      @NonNull RadioButton SuccessfulYes, @NonNull TextView SuccessfullyClimbed,
-      @NonNull RadioGroup SuccessfullyClimbedLocation, @NonNull TextView TeleopWarning,
-      @NonNull TextView TowerClimbPlacement, @NonNull ImageView bottomEdgeBar,
+      @NonNull TextView ScoringTitle, @NonNull RadioButton Start25, @NonNull RadioButton Start50,
+      @NonNull RadioButton Start75, @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty,
+      @NonNull RadioButton StartFull, @NonNull RadioGroup StartLevelToggle,
+      @NonNull TextView StartTitle, @NonNull RadioButton Stop25, @NonNull RadioButton Stop50,
+      @NonNull RadioButton Stop75, @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty,
+      @NonNull RadioButton StopFull, @NonNull RadioGroup StopLevelToggle,
+      @NonNull TextView StopTitle, @NonNull RadioGroup SuccessfulClimbed,
+      @NonNull RadioButton SuccessfulNo, @NonNull RadioButton SuccessfulYes,
+      @NonNull TextView SuccessfullyClimbed, @NonNull RadioGroup SuccessfullyClimbedLocation,
+      @NonNull TextView TeleopWarning, @NonNull TextView TowerClimbPlacement,
+      @NonNull ConstraintLayout autonFieldContainer, @NonNull ImageView bottomEdgeBar,
       @NonNull ImageView leftEdgeBar, @NonNull ImageView rightEdgeBar,
       @NonNull ImageView topEdgeBar) {
     this.rootView = rootView;
     this.AchievedLevel1 = AchievedLevel1;
     this.AttemptedClimbToggle = AttemptedClimbToggle;
     this.AutonSeconds = AutonSeconds;
-    this.CancelButton = CancelButton;
     this.Center = Center;
     this.ClimbingDesc = ClimbingDesc;
     this.ClimbingTitle = ClimbingTitle;
@@ -303,7 +295,6 @@ public final class AutonScreenBinding implements ViewBinding {
     this.CollectingPlus10 = CollectingPlus10;
     this.CollectingPlus5 = CollectingPlus5;
     this.CollectingTitle = CollectingTitle;
-    this.Contents = Contents;
     this.DidNotAttempt = DidNotAttempt;
     this.FellOverLabel = FellOverLabel;
     this.FerryingCounterToggle = FerryingCounterToggle;
@@ -332,7 +323,6 @@ public final class AutonScreenBinding implements ViewBinding {
     this.NoShowSwitch = NoShowSwitch;
     this.Right = Right;
     this.SaveButton = SaveButton;
-    this.ScoredPopupWindow = ScoredPopupWindow;
     this.ScoringTitle = ScoringTitle;
     this.Start25 = Start25;
     this.Start50 = Start50;
@@ -357,6 +347,7 @@ public final class AutonScreenBinding implements ViewBinding {
     this.SuccessfullyClimbedLocation = SuccessfullyClimbedLocation;
     this.TeleopWarning = TeleopWarning;
     this.TowerClimbPlacement = TowerClimbPlacement;
+    this.autonFieldContainer = autonFieldContainer;
     this.bottomEdgeBar = bottomEdgeBar;
     this.leftEdgeBar = leftEdgeBar;
     this.rightEdgeBar = rightEdgeBar;
@@ -405,12 +396,6 @@ public final class AutonScreenBinding implements ViewBinding {
       id = R.id.AutonSeconds;
       TextView AutonSeconds = ViewBindings.findChildViewById(rootView, id);
       if (AutonSeconds == null) {
-        break missingId;
-      }
-
-      id = R.id.CancelButton;
-      Button CancelButton = ViewBindings.findChildViewById(rootView, id);
-      if (CancelButton == null) {
         break missingId;
       }
 
@@ -489,12 +474,6 @@ public final class AutonScreenBinding implements ViewBinding {
       id = R.id.CollectingTitle;
       TextView CollectingTitle = ViewBindings.findChildViewById(rootView, id);
       if (CollectingTitle == null) {
-        break missingId;
-      }
-
-      id = R.id.Contents;
-      ConstraintLayout Contents = ViewBindings.findChildViewById(rootView, id);
-      if (Contents == null) {
         break missingId;
       }
 
@@ -666,8 +645,6 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      ConstraintLayout ScoredPopupWindow = (ConstraintLayout) rootView;
-
       id = R.id.ScoringTitle;
       TextView ScoringTitle = ViewBindings.findChildViewById(rootView, id);
       if (ScoringTitle == null) {
@@ -812,6 +789,8 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      ConstraintLayout autonFieldContainer = (ConstraintLayout) rootView;
+
       id = R.id.bottomEdgeBar;
       ImageView bottomEdgeBar = ViewBindings.findChildViewById(rootView, id);
       if (bottomEdgeBar == null) {
@@ -837,19 +816,19 @@ public final class AutonScreenBinding implements ViewBinding {
       }
 
       return new AutonScreenBinding((ConstraintLayout) rootView, AchievedLevel1,
-          AttemptedClimbToggle, AutonSeconds, CancelButton, Center, ClimbingDesc, ClimbingTitle,
+          AttemptedClimbToggle, AutonSeconds, Center, ClimbingDesc, ClimbingTitle,
           CollectingCounter, CollectingCounterToggle, CollectingDesc, CollectingMinus,
           CollectingMinus10, CollectingMinus5, CollectingPlus, CollectingPlus10, CollectingPlus5,
-          CollectingTitle, Contents, DidNotAttempt, FellOverLabel, FerryingCounterToggle,
-          FerryingDesc, FerryingMinus, FerryingMinus10, FerryingMinus5, FerryingPlus,
-          FerryingPlus10, FerryingPlus5, FerryingTitle, FerryingZero, IDAutonSeconds1, Left,
-          MissedCounterToggle, MissedDesc, MissedMinus, MissedMinus10, MissedMinus5, MissedPlus,
-          MissedPlus10, MissedPlus5, MissedTitle, MissedZero, NextButtonAuton, NoShowSwitch, Right,
-          SaveButton, ScoredPopupWindow, ScoringTitle, Start25, Start50, Start75, StartDesc,
-          StartEmpty, StartFull, StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc,
-          StopEmpty, StopFull, StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfulNo,
-          SuccessfulYes, SuccessfullyClimbed, SuccessfullyClimbedLocation, TeleopWarning,
-          TowerClimbPlacement, bottomEdgeBar, leftEdgeBar, rightEdgeBar, topEdgeBar);
+          CollectingTitle, DidNotAttempt, FellOverLabel, FerryingCounterToggle, FerryingDesc,
+          FerryingMinus, FerryingMinus10, FerryingMinus5, FerryingPlus, FerryingPlus10,
+          FerryingPlus5, FerryingTitle, FerryingZero, IDAutonSeconds1, Left, MissedCounterToggle,
+          MissedDesc, MissedMinus, MissedMinus10, MissedMinus5, MissedPlus, MissedPlus10,
+          MissedPlus5, MissedTitle, MissedZero, NextButtonAuton, NoShowSwitch, Right, SaveButton,
+          ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
+          StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc, StopEmpty, StopFull,
+          StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfulNo, SuccessfulYes,
+          SuccessfullyClimbed, SuccessfullyClimbedLocation, TeleopWarning, TowerClimbPlacement,
+          autonFieldContainer, bottomEdgeBar, leftEdgeBar, rightEdgeBar, topEdgeBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

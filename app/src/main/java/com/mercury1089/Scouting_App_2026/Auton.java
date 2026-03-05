@@ -19,6 +19,9 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import androidx.fragment.app.Fragment;
 
@@ -29,242 +32,277 @@ import java.util.LinkedHashMap;
 
 public class Auton extends Fragment implements UpdateListener {
 
-    // HashMaps for data persistence
     private LinkedHashMap<String, String> setupHashMap;
     private LinkedHashMap<String, String> autonHashMap;
 
-    // ═════════════════════════════════════════
-    // FUEL SECTION — counter toggles
-    // ═════════════════════════════════════════
+    // Fuel section
     private RadioGroup collectingCounterToggle;
     private RadioGroup ferryingCounterToggle;
     private RadioGroup startLevelToggle;
     private RadioGroup stopLevelToggle;
     private RadioGroup missedCounterToggle;
 
-    // ═════════════════════════════════════════
-    // CLIMBING SECTION
-    // ═════════════════════════════════════════
+    // Climbing section
     private RadioGroup attemptedClimbToggle;
     private RadioGroup successfulClimbedToggle;
     private RadioGroup successfullyClimbedLocationToggle;
 
-    // ═════════════════════════════════════════
-    // OTHER CONTROLS
-    // ═════════════════════════════════════════
+    // Other controls
     private Switch noShowSwitch;
     private Button saveButton;
-    private Button cancelButton;
     private Button nextButtonAuton;
 
-    // ═════════════════════════════════════════
-    // TIMER & ANIMATION
-    // ═════════════════════════════════════════
+    // Timer & animation
     private TextView timerID;
     private TextView secondsRemaining;
     private TextView teleopWarning;
-
-    private ImageView topEdgeBar;
-    private ImageView bottomEdgeBar;
-    private ImageView leftEdgeBar;
-    private ImageView rightEdgeBar;
+    private ImageView topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar;
 
     private static CountDownTimer timer;
     private boolean firstTime = true;
     private boolean running = true;
-    private ValueAnimator teleopButtonAnimation;
-    private AnimatorSet animatorSet;
     private MatchActivity context;
 
-    // ═════════════════════════════════════════
-    // RUNNING COUNTS (held in memory, persisted to HashMap on save)
-    // ═════════════════════════════════════════
+    // Running counts
     private int collectingCount = 0;
-    private int ferryingCount = 0;
-    private int missedCount = 0;
+    private int ferryingCount   = 0;
+    private int missedCount     = 0;
 
     public static Auton newInstance() {
         Auton fragment = new Auton();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+        fragment.setArguments(new Bundle());
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = (MatchActivity) getActivity();
-        View inflated = null;
         try {
-            inflated = inflater.inflate(R.layout.auton_screen, container, false);
+            return inflater.inflate(R.layout.auton_screen, container, false);
         } catch (InflateException e) {
-            Log.d("Auton", "Layout inflation error: " + e.getMessage());
+            Log.d("Auton", "Inflate error: " + e.getMessage());
             throw e;
         }
-        return inflated;
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        // Get HashMap data
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.AUTON);
         setupHashMap = HashMapManager.getSetupHashMap();
         autonHashMap = HashMapManager.getAutonHashMap();
 
-        // ── Fuel section ──────────────────────────────
-        collectingCounterToggle = getView().findViewById(R.id.CollectingCounterToggle);
-        ferryingCounterToggle   = getView().findViewById(R.id.FerryingCounterToggle);
-        startLevelToggle        = getView().findViewById(R.id.StartLevelToggle);
-        stopLevelToggle         = getView().findViewById(R.id.StopLevelToggle);
-        missedCounterToggle     = getView().findViewById(R.id.MissedCounterToggle);
-
-        // ── Climbing section ──────────────────────────
+        // Link views
+        collectingCounterToggle          = getView().findViewById(R.id.CollectingCounterToggle);
+        ferryingCounterToggle            = getView().findViewById(R.id.FerryingCounterToggle);
+        startLevelToggle                 = getView().findViewById(R.id.StartLevelToggle);
+        stopLevelToggle                  = getView().findViewById(R.id.StopLevelToggle);
+        missedCounterToggle              = getView().findViewById(R.id.MissedCounterToggle);
         attemptedClimbToggle             = getView().findViewById(R.id.AttemptedClimbToggle);
         successfulClimbedToggle          = getView().findViewById(R.id.SuccessfulClimbed);
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
+        noShowSwitch                     = getView().findViewById(R.id.NoShowSwitch);
+        saveButton                       = getView().findViewById(R.id.SaveButton);
+        nextButtonAuton                  = getView().findViewById(R.id.NextButtonAuton);
+        timerID                          = getView().findViewById(R.id.IDAutonSeconds1);
+        secondsRemaining                 = getView().findViewById(R.id.AutonSeconds);
+        teleopWarning                    = getView().findViewById(R.id.TeleopWarning);
+        topEdgeBar                       = getView().findViewById(R.id.topEdgeBar);
+        bottomEdgeBar                    = getView().findViewById(R.id.bottomEdgeBar);
+        leftEdgeBar                      = getView().findViewById(R.id.leftEdgeBar);
+        rightEdgeBar                     = getView().findViewById(R.id.rightEdgeBar);
 
-        // ── Other controls ────────────────────────────
-        noShowSwitch   = getView().findViewById(R.id.NoShowSwitch);
-        saveButton     = getView().findViewById(R.id.SaveButton);
-        cancelButton   = getView().findViewById(R.id.CancelButton);
-        nextButtonAuton = getView().findViewById(R.id.NextButtonAuton);
-
-        // ── Timer views ───────────────────────────────
-        timerID          = getView().findViewById(R.id.IDAutonSeconds1);
-        secondsRemaining = getView().findViewById(R.id.AutonSeconds);
-        teleopWarning    = getView().findViewById(R.id.TeleopWarning);
-
-        topEdgeBar    = getView().findViewById(R.id.topEdgeBar);
-        bottomEdgeBar = getView().findViewById(R.id.bottomEdgeBar);
-        leftEdgeBar   = getView().findViewById(R.id.leftEdgeBar);
-        rightEdgeBar  = getView().findViewById(R.id.rightEdgeBar);
-
-        // Load saved data into UI
         loadAutonData();
+        setupCounterListeners();
+        setupCascadingListeners();
+        setupButtonListeners();
+        setupTimer();
+    }
 
-        // ═════════════════════════════════════════
-        // COUNTER TOGGLE LISTENERS
-        // Each counter toggle adjusts a running int count,
-        // then resets the selection back to the display (000) button.
-        // ═════════════════════════════════════════
+    // ─────────────────────────────────────────
+    // COUNTER LISTENERS
+    // Tapping -10/-5/-/+/+5/+10 adjusts the running count.
+    // The centre button is just a display; tapping it does nothing.
+    // After each tap the selection snaps back to the centre display button.
+    // ─────────────────────────────────────────
 
-        collectingCounterToggle.setOnCheckedChangeListener((group, checkedId) -> {
-            collectingCount = applyCounterDelta(collectingCount, checkedId,
+    private void setupCounterListeners() {
+        collectingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.CollectingCounter) return;
+            collectingCount = clamp(collectingCount + deltaFor(id,
                     R.id.CollectingMinus10, R.id.CollectingMinus5, R.id.CollectingMinus,
-                    R.id.CollectingCounter,
-                    R.id.CollectingPlus, R.id.CollectingPlus5, R.id.CollectingPlus10);
-            updateCounterDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
+                    R.id.CollectingPlus,    R.id.CollectingPlus5,  R.id.CollectingPlus10));
+            refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
         });
 
-        ferryingCounterToggle.setOnCheckedChangeListener((group, checkedId) -> {
-            ferryingCount = applyCounterDelta(ferryingCount, checkedId,
+        ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.FerryingZero) return;
+            ferryingCount = clamp(ferryingCount + deltaFor(id,
                     R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
-                    R.id.FerryingZero,
-                    R.id.FerryingPlus, R.id.FerryingPlus5, R.id.FerryingPlus10);
-            updateCounterDisplay(ferryingCounterToggle, R.id.FerryingZero, ferryingCount);
+                    R.id.FerryingPlus,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
+            refreshDisplay(ferryingCounterToggle, R.id.FerryingZero, ferryingCount);
         });
 
-        missedCounterToggle.setOnCheckedChangeListener((group, checkedId) -> {
-            missedCount = applyCounterDelta(missedCount, checkedId,
+        missedCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.MissedZero) return;
+            missedCount = clamp(missedCount + deltaFor(id,
                     R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
-                    R.id.MissedZero,
-                    R.id.MissedPlus, R.id.MissedPlus5, R.id.MissedPlus10);
-            updateCounterDisplay(missedCounterToggle, R.id.MissedZero, missedCount);
+                    R.id.MissedPlus,    R.id.MissedPlus5,  R.id.MissedPlus10));
+            refreshDisplay(missedCounterToggle, R.id.MissedZero, missedCount);
         });
+    }
 
-        // ═════════════════════════════════════════
-        // CASCADING LOGIC LISTENERS
-        // ═════════════════════════════════════════
+    /** Returns the delta for the tapped button id (-10/-5/-1/+1/+5/+10). */
+    private int deltaFor(int id,
+                         int m10, int m5, int m1,
+                         int p1,  int p5, int p10) {
+        if (id == m10) return -10;
+        if (id == m5)  return -5;
+        if (id == m1)  return -1;
+        if (id == p1)  return +1;
+        if (id == p5)  return +5;
+        if (id == p10) return +10;
+        return 0;
+    }
 
-        RadioGroup.OnCheckedChangeListener fuelStateListener = (group, checkedId) ->
-                updateFuelButtonStates();
-        startLevelToggle.setOnCheckedChangeListener(fuelStateListener);
-        stopLevelToggle.setOnCheckedChangeListener(fuelStateListener);
-        updateFuelButtonStates();
+    /** Clamps a count to a minimum of 0. */
+    private int clamp(int value) {
+        return Math.max(0, value);
+    }
 
-        RadioGroup.OnCheckedChangeListener climbingStateListener = (group, checkedId) ->
-                updateClimbingButtonStates();
-        attemptedClimbToggle.setOnCheckedChangeListener(climbingStateListener);
-        successfulClimbedToggle.setOnCheckedChangeListener(climbingStateListener);
-        updateClimbingButtonStates();
+    /**
+     * Updates the display button text and snaps the RadioGroup selection back to it.
+     * Temporarily removes the listener to avoid recursive calls.
+     */
+    private void refreshDisplay(RadioGroup group, int displayId, int count) {
+        RadioButton display = group.findViewById(displayId);
+        if (display != null) {
+            display.setText(String.valueOf(count)); // plain number, no leading zeros
+        }
+        group.setOnCheckedChangeListener(null);
+        group.check(displayId);
+        // Re-attach the right listener
+        if      (group == collectingCounterToggle) setupCollectingListener();
+        else if (group == ferryingCounterToggle)   setupFerryingListener();
+        else if (group == missedCounterToggle)      setupMissedListener();
+    }
 
-        // ═════════════════════════════════════════
-        // BUTTON LISTENERS
-        // ═════════════════════════════════════════
+    private void setupCollectingListener() {
+        collectingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.CollectingCounter) return;
+            collectingCount = clamp(collectingCount + deltaFor(id,
+                    R.id.CollectingMinus10, R.id.CollectingMinus5, R.id.CollectingMinus,
+                    R.id.CollectingPlus,    R.id.CollectingPlus5,  R.id.CollectingPlus10));
+            refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
+        });
+    }
 
+    private void setupFerryingListener() {
+        ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.FerryingZero) return;
+            ferryingCount = clamp(ferryingCount + deltaFor(id,
+                    R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
+                    R.id.FerryingPlus,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
+            refreshDisplay(ferryingCounterToggle, R.id.FerryingZero, ferryingCount);
+        });
+    }
+
+    private void setupMissedListener() {
+        missedCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.MissedZero) return;
+            missedCount = clamp(missedCount + deltaFor(id,
+                    R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
+                    R.id.MissedPlus,    R.id.MissedPlus5,  R.id.MissedPlus10));
+            refreshDisplay(missedCounterToggle, R.id.MissedZero, missedCount);
+        });
+    }
+
+    // ─────────────────────────────────────────
+    // CASCADING LOGIC
+    // ─────────────────────────────────────────
+
+    private void setupCascadingListeners() {
+        startLevelToggle.setOnCheckedChangeListener((g, id) -> updateFuelStates());
+        stopLevelToggle.setOnCheckedChangeListener((g, id)  -> updateFuelStates());
+        updateFuelStates();
+
+        attemptedClimbToggle.setOnCheckedChangeListener((g, id)    -> updateClimbStates());
+        successfulClimbedToggle.setOnCheckedChangeListener((g, id) -> updateClimbStates());
+        updateClimbStates();
+    }
+
+    /** Missed only enabled when BOTH start and stop are not EMPTY. */
+    private void updateFuelStates() {
+        boolean bothSet = !getLevelValue(startLevelToggle).equals("EMPTY")
+                && !getLevelValue(stopLevelToggle).equals("EMPTY");
+        setGroupEnabled(missedCounterToggle, bothSet);
+    }
+
+    /** Climb location only enabled when attempted = "1" AND successful = "1". */
+    private void updateClimbStates() {
+        String attempted  = getSelectedText(attemptedClimbToggle, "");
+        String successful = getSelectedText(successfulClimbedToggle, "");
+        boolean climbed = "1".equals(attempted) && "1".equals(successful);
+        setGroupEnabled(successfullyClimbedLocationToggle, climbed);
+    }
+
+    // ─────────────────────────────────────────
+    // BUTTON LISTENERS
+    // ─────────────────────────────────────────
+
+    private void setupButtonListeners() {
         saveButton.setOnClickListener(v -> {
-            saveAutonData();
-            Toast.makeText(context, "Data saved", Toast.LENGTH_SHORT).show();
+            // CHANGED: was saveAutonData();
+            appendAutonSnapshot(); // <-- appends instead of overwriting
+            Toast.makeText(context, "Snapshot saved", Toast.LENGTH_SHORT).show();
         });
 
-        cancelButton.setOnClickListener(v -> {
-            loadAutonData();
-            Toast.makeText(context, "Changes cancelled", Toast.LENGTH_SHORT).show();
-        });
+        //nextButtonAuton.setOnClickListener(v -> {
+            // OPTION A (recommended): only save current state (no extra snapshots)
+            // saveAutonData(); // <-- keep as overwrite-only
+            //
+            // OPTION B: if you want Next to also create a snapshot, use this instead:
+            //appendAutonSnapshot(); // <-- COMMENT OUT if you don’t want Next to append
 
-        nextButtonAuton.setOnClickListener(v -> {
-            saveAutonData();
-            context.tabs.getTabAt(1).select();
-        });
+            //context.tabs.getTabAt(1).select();
+       // });
+    }
 
-        // ═════════════════════════════════════════
-        // TIMER
-        // ═════════════════════════════════════════
+    // ─────────────────────────────────────────
+    // TIMER
+    // ─────────────────────────────────────────
 
+    private void setupTimer() {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
         timer = new CountDownTimer(20000, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
-                secondsRemaining.setText(GenUtils.padLeftZeros("" + millisUntilFinished / 1000, 2));
-
+            public void onTick(long ms) {
+                long secs = ms / 1000;
+                secondsRemaining.setText(String.valueOf(secs));
                 if (!running) return;
 
-                // Warning at 3 seconds remaining
-                if (millisUntilFinished / 1000 <= 3 && millisUntilFinished / 1000 > 0) {
+                if (secs <= 3 && secs > 0) {
                     teleopWarning.setVisibility(View.VISIBLE);
                     timerID.setTextColor(context.getResources().getColor(R.color.banana));
                     timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
-
                     if (vibrator != null) vibrator.vibrate(500);
-
-                    ObjectAnimator topEdgeLighter    = ObjectAnimator.ofFloat(topEdgeBar,    View.ALPHA, 0.0f, 1.0f);
-                    ObjectAnimator bottomEdgeLighter = ObjectAnimator.ofFloat(bottomEdgeBar, View.ALPHA, 0.0f, 1.0f);
-                    ObjectAnimator rightEdgeLighter  = ObjectAnimator.ofFloat(rightEdgeBar,  View.ALPHA, 0.0f, 1.0f);
-                    ObjectAnimator leftEdgeLighter   = ObjectAnimator.ofFloat(leftEdgeBar,   View.ALPHA, 0.0f, 1.0f);
-
-                    topEdgeLighter.setDuration(500);
-                    bottomEdgeLighter.setDuration(500);
-                    leftEdgeLighter.setDuration(500);
-                    rightEdgeLighter.setDuration(500);
-
-                    topEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);    topEdgeLighter.setRepeatCount(1);
-                    bottomEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE); bottomEdgeLighter.setRepeatCount(1);
-                    leftEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);   leftEdgeLighter.setRepeatCount(1);
-                    rightEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);  rightEdgeLighter.setRepeatCount(1);
-
-                    AnimatorSet edgeSet = new AnimatorSet();
-                    edgeSet.playTogether(topEdgeLighter, bottomEdgeLighter, leftEdgeLighter, rightEdgeLighter);
-                    edgeSet.start();
+                    pulseEdgeBars();
                 }
             }
 
             @Override
             public void onFinish() {
-                if (running) {
-                    secondsRemaining.setText("00");
-                    topEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
-                    bottomEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
-                    leftEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
-                    rightEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
-                    timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
-                    timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
-                    teleopWarning.setVisibility(View.VISIBLE);
-                    teleopWarning.setTextColor(getResources().getColor(R.color.white));
-                    teleopWarning.setText(getResources().getString(R.string.TeleopError));
-                }
+                if (!running) return;
+                secondsRemaining.setText("0");
+                setAllEdgeBars(R.drawable.teleop_warning);
+                timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
+                timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
+                teleopWarning.setVisibility(View.VISIBLE);
+                teleopWarning.setTextColor(getResources().getColor(R.color.white));
+                teleopWarning.setText(getString(R.string.TeleopError));
             }
         };
 
@@ -274,212 +312,119 @@ public class Auton extends Fragment implements UpdateListener {
         }
     }
 
-    // ═════════════════════════════════════════
-    // COUNTER LOGIC
-    // ═════════════════════════════════════════
-
-    /**
-     * Given the currently checked button ID, apply the correct delta to the count.
-     * The center "display" button ID is ignored (it's just the readout).
-     * Returns the new count (clamped to 0 minimum).
-     */
-    private int applyCounterDelta(int currentCount, int checkedId,
-                                  int minus10Id, int minus5Id, int minusId,
-                                  int displayId,
-                                  int plusId, int plus5Id, int plus10Id) {
-        if (checkedId == displayId) return currentCount; // tapped the display — no change
-
-        int delta = 0;
-        if      (checkedId == minus10Id) delta = -10;
-        else if (checkedId == minus5Id)  delta = -5;
-        else if (checkedId == minusId)   delta = -1;
-        else if (checkedId == plusId)    delta = +1;
-        else if (checkedId == plus5Id)   delta = +5;
-        else if (checkedId == plus10Id)  delta = +10;
-
-        int newCount = currentCount + delta;
-        if (newCount < 0) newCount = 0; // clamp at zero
-        return newCount;
-    }
-
-    /**
-     * Updates the display (centre) button's text to show the current count,
-     * then snaps selection back to that display button.
-     */
-    private void updateCounterDisplay(RadioGroup group, int displayButtonId, int count) {
-        RadioButton display = group.findViewById(displayButtonId);
-        if (display != null) {
-            display.setText(String.format("%03d", count));
-        }
-        // Temporarily remove listener so programmatic check doesn't re-trigger delta logic
-        group.setOnCheckedChangeListener(null);
-        group.check(displayButtonId);
-
-        // Re-attach the correct listener
-        if (group == collectingCounterToggle) {
-            group.setOnCheckedChangeListener((g, id) -> {
-                collectingCount = applyCounterDelta(collectingCount, id,
-                        R.id.CollectingMinus10, R.id.CollectingMinus5, R.id.CollectingMinus,
-                        R.id.CollectingCounter,
-                        R.id.CollectingPlus, R.id.CollectingPlus5, R.id.CollectingPlus10);
-                updateCounterDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
-            });
-        } else if (group == ferryingCounterToggle) {
-            group.setOnCheckedChangeListener((g, id) -> {
-                ferryingCount = applyCounterDelta(ferryingCount, id,
-                        R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
-                        R.id.FerryingZero,
-                        R.id.FerryingPlus, R.id.FerryingPlus5, R.id.FerryingPlus10);
-                updateCounterDisplay(ferryingCounterToggle, R.id.FerryingZero, ferryingCount);
-            });
-        } else if (group == missedCounterToggle) {
-            group.setOnCheckedChangeListener((g, id) -> {
-                missedCount = applyCounterDelta(missedCount, id,
-                        R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
-                        R.id.MissedZero,
-                        R.id.MissedPlus, R.id.MissedPlus5, R.id.MissedPlus10);
-                updateCounterDisplay(missedCounterToggle, R.id.MissedZero, missedCount);
-            });
+    private void pulseEdgeBars() {
+        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+            ObjectAnimator anim = ObjectAnimator.ofFloat(bar, View.ALPHA, 0f, 1f);
+            anim.setDuration(500);
+            anim.setRepeatMode(ObjectAnimator.REVERSE);
+            anim.setRepeatCount(1);
+            anim.start();
         }
     }
 
-    // ═════════════════════════════════════════
-    // CASCADING LOGIC — FUEL
-    // Missed is only enabled when BOTH Start & Stop are not Empty
-    // ═════════════════════════════════════════
-
-    private void updateFuelButtonStates() {
-        String startLevel = getLevelValue(startLevelToggle);
-        String stopLevel  = getLevelValue(stopLevelToggle);
-
-        setRadioGroupEnabled(collectingCounterToggle, true);
-        setRadioGroupEnabled(ferryingCounterToggle, true);
-        setRadioGroupEnabled(startLevelToggle, true);
-        setRadioGroupEnabled(stopLevelToggle, true);
-
-        boolean bothSelected = !startLevel.equals("Empty") && !stopLevel.equals("Empty");
-        setRadioGroupEnabled(missedCounterToggle, bothSelected);
+    private void setAllEdgeBars(int drawableRes) {
+        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+            bar.setBackground(getResources().getDrawable(drawableRes));
+        }
     }
 
-    // ═════════════════════════════════════════
-    // CASCADING LOGIC — CLIMBING
-    // Location only enabled when Attempted = "1" AND Successful = "1"
-    // ═════════════════════════════════════════
+    // ─────────────────────────────────────────
+    // GET / SET HELPERS
+    // ─────────────────────────────────────────
 
-    private void updateClimbingButtonStates() {
-        String attempted   = getClimbValue(attemptedClimbToggle);
-        String successful  = getClimbValue(successfulClimbedToggle);
-
-        setRadioGroupEnabled(attemptedClimbToggle, true);
-        setRadioGroupEnabled(successfulClimbedToggle, true);
-
-        boolean climbed = "1".equals(attempted) && "1".equals(successful);
-        setRadioGroupEnabled(successfullyClimbedLocationToggle, climbed);
+    /**
+     * Returns the text of the currently selected button in a RadioGroup,
+     * or defaultVal if nothing is selected.
+     */
+    private String getSelectedText(RadioGroup group, String defaultVal) {
+        int id = group.getCheckedRadioButtonId();
+        if (id == -1) return defaultVal;
+        RadioButton btn = group.findViewById(id);
+        return btn != null ? btn.getText().toString().trim() : defaultVal;
     }
 
-    // ═════════════════════════════════════════
-    // GET VALUES
-    // ═════════════════════════════════════════
-
+    /**
+     * Returns the normalised level value for Start/Stop toggles.
+     * Button texts from strings.xml: "EMPTY", "25%", "50%", "75%", "FULL"
+     */
     private String getLevelValue(RadioGroup group) {
-        int selectedId = group.getCheckedRadioButtonId();
-        if (selectedId == -1) return "Empty";
-        RadioButton btn = group.findViewById(selectedId);
-        if (btn == null) return "Empty";
-        String text = btn.getText().toString().trim();
-        if (text.toLowerCase().contains("empty")) return "Empty";
-        if (text.contains("25"))                  return "25";
-        if (text.contains("50"))                  return "50";
-        if (text.contains("75"))                  return "75";
-        if (text.toLowerCase().contains("full"))  return "Full";
-        return text;
+        return getSelectedText(group, "EMPTY");
     }
 
-    private String getClimbValue(RadioGroup group) {
-        int selectedId = group.getCheckedRadioButtonId();
-        if (selectedId == -1) return "DNA";
-        RadioButton btn = group.findViewById(selectedId);
-        return btn != null ? btn.getText().toString().trim() : "DNA";
-    }
-
-    private String getClimbLocationValue() {
-        int selectedId = successfullyClimbedLocationToggle.getCheckedRadioButtonId();
-        if (selectedId == -1) return "None";
-        RadioButton btn = successfullyClimbedLocationToggle.findViewById(selectedId);
-        return btn != null ? btn.getText().toString().trim() : "None";
-    }
-
-    // ═════════════════════════════════════════
-    // SET VALUES
-    // ═════════════════════════════════════════
-
-    private void setLevelValue(RadioGroup group, String value) {
+    /**
+     * Selects the radio button whose text matches value (case-insensitive).
+     * Falls back to the first button if no match found.
+     */
+    private void selectByText(RadioGroup group, String value) {
         for (int i = 0; i < group.getChildCount(); i++) {
             RadioButton btn = (RadioButton) group.getChildAt(i);
-            String text = btn.getText().toString().trim();
-            if (text.equalsIgnoreCase(value)
-                    || (value.equals("25") && text.contains("25"))
-                    || (value.equals("50") && text.contains("50"))
-                    || (value.equals("75") && text.contains("75"))) {
+            if (btn.getText().toString().trim().equalsIgnoreCase(value)) {
                 group.check(btn.getId());
                 return;
             }
         }
+        // Default: first button
         if (group.getChildCount() > 0)
             group.check(((RadioButton) group.getChildAt(0)).getId());
     }
 
-    private void setClimbValue(RadioGroup group, String value) {
-        for (int i = 0; i < group.getChildCount(); i++) {
-            RadioButton btn = (RadioButton) group.getChildAt(i);
-            if (btn.getText().toString().trim().equals(value)) {
-                group.check(btn.getId());
-                return;
-            }
-        }
-        if (group.getChildCount() > 0)
-            group.check(((RadioButton) group.getChildAt(0)).getId());
-    }
-
-    // ═════════════════════════════════════════
-    // ENABLE / DISABLE
-    // ═════════════════════════════════════════
-
-    private void setRadioGroupEnabled(RadioGroup group, boolean enabled) {
-        for (int i = 0; i < group.getChildCount(); i++) {
+    private void setGroupEnabled(RadioGroup group, boolean enabled) {
+        for (int i = 0; i < group.getChildCount(); i++)
             group.getChildAt(i).setEnabled(enabled);
-        }
     }
 
-    // ═════════════════════════════════════════
+    // ─────────────────────────────────────────
     // DATA PERSISTENCE
-    // ═════════════════════════════════════════
+    // ─────────────────────────────────────────
+
+
+    private static final String KEY_AUTON_SAVE_INDEX = "AutonSaveIndex";
+    private static final String SNAP_SEP = "__"; // keys look like Collecting__1, Collecting__2, etc.
+
+    private int nextAutonSaveIndex() {
+        String cur = autonHashMap.get(KEY_AUTON_SAVE_INDEX);
+        int idx = 0;
+        try { idx = (cur == null) ? 0 : Integer.parseInt(cur); }
+        catch (NumberFormatException ignored) { idx = 0; }
+
+        idx += 1; // next snapshot number
+        autonHashMap.put(KEY_AUTON_SAVE_INDEX, String.valueOf(idx));
+        return idx;
+    }
+
+    private String snapKey(String baseKey, int idx) {
+        return baseKey + SNAP_SEP + idx;
+    }
+
+
+
 
     private void loadAutonData() {
-        // Load counts from HashMap
-        collectingCount = parseCount(getHashMapValue("Collecting", "0"));
-        ferryingCount   = parseCount(getHashMapValue("Ferrying",   "0"));
-        missedCount     = parseCount(getHashMapValue("Missed",     "0"));
+        collectingCount = parseCount(hm("Collecting", "0"));
+        ferryingCount   = parseCount(hm("Ferrying",   "0"));
+        missedCount     = parseCount(hm("Missed",     "0"));
 
-        // Refresh counter displays
-        updateCounterDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
-        updateCounterDisplay(ferryingCounterToggle,   R.id.FerryingZero,     ferryingCount);
-        updateCounterDisplay(missedCounterToggle,     R.id.MissedZero,       missedCount);
+        // Snap display buttons to loaded counts (re-attaches listeners inside)
+        refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingZero,     ferryingCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedZero,       missedCount);
 
-        // Load level toggles
-        setLevelValue(startLevelToggle, getHashMapValue("StartLevel", "Empty"));
-        setLevelValue(stopLevelToggle,  getHashMapValue("StopLevel",  "Empty"));
+        // Level toggles — stored as exact button text e.g. "EMPTY", "25%", "FULL"
+        selectByText(startLevelToggle, hm("StartLevel", "EMPTY"));
+        selectByText(stopLevelToggle,  hm("StopLevel",  "EMPTY"));
 
-        // Load climbing toggles
-        setClimbValue(attemptedClimbToggle,              getHashMapValue("AttemptedClimb",    "DNA"));
-        setClimbValue(successfulClimbedToggle,           getHashMapValue("SuccessfulClimbed", "None"));
-        setClimbValue(successfullyClimbedLocationToggle, getHashMapValue("ClimbLocation",     "None"));
+        // Climb toggles — stored as exact button text
+        // AttemptedClimbToggle buttons: "DID NOT ATTEMPT" | "1"
+        selectByText(attemptedClimbToggle,             hm("AttemptedClimb",    "DID NOT ATTEMPT"));
+        // SuccessfulClimbed buttons: "None" | "1"
+        selectByText(successfulClimbedToggle,          hm("SuccessfulClimbed", "None"));
+        // Location buttons: "LEFT" | "CENTER" | "RIGHT"
+        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",    "LEFT"));
 
-        // Load switch
-        noShowSwitch.setChecked("Y".equals(getHashMapValue("RobotFellOver", "N")));
+        noShowSwitch.setChecked("Y".equals(hm("RobotFellOver", "N")));
 
-        updateFuelButtonStates();
-        updateClimbingButtonStates();
+        updateFuelStates();
+        updateClimbStates();
     }
 
     private void saveAutonData() {
@@ -488,49 +433,73 @@ public class Auton extends Fragment implements UpdateListener {
         autonHashMap.put("Missed",            String.valueOf(missedCount));
         autonHashMap.put("StartLevel",        getLevelValue(startLevelToggle));
         autonHashMap.put("StopLevel",         getLevelValue(stopLevelToggle));
-        autonHashMap.put("AttemptedClimb",    getClimbValue(attemptedClimbToggle));
-        autonHashMap.put("SuccessfulClimbed", getClimbValue(successfulClimbedToggle));
-        autonHashMap.put("ClimbLocation",     getClimbLocationValue());
+        autonHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,             "DID NOT ATTEMPT"));
+        autonHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,          "None"));
+        autonHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, "LEFT"));
         autonHashMap.put("RobotFellOver",     noShowSwitch.isChecked() ? "Y" : "N");
-
         HashMapManager.putAutonHashMap(autonHashMap);
     }
 
-    // ═════════════════════════════════════════
-    // HELPERS
-    // ═════════════════════════════════════════
 
-    /** API 21-compatible replacement for getOrDefault() */
-    private String getHashMapValue(String key, String defaultValue) {
-        String value = autonHashMap.get(key);
-        return (value != null) ? value : defaultValue;
+    private void appendAutonSnapshot() {
+
+        // Keep your existing “current state” save so loadAutonData() still works
+        // (This overwrites the base keys like "Collecting", "Ferrying", etc.)
+        saveAutonData();
+
+        int idx = nextAutonSaveIndex();
+
+        // Optional: save timestamp for each snapshot
+        autonHashMap.put(snapKey("ts", idx), String.valueOf(System.currentTimeMillis()));
+
+        // Snapshot saved in the SAME format (same field names) but indexed so it never overwrites
+        autonHashMap.put(snapKey("Collecting", idx),        String.valueOf(collectingCount));
+        autonHashMap.put(snapKey("Ferrying", idx),          String.valueOf(ferryingCount));
+        autonHashMap.put(snapKey("Missed", idx),            String.valueOf(missedCount));
+        autonHashMap.put(snapKey("StartLevel", idx),        getLevelValue(startLevelToggle));
+        autonHashMap.put(snapKey("StopLevel", idx),         getLevelValue(stopLevelToggle));
+        autonHashMap.put(snapKey("AttemptedClimb", idx),    getSelectedText(attemptedClimbToggle,               "DID NOT ATTEMPT"));
+        autonHashMap.put(snapKey("SuccessfulClimbed", idx), getSelectedText(successfulClimbedToggle,            "None"));
+        autonHashMap.put(snapKey("ClimbLocation", idx),     getSelectedText(successfullyClimbedLocationToggle,  "LEFT"));
+        autonHashMap.put(snapKey("RobotFellOver", idx),     noShowSwitch.isChecked() ? "Y" : "N");
+
+        // Persist appended snapshot
+        HashMapManager.putAutonHashMap(autonHashMap);
     }
 
-    private int parseCount(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            return 0;
-        }
+
+
+
+    /** API 21-safe HashMap get with default. */
+    private String hm(String key, String def) {
+        String v = autonHashMap.get(key);
+        return v != null ? v : def;
     }
 
-    // ═════════════════════════════════════════
+    private int parseCount(String s) {
+        try { return Integer.parseInt(s); }
+        catch (NumberFormatException e) { return 0; }
+    }
+
+    // ─────────────────────────────────────────
     // LIFECYCLE
-    // ═════════════════════════════════════════
+    // ─────────────────────────────────────────
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (this.isVisible()) {
-            if (isVisibleToUser) {
-                setupHashMap = HashMapManager.getSetupHashMap();
-                autonHashMap = HashMapManager.getAutonHashMap();
-                loadAutonData();
-            } else {
-                saveAutonData();
+        @Override
+        public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+            if (this.isVisible()) {
+                if (isVisibleToUser) {
+                    setupHashMap = HashMapManager.getSetupHashMap();
+                    autonHashMap = HashMapManager.getAutonHashMap();
+                    loadAutonData();
+                } else {
+                    // CHANGED: was saveAutonData();
+                    // This should NOT append a snapshot—only keep current state updated.
+                    saveAutonData();
+                }
             }
         }
-    }
 
     @Override
     public void onStop() {
@@ -540,7 +509,5 @@ public class Auton extends Fragment implements UpdateListener {
     }
 
     @Override
-    public void onUpdate() {
-        loadAutonData();
-    }
+    public void onUpdate() { loadAutonData(); }
 }

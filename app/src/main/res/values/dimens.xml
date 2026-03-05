@@ -21,10 +21,10 @@
     <dimen name="tail_height">12dp</dimen>
     <dimen name="scoring_popup_width">411dp</dimen>
     <dimen name="scoring_popup_height">735dp</dimen>
-    <dimen name="field_popup_width">1200dp</dimen>
-    <dimen name="field_popup_height">735dp</dimen>
-    <dimen name="field_tower_popup_width">2000dp</dimen>
-    <dimen name="field_tower_popup_height">735dp</dimen>
+    <dimen name="field_popup_width">1340dp</dimen>
+    <dimen name="field_popup_height">800dp</dimen>
+    <dimen name="field_tower_popup_width">1340dp</dimen>
+    <dimen name="field_tower_popup_height">800dp</dimen>
     <dimen name="carat_width">48dp</dimen>
     <dimen name="carat_height">28dp</dimen>
     <dimen name="square_toggle_text">20sp</dimen>

@@ -1,256 +1,276 @@
 package com.mercury1089.Scouting_App_2026;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
-import android.os.Build;
-import android.os.Vibrator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.TextView;
-import java.util.LinkedHashMap;
-
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.fragment.app.Fragment;
 
 import com.mercury1089.Scouting_App_2026.listeners.UpdateListener;
 import com.mercury1089.Scouting_App_2026.utils.GenUtils;
 
-public class Teleop extends Fragment implements UpdateListener {
-    // HashMaps for data persistence
-    private LinkedHashMap<String, String> setupHashMap;
-    private LinkedHashMap<String, String> endgameHashMap;
+import java.util.LinkedHashMap;
 
-    // ═════════════════════════════════════════
-    // FUEL SECTION (Left Side)
-    // ═════════════════════════════════════════
+public class Teleop extends Fragment implements UpdateListener {
+
+    private LinkedHashMap<String, String> setupHashMap;
+    private LinkedHashMap<String, String> teleopHashMap;
+
+    // Fuel section
     private RadioGroup collectingCounterToggle;
     private RadioGroup ferryingCounterToggle;
     private RadioGroup startLevelToggle;
     private RadioGroup stopLevelToggle;
     private RadioGroup missedCounterToggle;
 
-    // ═════════════════════════════════════════
-    // CLIMBING SECTION (Right Side)
-    // ═════════════════════════════════════════
+    // Climbing section
     private RadioGroup attemptedClimbToggle;
     private RadioGroup successfulClimbedToggle;
     private RadioGroup successfullyClimbedLocationToggle;
 
-    // ═════════════════════════════════════════
-    // OTHER CONTROLS
-    // ═════════════════════════════════════════
+    // Other controls
     private Switch noShowSwitch;
-    private Button nextButtonEndGame;
+    private Button saveButton;
+    private Button cancelButton;
 
-    // ═════════════════════════════════════════
-    // TIMER & ANIMATION
-    // ═════════════════════════════════════════
+    // Timer & animation
     private TextView timerID;
     private TextView secondsRemaining;
-    private TextView postMatchWarning;
-
-    // Edge bars for animation
-    private ImageView topEdgeBar;
-    private ImageView bottomEdgeBar;
-    private ImageView leftEdgeBar;
-    private ImageView rightEdgeBar;
+    private TextView endgameWarning;
+    private ImageView topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar;
 
     private static CountDownTimer timer;
     private boolean firstTime = true;
     private boolean running = true;
-    private ValueAnimator endgameButtonAnimation;
-    private AnimatorSet animatorSet;
     private MatchActivity context;
 
-    public static Endgame newInstance() {
-        Endgame fragment = new Endgame();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+    // Running counts
+    private int collectingCount = 0;
+    private int ferryingCount   = 0;
+    private int missedCount     = 0;
+
+    public static Teleop newInstance() {
+        Teleop fragment = new Teleop();
+        fragment.setArguments(new Bundle());
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = (MatchActivity) getActivity();
-        View inflated = null;
         try {
-            inflated = inflater.inflate(R.layout.endgame_screen, container, false);
+            return inflater.inflate(R.layout.teleop_screen, container, false);
         } catch (InflateException e) {
-            Log.d("Endgame", "Layout inflation error: " + e.getMessage());
+            Log.d("Teleop", "Inflate error: " + e.getMessage());
             throw e;
         }
-        return inflated;
     }
 
     @Override
     public void onStart() {
-        setupHashMap = HashMapManager.getSetupHashMap();
-        endgameHashMap = HashMapManager.getAutonHashMap();
         super.onStart();
 
-        // ═════════════════════════════════════════
-        // LINK FUEL SECTION VIEWS
-        // ═════════════════════════════════════════
-        collectingCounterToggle = getView().findViewById(R.id.CollectingCounterToggle);
-        ferryingCounterToggle = getView().findViewById(R.id.FerryingCounterToggle);
-        startLevelToggle = getView().findViewById(R.id.StartLevelToggle);
-        stopLevelToggle = getView().findViewById(R.id.StopLevelToggle);
-        missedCounterToggle = getView().findViewById(R.id.MissedCounterToggle);
-
-        // ═════════════════════════════════════════
-        // LINK CLIMBING SECTION VIEWS
-        // ═════════════════════════════════════════
-        attemptedClimbToggle = getView().findViewById(R.id.AttemptedClimbToggle);
-        successfulClimbedToggle = getView().findViewById(R.id.SuccessfulClimbed);
-        successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
-
-        // ═════════════════════════════════════════
-        // LINK OTHER CONTROLS
-        // ═════════════════════════════════════════
-        noShowSwitch = getView().findViewById(R.id.NoShowSwitch);
-        nextButtonEndGame = getView().findViewById(R.id.NextButtonEndGame);
-
-        // ═════════════════════════════════════════
-        // LINK TIMER VIEWS
-        // ═════════════════════════════════════════
-        timerID = getView().findViewById(R.id.IDEndGameSeconds1);
-        secondsRemaining = getView().findViewById(R.id.EndGameSeconds);
-        postMatchWarning = getView().findViewById(R.id.PostMatchWarning);
-
-        // Link edge bars for animations
-        topEdgeBar = getView().findViewById(R.id.topEdgeBar);
-        bottomEdgeBar = getView().findViewById(R.id.bottomEdgeBar);
-        leftEdgeBar = getView().findViewById(R.id.leftEdgeBar);
-        rightEdgeBar = getView().findViewById(R.id.rightEdgeBar);
-
-        // Get HashMap data (fill with defaults if empty or null)
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
-        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.AUTON);
-        setupHashMap = HashMapManager.getSetupHashMap();
-        endgameHashMap = HashMapManager.getAutonHashMap();
+        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.TELEOP);
+        setupHashMap  = HashMapManager.getSetupHashMap();
+        teleopHashMap = HashMapManager.getTeleopHashMap();
 
-        // Load saved data into UI
-        loadEndgameData();
+        // Link views
+        collectingCounterToggle          = getView().findViewById(R.id.CollectingCounterToggle);
+        ferryingCounterToggle            = getView().findViewById(R.id.FerryingCounterToggle);
+        startLevelToggle                 = getView().findViewById(R.id.StartLevelToggle);
+        stopLevelToggle                  = getView().findViewById(R.id.StopLevelToggle);
+        missedCounterToggle              = getView().findViewById(R.id.MissedCounterToggle);
+        attemptedClimbToggle             = getView().findViewById(R.id.AttemptedClimbToggle);
+        successfulClimbedToggle          = getView().findViewById(R.id.SuccessfulClimbed);
+        successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
+        noShowSwitch                     = getView().findViewById(R.id.NoShowSwitch);
+        saveButton                       = getView().findViewById(R.id.SaveButton);
+        cancelButton                     = getView().findViewById(R.id.CancelButton);
+        timerID                          = getView().findViewById(R.id.IDTeleopSeconds1);
+        secondsRemaining                 = getView().findViewById(R.id.TeleopSeconds);
+        endgameWarning                   = getView().findViewById(R.id.EndgameWarning);
+        topEdgeBar                       = getView().findViewById(R.id.topEdgeBar);
+        bottomEdgeBar                    = getView().findViewById(R.id.bottomEdgeBar);
+        leftEdgeBar                      = getView().findViewById(R.id.leftEdgeBar);
+        rightEdgeBar                     = getView().findViewById(R.id.rightEdgeBar);
 
-        // ═════════════════════════════════════════
-        // SETUP CASCADING LOGIC LISTENERS
-        // ═════════════════════════════════════════
+        loadTeleopData();
+        setupCounterListeners();
+        setupCascadingListeners();
+        setupTimer();
+    }
 
-        // Fuel section cascading: MISSED only enabled when START & STOP both selected
-        RadioGroup.OnCheckedChangeListener fuelStateListener = (group, checkedId) ->
-                updateFuelButtonStates();
+    // ─────────────────────────────────────────
+    // COUNTER LISTENERS
+    // ─────────────────────────────────────────
 
-        startLevelToggle.setOnCheckedChangeListener(fuelStateListener);
-        stopLevelToggle.setOnCheckedChangeListener(fuelStateListener);
-
-        // Initial state update for fuel section
-        updateFuelButtonStates();
-
-        // Climbing section cascading: Location only enabled when Attempted = 1 AND Successful = 1
-        RadioGroup.OnCheckedChangeListener climbingStateListener = (group, checkedId) ->
-                updateClimbingButtonStates();
-
-        attemptedClimbToggle.setOnCheckedChangeListener(climbingStateListener);
-        successfulClimbedToggle.setOnCheckedChangeListener(climbingStateListener);
-
-        // Initial state update for climbing section
-        updateClimbingButtonStates();
-
-        // ═════════════════════════════════════════
-        // SETUP BUTTON LISTENERS
-        // ═════════════════════════════════════════
-
-        nextButtonEndGame.setOnClickListener(v -> {
-            // Save data before finishing
-            saveEndgameData();
-            Toast.makeText(context, "Match data saved", Toast.LENGTH_SHORT).show();
-            // Navigate to next screen or finish match
-            context.tabs.getTabAt(0).select(); // Or appropriate next navigation
+    private void setupCounterListeners() {
+        collectingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.CollectingCounter) return;
+            collectingCount = clamp(collectingCount + deltaFor(id,
+                    R.id.CollectingMinus10, R.id.CollectingMinus5, R.id.CollectingMinus,
+                    R.id.CollectingPlus,    R.id.CollectingPlus5,  R.id.CollectingPlus10));
+            refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
         });
 
-        // ═════════════════════════════════════════
-        // SETUP TIMER (30 seconds)
-        // ═════════════════════════════════════════
+        ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.FerryingZero) return;
+            ferryingCount = clamp(ferryingCount + deltaFor(id,
+                    R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
+                    R.id.FerryingPlus,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
+            refreshDisplay(ferryingCounterToggle, R.id.FerryingZero, ferryingCount);
+        });
 
+        missedCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.MissedZero) return;
+            missedCount = clamp(missedCount + deltaFor(id,
+                    R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
+                    R.id.MissedPlus,    R.id.MissedPlus5,  R.id.MissedPlus10));
+            refreshDisplay(missedCounterToggle, R.id.MissedZero, missedCount);
+        });
+    }
+
+    private int deltaFor(int id, int m10, int m5, int m1, int p1, int p5, int p10) {
+        if (id == m10) return -10;
+        if (id == m5)  return -5;
+        if (id == m1)  return -1;
+        if (id == p1)  return +1;
+        if (id == p5)  return +5;
+        if (id == p10) return +10;
+        return 0;
+    }
+
+    private int clamp(int value) { return Math.max(0, value); }
+
+    private void refreshDisplay(RadioGroup group, int displayId, int count) {
+        RadioButton display = group.findViewById(displayId);
+        if (display != null) display.setText(String.valueOf(count));
+        group.setOnCheckedChangeListener(null);
+        group.check(displayId);
+        if      (group == collectingCounterToggle) setupCollectingListener();
+        else if (group == ferryingCounterToggle)   setupFerryingListener();
+        else if (group == missedCounterToggle)      setupMissedListener();
+    }
+
+    private void setupCollectingListener() {
+        collectingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.CollectingCounter) return;
+            collectingCount = clamp(collectingCount + deltaFor(id,
+                    R.id.CollectingMinus10, R.id.CollectingMinus5, R.id.CollectingMinus,
+                    R.id.CollectingPlus,    R.id.CollectingPlus5,  R.id.CollectingPlus10));
+            refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
+        });
+    }
+
+    private void setupFerryingListener() {
+        ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.FerryingZero) return;
+            ferryingCount = clamp(ferryingCount + deltaFor(id,
+                    R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
+                    R.id.FerryingPlus,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
+            refreshDisplay(ferryingCounterToggle, R.id.FerryingZero, ferryingCount);
+        });
+    }
+
+    private void setupMissedListener() {
+        missedCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.MissedZero) return;
+            missedCount = clamp(missedCount + deltaFor(id,
+                    R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
+                    R.id.MissedPlus,    R.id.MissedPlus5,  R.id.MissedPlus10));
+            refreshDisplay(missedCounterToggle, R.id.MissedZero, missedCount);
+        });
+    }
+
+    // ─────────────────────────────────────────
+    // CASCADING LOGIC
+    // ─────────────────────────────────────────
+
+    private void setupCascadingListeners() {
+        startLevelToggle.setOnCheckedChangeListener((g, id) -> updateFuelStates());
+        stopLevelToggle.setOnCheckedChangeListener((g, id)  -> updateFuelStates());
+        updateFuelStates();
+
+        attemptedClimbToggle.setOnCheckedChangeListener((g, id)    -> updateClimbStates());
+        successfulClimbedToggle.setOnCheckedChangeListener((g, id) -> updateClimbStates());
+        updateClimbStates();
+    }
+
+    private void updateFuelStates() {
+        boolean bothSet = !getLevelValue(startLevelToggle).equals("EMPTY")
+                && !getLevelValue(stopLevelToggle).equals("EMPTY");
+        setGroupEnabled(missedCounterToggle, bothSet);
+    }
+
+    private void updateClimbStates() {
+        String attempted  = getSelectedText(attemptedClimbToggle, "");
+        String successful = getSelectedText(successfulClimbedToggle, "");
+        setGroupEnabled(successfullyClimbedLocationToggle, "1".equals(attempted) && "1".equals(successful));
+    }
+
+    // ─────────────────────────────────────────
+    // BUTTON LISTENERS
+    // ─────────────────────────────────────────
+
+    private void setupButtonListeners() {
+        saveButton.setOnClickListener(v -> {
+            saveTeleopData();
+            Toast.makeText(context, "Data saved", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    // ─────────────────────────────────────────
+    // TIMER — 1:50 (110 seconds), warning at 30s
+    // ─────────────────────────────────────────
+
+    private void setupTimer() {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
-        timer = new CountDownTimer(30000, 1000) {
+        timer = new CountDownTimer(110000, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
-                long secondsLeft = millisUntilFinished / 1000;
-                secondsRemaining.setText(String.valueOf(secondsLeft));
-
+            public void onTick(long ms) {
+                long secs = ms / 1000;
+                long mins = secs / 60;
+                long rem  = secs % 60;
+                secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
                 if (!running) return;
 
-                // Warning at 5 seconds remaining
-                if (secondsLeft <= 5 && secondsLeft > 0) {
-                    postMatchWarning.setVisibility(View.VISIBLE);
+                if (secs <= 30 && secs > 0) {
+                    endgameWarning.setVisibility(View.VISIBLE);
                     timerID.setTextColor(context.getResources().getColor(R.color.banana));
                     timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
-
-                    if (vibrator != null) {
-                        vibrator.vibrate(500);
-                    }
-
-                    // Animate edge bars
-                    ObjectAnimator topEdgeLighter = ObjectAnimator.ofFloat(topEdgeBar, View.ALPHA, 0.0f, 1.0f);
-                    ObjectAnimator bottomEdgeLighter = ObjectAnimator.ofFloat(bottomEdgeBar, View.ALPHA, 0.0f, 1.0f);
-                    ObjectAnimator rightEdgeLighter = ObjectAnimator.ofFloat(rightEdgeBar, View.ALPHA, 0.0f, 1.0f);
-                    ObjectAnimator leftEdgeLighter = ObjectAnimator.ofFloat(leftEdgeBar, View.ALPHA, 0.0f, 1.0f);
-
-                    topEdgeLighter.setDuration(500);
-                    bottomEdgeLighter.setDuration(500);
-                    leftEdgeLighter.setDuration(500);
-                    rightEdgeLighter.setDuration(500);
-
-                    topEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
-                    topEdgeLighter.setRepeatCount(1);
-                    bottomEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
-                    bottomEdgeLighter.setRepeatCount(1);
-                    leftEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
-                    leftEdgeLighter.setRepeatCount(1);
-                    rightEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
-                    rightEdgeLighter.setRepeatCount(1);
-
-                    AnimatorSet edgeAnimatorSet = new AnimatorSet();
-                    edgeAnimatorSet.playTogether(topEdgeLighter, bottomEdgeLighter, leftEdgeLighter, rightEdgeLighter);
-                    edgeAnimatorSet.start();
+                    if (vibrator != null) vibrator.vibrate(500);
+                    pulseEdgeBars();
                 }
             }
 
             @Override
             public void onFinish() {
-                if (running) {
-                    secondsRemaining.setText("0");
-                    topEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
-                    bottomEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
-                    leftEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
-                    rightEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
-                    timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
-                    timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
-                    postMatchWarning.setVisibility(View.VISIBLE);
-                    postMatchWarning.setTextColor(getResources().getColor(R.color.white));
-                    postMatchWarning.setText(getResources().getString(R.string.EndGameWarning));
-                }
+                if (!running) return;
+                secondsRemaining.setText("0:00");
+                setAllEdgeBars(R.drawable.teleop_warning);
+                timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
+                timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
+                endgameWarning.setVisibility(View.VISIBLE);
+                endgameWarning.setTextColor(getResources().getColor(R.color.white));
+                endgameWarning.setText(getString(R.string.EndGameError));
             }
         };
 
@@ -260,267 +280,116 @@ public class Teleop extends Fragment implements UpdateListener {
         }
     }
 
-    // ═════════════════════════════════════════
-    // CASCADING LOGIC - FUEL SECTION
-    // ═════════════════════════════════════════
-
-    /**
-     * Update fuel button states based on cascading logic:
-     * - Collecting: Always enabled
-     * - Ferrying: Always enabled
-     * - Start Level: Always enabled
-     * - Stop Level: Always enabled
-     * - MISSED: ONLY enabled when BOTH Start ≠ Empty AND Stop ≠ Empty
-     */
-    private void updateFuelButtonStates() {
-        String startLevel = getStartLevelValue();
-        String stopLevel = getStopLevelValue();
-
-        // Always enable these
-        setRadioGroupEnabled(collectingCounterToggle, true);
-        setRadioGroupEnabled(ferryingCounterToggle, true);
-        setRadioGroupEnabled(startLevelToggle, true);
-        setRadioGroupEnabled(stopLevelToggle, true);
-
-        // MISSED only enabled if BOTH levels are selected
-        boolean bothLevelsSelected = !startLevel.equals("Empty") && !stopLevel.equals("Empty");
-        setRadioGroupEnabled(missedCounterToggle, bothLevelsSelected);
-    }
-
-    // ═════════════════════════════════════════
-    // CASCADING LOGIC - CLIMBING SECTION
-    // ═════════════════════════════════════════
-
-    /**
-     * Update climbing button states based on cascading logic:
-     * - Attempted Climb: Always enabled
-     * - Successfully Climbed: Always enabled
-     * - Tower Climb Location: ONLY enabled when Attempted = "1" AND Successfully Climbed = "1"
-     */
-    private void updateClimbingButtonStates() {
-        String attemptedValue = getAttemptedClimbValue();
-        String successfulValue = getSuccessfulClimbValue();
-
-        // Always enable these
-        setRadioGroupEnabled(attemptedClimbToggle, true);
-        setRadioGroupEnabled(successfulClimbedToggle, true);
-
-        // Location only enabled if robot successfully climbed
-        boolean robotClimbed = "1".equals(attemptedValue) && "1".equals(successfulValue);
-        setRadioGroupEnabled(successfullyClimbedLocationToggle, robotClimbed);
-    }
-
-    // ═════════════════════════════════════════
-    // HELPER METHODS - GET VALUES
-    // ═════════════════════════════════════════
-
-    private String getCounterValue(RadioGroup group) {
-        int selectedId = group.getCheckedRadioButtonId();
-        if (selectedId == -1) return "000";
-        RadioButton button = group.findViewById(selectedId);
-        return button != null ? button.getText().toString().trim() : "000";
-    }
-
-    private String getStartLevelValue() {
-        int selectedId = startLevelToggle.getCheckedRadioButtonId();
-        if (selectedId == -1) return "Empty";
-        RadioButton button = startLevelToggle.findViewById(selectedId);
-        if (button != null) {
-            String text = button.getText().toString().trim();
-            if (text.toLowerCase().contains("empty")) return "Empty";
-            if (text.contains("25")) return "25";
-            if (text.contains("50")) return "50";
-            if (text.contains("75")) return "75";
-            if (text.toLowerCase().contains("full")) return "Full";
-            return text;
+    private void pulseEdgeBars() {
+        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+            ObjectAnimator anim = ObjectAnimator.ofFloat(bar, View.ALPHA, 0f, 1f);
+            anim.setDuration(500);
+            anim.setRepeatMode(ObjectAnimator.REVERSE);
+            anim.setRepeatCount(1);
+            anim.start();
         }
-        return "Empty";
     }
 
-    private String getStopLevelValue() {
-        int selectedId = stopLevelToggle.getCheckedRadioButtonId();
-        if (selectedId == -1) return "Empty";
-        RadioButton button = stopLevelToggle.findViewById(selectedId);
-        if (button != null) {
-            String text = button.getText().toString().trim();
-            if (text.toLowerCase().contains("empty")) return "Empty";
-            if (text.contains("25")) return "25";
-            if (text.contains("50")) return "50";
-            if (text.contains("75")) return "75";
-            if (text.toLowerCase().contains("full")) return "Full";
-            return text;
-        }
-        return "Empty";
+    private void setAllEdgeBars(int drawableRes) {
+        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar})
+            bar.setBackground(getResources().getDrawable(drawableRes));
     }
 
-    private String getAttemptedClimbValue() {
-        int selectedId = attemptedClimbToggle.getCheckedRadioButtonId();
-        if (selectedId == -1) return "DNA";
-        RadioButton button = attemptedClimbToggle.findViewById(selectedId);
-        return button != null ? button.getText().toString().trim() : "DNA";
+    // ─────────────────────────────────────────
+    // GET / SET HELPERS
+    // ─────────────────────────────────────────
+
+    private String getSelectedText(RadioGroup group, String defaultVal) {
+        int id = group.getCheckedRadioButtonId();
+        if (id == -1) return defaultVal;
+        RadioButton btn = group.findViewById(id);
+        return btn != null ? btn.getText().toString().trim() : defaultVal;
     }
 
-    private String getSuccessfulClimbValue() {
-        int selectedId = successfulClimbedToggle.getCheckedRadioButtonId();
-        if (selectedId == -1) return "None";
-        RadioButton button = successfulClimbedToggle.findViewById(selectedId);
-        return button != null ? button.getText().toString().trim() : "None";
+    private String getLevelValue(RadioGroup group) {
+        return getSelectedText(group, "EMPTY");
     }
 
-    private String getClimbLocationValue() {
-        int selectedId = successfullyClimbedLocationToggle.getCheckedRadioButtonId();
-        if (selectedId == -1) return "None";
-        RadioButton button = successfullyClimbedLocationToggle.findViewById(selectedId);
-        return button != null ? button.getText().toString().trim() : "None";
-    }
-
-    // ═════════════════════════════════════════
-    // HELPER METHODS - SET VALUES
-    // ═════════════════════════════════════════
-
-    private void setCounterValue(RadioGroup group, String value) {
+    private void selectByText(RadioGroup group, String value) {
         for (int i = 0; i < group.getChildCount(); i++) {
-            RadioButton button = (RadioButton) group.getChildAt(i);
-            if (button.getText().toString().trim().equals(value)) {
-                group.check(button.getId());
+            RadioButton btn = (RadioButton) group.getChildAt(i);
+            if (btn.getText().toString().trim().equalsIgnoreCase(value)) {
+                group.check(btn.getId());
                 return;
             }
         }
-        // Default to first button if not found
-        if (group.getChildCount() > 0) {
+        if (group.getChildCount() > 0)
             group.check(((RadioButton) group.getChildAt(0)).getId());
-        }
     }
 
-    private void setLevelValue(RadioGroup group, String value) {
-        for (int i = 0; i < group.getChildCount(); i++) {
-            RadioButton button = (RadioButton) group.getChildAt(i);
-            String buttonText = button.getText().toString().trim();
-
-            if (buttonText.equalsIgnoreCase(value) ||
-                    (value.equals("25") && buttonText.contains("25")) ||
-                    (value.equals("50") && buttonText.contains("50")) ||
-                    (value.equals("75") && buttonText.contains("75"))) {
-                group.check(button.getId());
-                return;
-            }
-        }
-        // Default to first button
-        if (group.getChildCount() > 0) {
-            group.check(((RadioButton) group.getChildAt(0)).getId());
-        }
-    }
-
-    private void setClimbValue(RadioGroup group, String value) {
-        for (int i = 0; i < group.getChildCount(); i++) {
-            RadioButton button = (RadioButton) group.getChildAt(i);
-            if (button.getText().toString().trim().equals(value)) {
-                group.check(button.getId());
-                return;
-            }
-        }
-        // Default to first button
-        if (group.getChildCount() > 0) {
-            group.check(((RadioButton) group.getChildAt(0)).getId());
-        }
-    }
-
-    // ═════════════════════════════════════════
-    // HELPER METHODS - ENABLE/DISABLE
-    // ═════════════════════════════════════════
-
-    /**
-     * Enable or disable all radio buttons in a RadioGroup
-     */
-    private void setRadioGroupEnabled(RadioGroup group, boolean enabled) {
-        for (int i = 0; i < group.getChildCount(); i++) {
+    private void setGroupEnabled(RadioGroup group, boolean enabled) {
+        for (int i = 0; i < group.getChildCount(); i++)
             group.getChildAt(i).setEnabled(enabled);
-        }
     }
 
-    // ═════════════════════════════════════════
+    // ─────────────────────────────────────────
     // DATA PERSISTENCE
-    // ═════════════════════════════════════════
+    // ─────────────────────────────────────────
 
-    /**
-     * Load all endgame data from HashMap into UI controls
-     */
-    private void loadEndgameData() {
-        // Load fuel section
-        setCounterValue(collectingCounterToggle, getHashMapValue("Collecting", "000"));
-        setCounterValue(ferryingCounterToggle, getHashMapValue("Ferrying", "000"));
-        setLevelValue(startLevelToggle, getHashMapValue("StartLevel", "Empty"));
-        setLevelValue(stopLevelToggle, getHashMapValue("StopLevel", "Empty"));
-        setCounterValue(missedCounterToggle, getHashMapValue("Missed", "000"));
+    private void loadTeleopData() {
+        collectingCount = parseCount(hm("Collecting", "0"));
+        ferryingCount   = parseCount(hm("Ferrying",   "0"));
+        missedCount     = parseCount(hm("Missed",     "0"));
 
-        // Load climbing section
-        setClimbValue(attemptedClimbToggle, getHashMapValue("AttemptedClimb", "DNA"));
-        setClimbValue(successfulClimbedToggle, getHashMapValue("SuccessfulClimbed", "None"));
-        setClimbValue(successfullyClimbedLocationToggle, getHashMapValue("ClimbLocation", "None"));
+        refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingZero,     ferryingCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedZero,       missedCount);
 
-        // Load robot fell over switch
-        noShowSwitch.setChecked("Y".equals(getHashMapValue("RobotFellOver", "N")));
+        selectByText(startLevelToggle, hm("StartLevel", "EMPTY"));
+        selectByText(stopLevelToggle,  hm("StopLevel",  "EMPTY"));
 
-        // Update cascading logic states
-        updateFuelButtonStates();
-        updateClimbingButtonStates();
+        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    "DID NOT ATTEMPT"));
+        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", "None"));
+        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     "LEFT"));
+
+        noShowSwitch.setChecked("Y".equals(hm("RobotFellOver", "N")));
+
+        updateFuelStates();
+        updateClimbStates();
     }
 
-    /**
-     * Save all endgame data from UI controls to HashMap
-     */
-    private void saveEndgameData() {
-        // Save fuel section
-        endgameHashMap.put("Collecting", getCounterValue(collectingCounterToggle));
-        endgameHashMap.put("Ferrying", getCounterValue(ferryingCounterToggle));
-        endgameHashMap.put("StartLevel", getStartLevelValue());
-        endgameHashMap.put("StopLevel", getStopLevelValue());
-        endgameHashMap.put("Missed", getCounterValue(missedCounterToggle));
-
-        // Save climbing section
-        endgameHashMap.put("AttemptedClimb", getAttemptedClimbValue());
-        endgameHashMap.put("SuccessfulClimbed", getSuccessfulClimbValue());
-        endgameHashMap.put("ClimbLocation", getClimbLocationValue());
-
-        // Save robot fell over switch
-        endgameHashMap.put("RobotFellOver", noShowSwitch.isChecked() ? "Y" : "N");
-
-        // Update HashMapManager
-        HashMapManager.putAutonHashMap(endgameHashMap);
+    private void saveTeleopData() {
+        teleopHashMap.put("Collecting",        String.valueOf(collectingCount));
+        teleopHashMap.put("Ferrying",          String.valueOf(ferryingCount));
+        teleopHashMap.put("Missed",            String.valueOf(missedCount));
+        teleopHashMap.put("StartLevel",        getLevelValue(startLevelToggle));
+        teleopHashMap.put("StopLevel",         getLevelValue(stopLevelToggle));
+        teleopHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              "DID NOT ATTEMPT"));
+        teleopHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           "None"));
+        teleopHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, "LEFT"));
+        teleopHashMap.put("RobotFellOver",     noShowSwitch.isChecked() ? "Y" : "N");
+        HashMapManager.putTeleopHashMap(teleopHashMap);
     }
 
-    // ═════════════════════════════════════════
-    // HELPER METHOD - API COMPATIBILITY
-    // ═════════════════════════════════════════
-
-    /**
-     * Get value from HashMap with default, compatible with API 21+
-     * Avoids using getOrDefault() which requires API 24+
-     */
-    private String getHashMapValue(String key, String defaultValue) {
-        if (endgameHashMap != null && endgameHashMap.containsKey(key)) {
-            return endgameHashMap.get(key);
-        }
-        return defaultValue;
+    private String hm(String key, String def) {
+        String v = teleopHashMap.get(key);
+        return v != null ? v : def;
     }
 
-    // ═════════════════════════════════════════
-    // LIFECYCLE METHODS
-    // ═════════════════════════════════════════
+    private int parseCount(String s) {
+        try { return Integer.parseInt(s); }
+        catch (NumberFormatException e) { return 0; }
+    }
+
+    // ─────────────────────────────────────────
+    // LIFECYCLE
+    // ─────────────────────────────────────────
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-
         if (this.isVisible()) {
             if (isVisibleToUser) {
-                // Fragment becoming visible - load fresh data
-                setupHashMap = HashMapManager.getSetupHashMap();
-                endgameHashMap = HashMapManager.getAutonHashMap();
-                loadEndgameData();
+                setupHashMap  = HashMapManager.getSetupHashMap();
+                teleopHashMap = HashMapManager.getTeleopHashMap();
+                loadTeleopData();
             } else {
-                // Fragment hiding - save current data
-                saveEndgameData();
+                saveTeleopData();
             }
         }
     }
@@ -529,13 +398,9 @@ public class Teleop extends Fragment implements UpdateListener {
     public void onStop() {
         super.onStop();
         running = false;
-        if (timer != null) {
-            timer.cancel();
-        }
+        if (timer != null) timer.cancel();
     }
 
     @Override
-    public void onUpdate() {
-        loadEndgameData();
-    }
+    public void onUpdate() { loadTeleopData(); }
 }

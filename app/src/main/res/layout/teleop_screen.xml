@@ -2,21 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScoredPopupWindow"
+    android:id="@+id/teleopFieldContainer"
     android:layout_width="@dimen/field_tower_popup_width"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Contents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/bg_scoring_popup"
-        android:padding="@dimen/padding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    android:layout_height="match_parent"
+    android:background="@color/night">
 
         <!-- ═════════════════════════════════════════
              COLLECTING SECTION
@@ -27,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
             android:gravity="top"
             android:text="@string/Header"
@@ -45,18 +35,18 @@
             android:textColor="@color/bootstrap_brand_secondary_border"
             android:textSize="@dimen/instruction_text_size"
             android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/CollectingCounterToggle"
+            app:layout_constraintStart_toStartOf="@id/CollectingTitle"
             app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
 
         <!-- Collecting counter toggle: 0-25, 26-50, 51-75, >75-->
         <RadioGroup
             android:id="@+id/CollectingCounterToggle"
-            android:layout_width="500dp"
+            android:layout_width="450dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/CollectingDesc"
             app:layout_constraintTop_toBottomOf="@+id/CollectingDesc">
 
             <RadioButton
@@ -125,8 +115,7 @@
             android:text="@string/Ferrying"
             android:textColor="@drawable/text_header_states"
             android:textSize="@dimen/header_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/StopDesc"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/CollectingDesc"
             app:layout_constraintTop_toBottomOf="@+id/CollectingCounterToggle"
             app:layout_constraintVertical_bias="0.5" />
 
@@ -140,18 +129,18 @@
             android:textColor="@color/bootstrap_brand_secondary_border"
             android:textSize="@dimen/instruction_text_size"
             android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/FerryingCounterToggle"
+            app:layout_constraintStart_toStartOf="@id/FerryingTitle"
             app:layout_constraintTop_toBottomOf="@+id/FerryingTitle" />
 
         <!-- Ferrying counter toggle: 0-25, 26-50, 51-75, >75-->
         <RadioGroup
             android:id="@+id/FerryingCounterToggle"
-            android:layout_width="500dp"
+            android:layout_width="450dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/FerryingTitle"
             app:layout_constraintTop_toBottomOf="@+id/FerryingDesc">
 
             <RadioButton
@@ -216,7 +205,7 @@
             android:id="@+id/ScoringTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="600dp"
+            android:layout_marginStart="520dp"
             android:layout_marginTop="0dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
             android:text="@string/ScoringTitle"
@@ -229,7 +218,7 @@
             android:id="@+id/StartTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="600dp"
+            android:layout_marginStart="520dp"
             android:layout_marginTop="0dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
             android:text="@string/StartTitle"
@@ -255,7 +244,7 @@
         <!-- Start level toggle: EMPTY | 25% | 50% | 75% | FULL -->
         <RadioGroup
             android:id="@+id/StartLevelToggle"
-            android:layout_width="500dp"
+            android:layout_width="450dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
@@ -361,7 +350,7 @@
         <!-- Stop level toggle: EMPTY | 25% | 50% | 75% | FULL -->
         <RadioGroup
             android:id="@+id/StopLevelToggle"
-            android:layout_width="500dp"
+            android:layout_width="450dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
@@ -467,7 +456,7 @@
         <!-- Missed counter toggle: 0-25, 26-50, 51-75, >75-->
         <RadioGroup
             android:id="@+id/MissedCounterToggle"
-            android:layout_width="500dp"
+            android:layout_width="450dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
@@ -555,233 +544,209 @@
             app:layout_constraintTop_toTopOf="@+id/NoShowSwitch"
             app:layout_constraintVertical_bias="0.5" />
 
-        <!-- ═════════════════════════════════════════
-             CLIMBING SECTION
-             ═════════════════════════════════════════ -->
+    <!-- ═════════════════════════════════════════
+     CLIMBING SECTION  (right column, below Missed)
+     ═════════════════════════════════════════ -->
 
-        <TextView
-            android:id="@+id/ClimbingTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="600dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:gravity="top"
-            android:text="@string/ClimbingTitle"
-            android:textColor="@drawable/text_header_states"
-            android:textSize="@dimen/header_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/StartLevelToggle"
-            app:layout_constraintStart_toStartOf="@+id/ScoringTitle"
-            app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
+    <TextView
+        android:id="@+id/ClimbingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/futura_medium_condensed_bt"
+        android:text="@string/ClimbingTitle"
+        android:layout_marginStart="490dp"
+        android:textColor="@drawable/text_header_states"
+        android:textSize="@dimen/header_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/StartLevelToggle"
+        app:layout_constraintStart_toStartOf="@+id/ScoringTitle"
+        app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
 
-        <TextView
-            android:id="@+id/ClimbingDesc"
+    <TextView
+        android:id="@+id/ClimbingDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/AttemptedCLimbLevelDesc"
+        android:textColor="@color/bootstrap_brand_secondary_border"
+        android:textSize="@dimen/instruction_text_size"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ClimbingTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ClimbingTitle" />
+
+    <!-- Did Not Attempt | 1 -->
+    <RadioGroup
+        android:id="@+id/AttemptedClimbToggle"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/ClimbingDesc"
+        app:layout_constraintTop_toBottomOf="@+id/ClimbingDesc">
+
+        <RadioButton
+            android:id="@+id/SuccessfulNo"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/AttemptedCLimbLevelDesc"
-            android:textColor="@color/bootstrap_brand_secondary_border"
-            android:textSize="@dimen/instruction_text_size"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/ClimbingTitle"
-            app:layout_constraintTop_toBottomOf="@+id/ClimbingTitle" />
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_left_states"
+            android:button="@null"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/DNA"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size" />
 
-        <!-- Did Not Attempt or Level 1 -->
-        <RadioGroup
-            android:id="@+id/AttemptedClimbToggle"
-            android:layout_width="348dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/ClimbingDesc"
-            app:layout_constraintTop_toBottomOf="@+id/ClimbingDesc">
-
-            <RadioButton
-                android:id="@+id/DidNotAttempt"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_left_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="@string/DNA"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <RadioButton
-                android:id="@+id/AchievedLevel1"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="1"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-        </RadioGroup>
-
-
-        <!--Successful Climbed-->
-
-        <!-- None or Level 1 -->
-        <TextView
-            android:id="@+id/SuccessfullyClimbed"
+        <RadioButton
+            android:id="@+id/SuccessfulYes"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/SuccessfullyClimbed"
-            android:textColor="@color/bootstrap_brand_secondary_border"
-            android:textSize="@dimen/instruction_text_size"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/AttemptedClimbToggle"
-            app:layout_constraintTop_toBottomOf="@+id/AttemptedClimbToggle" />
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_right_states"
+            android:button="@null"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size" />
+    </RadioGroup>
 
-        <RadioGroup
-            android:id="@+id/SuccessfulClimbed"
-            android:layout_width="348dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/SuccessfullyClimbed"
-            app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbed">
+    <!-- Successful Climbed: None | 1 -->
+    <TextView
+        android:id="@+id/SuccessfullyClimbed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/SuccessfullyClimbed"
+        android:textColor="@color/bootstrap_brand_secondary_border"
+        android:textSize="@dimen/instruction_text_size"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/AttemptedClimbToggle"
+        app:layout_constraintTop_toBottomOf="@+id/AttemptedClimbToggle" />
 
-            <RadioButton
-                android:id="@+id/DNA"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_left_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="@string/SuccessfulClimbedLevel"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
+    <RadioGroup
+        android:id="@+id/SuccessfulClimbed"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/SuccessfullyClimbed"
+        app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbed">
 
-            <RadioButton
-                android:id="@+id/Level1"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="1"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-        </RadioGroup>
-
-
-        <!--Tower Climb Level-->
-        <TextView
-            android:id="@+id/TowerClimbPlacement"
+        <RadioButton
+            android:id="@+id/DidNotAttempt"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/TowerClimbPlacement"
-            android:textColor="@color/bootstrap_brand_secondary_border"
-            android:textSize="@dimen/instruction_text_size"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/SuccessfulClimbed"
-            app:layout_constraintTop_toBottomOf="@+id/SuccessfulClimbed" />
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_left_states"
+            android:button="@null"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/SuccessfulClimbedLevel"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size" />
 
-        <!-- Left, Right, Center Climb Location -->
-        <RadioGroup
-            android:id="@+id/SuccessfullyClimbedLocation"
-            android:layout_width="348dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/TowerClimbPlacement"
-            app:layout_constraintTop_toBottomOf="@+id/TowerClimbPlacement">
+        <RadioButton
+            android:id="@+id/AchievedLevel1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_left_states"
+            android:button="@null"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size" />
+    </RadioGroup>
 
-            <RadioButton
-                android:id="@+id/Left"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_left_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="@string/Left"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
+    <!-- Tower Climb Location: LEFT | CENTER | RIGHT -->
+    <TextView
+        android:id="@+id/TowerClimbPlacement"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/TowerClimbPlacement"
+        android:textColor="@color/bootstrap_brand_secondary_border"
+        android:textSize="@dimen/instruction_text_size"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/SuccessfulClimbed"
+        app:layout_constraintTop_toBottomOf="@+id/SuccessfulClimbed" />
 
-            <RadioButton
-                android:id="@+id/Center"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_left_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="@string/Center"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
+    <RadioGroup
+        android:id="@+id/SuccessfullyClimbedLocation"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/TowerClimbPlacement"
+        app:layout_constraintTop_toBottomOf="@+id/TowerClimbPlacement">
 
-            <RadioButton
-                android:id="@+id/Right"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="@string/Right"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-        </RadioGroup>
+        <RadioButton
+            android:id="@+id/Left"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_left_states"
+            android:button="@null"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/Left"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size" />
+
+        <RadioButton
+            android:id="@+id/Center"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_left_states"
+            android:button="@null"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/Center"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size" />
+
+        <RadioButton
+            android:id="@+id/Right"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_left_states"
+            android:button="@null"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/Right"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size" />
+    </RadioGroup>
 
         <!-- ═════════════════════════════════════════
              BUTTONS
              ═════════════════════════════════════════ -->
-        <Button
-            android:id="@+id/CancelButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="20dp"
-            android:background="@android:color/transparent"
-            android:text="@string/Cancel"
-            android:textColor="@color/bootstrap_brand_secondary_border"
-            android:textSize="@dimen/button_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/SaveButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/MissedCounterToggle" />
 
-        <Button
-            android:id="@+id/SaveButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/button_large_active"
-            android:text="@string/Save"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/CancelButton"
-            app:layout_constraintTop_toBottomOf="@+id/MissedCounterToggle" />
+    <Button
+        android:id="@+id/SaveButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="605dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/button_large_active"
+        android:text="@string/Save"
+        android:textColor="@drawable/text_states"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbedLocation" />
 
         <Button
             android:id="@+id/NextButtonTeleop"
@@ -893,6 +858,5 @@
             app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
             app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
             app:layout_constraintTop_toTopOf="@+id/ScoringTitle" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
