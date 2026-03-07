@@ -4,9 +4,4 @@
     <size android:height="45dp"/>
     <corners android:radius="5dp"/>
     <solid android:color="@color/night"/>
-    <padding
-        android:bottom="12dp"
-        android:left="18dp"
-        android:right="18dp"
-        android:top="12dp"/>
 </shape>

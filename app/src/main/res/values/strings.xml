@@ -57,11 +57,11 @@
     <string name="MissedDesc">How much fuel was missed?</string>
     <string name="empty_label">EMPTY</string>
     <string name="full_label">FULL</string>
-    <string name="percent_25">25<sup>%</sup></string>
-    <string name="percent_50">50<sup>%</sup></string>
-    <string name="percent_75">75<sup>%</sup></string>
+    <string name="percent_25">25<small>%</small></string>
+    <string name="percent_50">50<small>%</small></string>
+    <string name="percent_75">75<small>%</small></string>
     <string name="RobotFellOver">Robot fell over/Died</string>
-    <string name="RobotFellOverDesc">Did the robot fall over during autonomous?</string>
+    <string name="RobotFellOverDesc">D id the robot fall over during autonomous?</string>
     <string name="Header">COLLECTING</string>
     <string name="FuelCollected">How much FUEL was collected?</string>
     <string name="Ferrying">FERRYING</string>
