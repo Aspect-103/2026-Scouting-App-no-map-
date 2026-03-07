@@ -99,7 +99,7 @@ public class Endgame extends Fragment implements UpdateListener {
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
         noShowSwitch                      = getView().findViewById(R.id.NoShowSwitch);
         saveButton                        = getView().findViewById(R.id.SaveButton);
-        generateQRButton                  = getView().findViewById(R.id.GenerateQRButton);
+        generateQRButton                  = getView().findViewById(R.id.NextButtonEndGame);
         timerID                           = getView().findViewById(R.id.IDEndGameSeconds1);
         secondsRemaining                  = getView().findViewById(R.id.EndGameSeconds);
         topEdgeBar                        = getView().findViewById(R.id.topEdgeBar);
@@ -170,14 +170,16 @@ public class Endgame extends Fragment implements UpdateListener {
     private void setupTimer() {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
-        timer = new CountDownTimer(30000, 1000) {
+        timer = new CountDownTimer(110000, 1000) {
             @Override
             public void onTick(long ms) {
                 long secs = ms / 1000;
-                secondsRemaining.setText(String.valueOf(secs));
+                long mins = secs / 60;
+                long rem  = secs % 60;
+                secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
                 if (!running) return;
 
-                if (secs <= 5 && secs > 0) {
+                if (secs <= 30 && secs > 0) {
                     postMatchWarning.setVisibility(View.VISIBLE);
                     timerID.setTextColor(context.getResources().getColor(R.color.banana));
                     timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);

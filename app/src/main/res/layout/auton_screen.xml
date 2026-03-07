@@ -8,8 +8,6 @@
     android:background="@color/night"
     android:paddingTop="5dp">
 
-
-
     <!-- ═════════════════════════════════════════
      TIMER & BUTTON BOX (bottom)
      ═════════════════════════════════════════ -->
@@ -34,6 +32,7 @@
             android:textColor="@color/bg_general"
             android:textSize="@dimen/input_label_text_size"
             android:layout_marginBottom="2dp"
+            android:visibility="invisible"
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- ═════════════════════════════════════════

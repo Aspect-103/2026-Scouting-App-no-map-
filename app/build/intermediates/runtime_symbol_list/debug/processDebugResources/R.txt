@@ -1459,6 +1459,7 @@ int id OuterIncrementDecrementContainer 0x7f0a007d
 int id OuterScore 0x7f0a007e
 int id PasswordField 0x7f0a007f
 int id PasswordSettingsButton 0x7f0a0080
+int id PostMatchWarning 0x7f0a097f
 int id PreloadedCargoDisplay 0x7f0a0081
 int id PreloadedCargoMinus 0x7f0a0082
 int id PreloadedCargoPlus 0x7f0a0083
