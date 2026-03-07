@@ -18,7 +18,7 @@ public class HashMapManager{
     private static LinkedHashMap<String, String> setupHashMap = new LinkedHashMap<>();
     private static LinkedHashMap<String, String> autonHashMap = new LinkedHashMap<>();
     private static LinkedHashMap<String, String> teleopHashMap = new LinkedHashMap<>();
-    private static LinkedHashMap<String, String> climbHashMap = new LinkedHashMap<>();
+    private static LinkedHashMap<String, String> endgameHashMap = new LinkedHashMap<>();
 
     /**
      *
@@ -26,13 +26,13 @@ public class HashMapManager{
      *
      */
     public enum HASH{
-        SETTINGS, SETUP, AUTON, TELEOP, CLIMB, QRCODES
+        SETTINGS, SETUP, AUTON, TELEOP, ENDGAME, QRCODES
     }
 
     /**
-    *
-    * Used to access the setup HashMap from an activity
-    *
+     *
+     * Used to access the setup HashMap from an activity
+     *
      */
     private HashMapManager(){
         // Nothing to see here
@@ -50,11 +50,11 @@ public class HashMapManager{
     }
 
     /**
-    *
-    * Used to get the setupHashMap
-    * Call when an activity starts and assign to global variable
+     *
+     * Used to get the setupHashMap
+     * Call when an activity starts and assign to global variable
      * @return  the setupHashMap
-    *
+     *
      */
     public static LinkedHashMap<String, String> getSetupHashMap(){
         return setupHashMap;
@@ -84,14 +84,15 @@ public class HashMapManager{
 
     /**
      *
-     * Used to get the climbHashMap
+     * Used to get the endgameHashMap
      * Call when an activity starts and assign to global variable
-     * @return the climbHashMap
+     * @return the endgameHashMap
      *
      */
-    public static LinkedHashMap<String, String> getClimbHashMap(){
-        return climbHashMap;
+    public static LinkedHashMap<String, String> getEndgameHashMap(){
+        return endgameHashMap;
     }
+
 
     /**
      *
@@ -107,11 +108,11 @@ public class HashMapManager{
     }
 
     /**
-    *
-    * Used to set the app wide setupHashMap
-    * Call before leaving an activity to update the app wide setupHashMap
+     *
+     * Used to set the app wide setupHashMap
+     * Call before leaving an activity to update the app wide setupHashMap
      * @param setupData The data to be put in the setupHashMap
-    *
+     *
      */
     public static void putSetupHashMap(LinkedHashMap<String, String> setupData){
         if(setupData == null) {
@@ -148,16 +149,17 @@ public class HashMapManager{
 
     /**
      *
-     * <p>Used to set the app wide climbHashMap</p>
-     * Call before leaving an activity to update the app wide climbHashMap
-     * @param climbData the data to be put in the climbHashMap
+     * Used to set the app wide endgameHashMap
+     * Call before leaving an activity to update the app wide endgameHashMap
+     * @param endgameData    the data to be put in the endgameHashMap
      *
      */
-    public static void putClimbHashMap(LinkedHashMap<String, String> climbData){
-        if(climbData == null)
+    public static void putEndgameHashMap(LinkedHashMap<String, String> endgameData){
+        if(endgameData == null)
             return;
-        climbHashMap = climbData;
+        endgameHashMap = endgameData;
     }
+
 
     /**
      *
@@ -296,11 +298,11 @@ public class HashMapManager{
     }
 
     /**
-    *
-    * Used to reset all the setupHashMap values to their default values
-    * Fill in default values to prevent null pointer exceptions
+     *
+     * Used to reset all the setupHashMap values to their default values
+     * Fill in default values to prevent null pointer exceptions
      * @param map   The hashmap to be reset
-    *
+     *
      */
     public static void setDefaultValues(HASH map){
         switch(map) {
@@ -322,82 +324,76 @@ public class HashMapManager{
                 setupHashMap.put("AlliancePartner2", "");
                 setupHashMap.put("AllianceColor", "");
                 setupHashMap.put("PreloadedCargo", "0");
-                //Note: FellOver is put in setup hashmap because its value may be updated in Auton, Teleop, or Climb
+                //Note: FellOver is put in setup hashmap because its value may be updated in Auton, Teleop, or Endgame
                 setupHashMap.put("FellOver", "N");
                 break;
             case AUTON:
-                //include all the items that will be in the autonHashMap
+                // 2026 Fuel Game - Autonomous Phase Defaults
                 autonHashMap.put("HashMapName", "Auton");
-                autonHashMap.put("CoralPickedUp", "0");
-                autonHashMap.put("AlgaePickedUp", "0");
 
-                autonHashMap.put("ScoredCoralL4", "0");
-                autonHashMap.put("ScoredCoralL3", "0");
-                autonHashMap.put("ScoredCoralL2", "0");
-                autonHashMap.put("ScoredCoralL1", "0");
+                // Game data fields
+                autonHashMap.put("Collecting", "0");
+                autonHashMap.put("Ferrying", "0");
+                autonHashMap.put("Missed", "0");
+                autonHashMap.put("StartLevel", "EMPTY");
+                autonHashMap.put("StopLevel", "EMPTY");
+                autonHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
+                autonHashMap.put("SuccessfulClimbed", "None");
+                autonHashMap.put("ClimbLocation", "LEFT");
+                autonHashMap.put("RobotFellOver", "0");
 
-                autonHashMap.put("MissedCoralL4", "0");
-                autonHashMap.put("MissedCoralL3", "0");
-                autonHashMap.put("MissedCoralL2", "0");
-                autonHashMap.put("MissedCoralL1", "0");
+                // CSV Snapshot buffer - initialize with header
+                autonHashMap.put("snapshots", "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
 
-                autonHashMap.put("RemovedAlgaeL3", "0");
-                autonHashMap.put("RemovedAlgaeL2", "0");
-                autonHashMap.put("AttemptedAlgaeL3", "0");
-                autonHashMap.put("AttemptedAlgaeL2", "0");
-
-                autonHashMap.put("ScoredAlgaeProcessor", "0");
-                autonHashMap.put("MissedAlgaeProcessor", "0");
-                autonHashMap.put("ScoredAlgaeNet", "0");
-                autonHashMap.put("MissedAlgaeNet", "0");
-
-                autonHashMap.put("Leave", "N");
                 break;
             case TELEOP:
-                //include all the items that will be in the teleopHashMap
+                // 2026 Fuel Game - Teleoperated Phase Defaults
                 teleopHashMap.put("HashMapName", "Teleop");
-                teleopHashMap.put("CoralPickedUp", "0");
-                teleopHashMap.put("AlgaePickedUp", "0");
 
-                teleopHashMap.put("ScoredCoralL4", "0");
-                teleopHashMap.put("ScoredCoralL3", "0");
-                teleopHashMap.put("ScoredCoralL2", "0");
-                teleopHashMap.put("ScoredCoralL1", "0");
+                // Game data fields
+                teleopHashMap.put("Collecting", "0");
+                teleopHashMap.put("Ferrying", "0");
+                teleopHashMap.put("Missed", "0");
+                teleopHashMap.put("StartLevel", "EMPTY");
+                teleopHashMap.put("StopLevel", "EMPTY");
+                teleopHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
+                teleopHashMap.put("SuccessfulClimbed", "None");
+                teleopHashMap.put("ClimbLocation", "LEFT");
+                teleopHashMap.put("RobotFellOver", "0");
 
-                teleopHashMap.put("MissedCoralL4", "0");
-                teleopHashMap.put("MissedCoralL3", "0");
-                teleopHashMap.put("MissedCoralL2", "0");
-                teleopHashMap.put("MissedCoralL1", "0");
-
-                teleopHashMap.put("RemovedAlgaeL3", "0");
-                teleopHashMap.put("RemovedAlgaeL2", "0");
-                teleopHashMap.put("AttemptedAlgaeL3", "0");
-                teleopHashMap.put("AttemptedAlgaeL2", "0");
-
-                teleopHashMap.put("ScoredAlgaeProcessor", "0");
-                teleopHashMap.put("MissedAlgaeProcessor", "0");
-                teleopHashMap.put("ScoredAlgaeNet", "0");
-                teleopHashMap.put("MissedAlgaeNet", "0");
+                // CSV Snapshot buffer - initialize with header
+                teleopHashMap.put("snapshots", "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
 
                 break;
-            case CLIMB:
-                //include all the items that will be in the climbHashMap
-                climbHashMap.put("HashMapName", "Climb");
-                climbHashMap.put("Park", "N");
-                climbHashMap.put("Hang", "N"); //Value to update barge selector (*NOT PART OF QRSTRING*)
-                //If robot didn't climb, value will be "N". Otherwise, it will be "S" or "D" (Shallow or Deep)
-                climbHashMap.put("Barge", "N");
+            case ENDGAME:
+                // 2026 Fuel Game - Endgame Phase Defaults (same structure as Teleop)
+                endgameHashMap.put("HashMapName", "Endgame");
+
+                // Game data fields
+                endgameHashMap.put("Collecting", "0");
+                endgameHashMap.put("Ferrying", "0");
+                endgameHashMap.put("Missed", "0");
+                endgameHashMap.put("StartLevel", "EMPTY");
+                endgameHashMap.put("StopLevel", "EMPTY");
+                endgameHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
+                endgameHashMap.put("SuccessfulClimbed", "None");
+                endgameHashMap.put("ClimbLocation", "LEFT");
+                endgameHashMap.put("RobotFellOver", "0");
+
+                // CSV Snapshot buffer - initialize with header
+                endgameHashMap.put("snapshots", "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
+
                 break;
         }
     }
 
     /**
-    *
-    * Checks if the setupHashMap is empty or null
-    * if it is null, it instantiates it and calls setDefaultValues()
-    * if it is empty, it calls setDefaultValues()
+     *
+     * Checks if the setupHashMap is empty or null
+     * if it is null, it instantiates it and calls setDefaultValues()
+     * if it is empty, it calls setDefaultValues()
      * @param map   The map to be checked
-    *
+     *
      */
 
     public static boolean checkNullOrEmpty(HASH map){
@@ -434,13 +430,14 @@ public class HashMapManager{
                     return true;
                 }
                 break;
-            case CLIMB:
-                if(climbHashMap == null)
-                    climbHashMap = new LinkedHashMap<>();
-                if(climbHashMap.isEmpty()) {
-                    setDefaultValues(HASH.CLIMB);
+            case ENDGAME:
+                if(endgameHashMap == null)
+                    endgameHashMap = new LinkedHashMap<>();
+                if(endgameHashMap.isEmpty()) {
+                    setDefaultValues(HASH.ENDGAME);
                     return true;
                 }
+                break;
         }
         return false;
     }
@@ -459,7 +456,7 @@ public class HashMapManager{
         setDefaultValues(HASH.SETUP);
         setDefaultValues(HASH.AUTON);
         setDefaultValues(HASH.TELEOP);
-        setDefaultValues(HASH.CLIMB);
+        setDefaultValues(HASH.ENDGAME);
         setupHashMap.put("ScouterName", scouterName);
         try {
             setupHashMap.put("MatchNumber", Integer.toString((Integer.parseInt(matchNumber) + 1)));

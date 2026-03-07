@@ -48,7 +48,7 @@ public class MatchActivity extends AppCompatActivity {
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.AUTON);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.TELEOP);
-        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.CLIMB);
+        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.ENDGAME);
     }
 
     //back button
@@ -78,7 +78,7 @@ public class MatchActivity extends AppCompatActivity {
                 HashMapManager.setDefaultValues(HashMapManager.HASH.SETUP);
                 HashMapManager.setDefaultValues(HashMapManager.HASH.AUTON);
                 HashMapManager.setDefaultValues(HashMapManager.HASH.TELEOP);
-                HashMapManager.setDefaultValues(HashMapManager.HASH.CLIMB);
+                HashMapManager.setDefaultValues(HashMapManager.HASH.ENDGAME);
                 Intent intent = new Intent(MatchActivity.this, PregameActivity.class);
                 startActivity(intent);
                 finish();

@@ -55,7 +55,7 @@ public class QRRunnable implements Runnable {
         // Once QR is generated, hashmap values go back to defaults
         HashMapManager.setDefaultValues(HashMapManager.HASH.AUTON);
         HashMapManager.setDefaultValues(HashMapManager.HASH.TELEOP);
-        HashMapManager.setDefaultValues(HashMapManager.HASH.CLIMB);
+        HashMapManager.setDefaultValues(HashMapManager.HASH.ENDGAME);
 
         try {
             Bitmap bitmap = QRUtils.textToImageEncode(qrString);

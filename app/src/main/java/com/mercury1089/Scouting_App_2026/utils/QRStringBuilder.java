@@ -68,8 +68,8 @@ public class QRStringBuilder {
     public static void buildQRString() {
         LinkedHashMap<String, String> setup  = HashMapManager.getSetupHashMap();
         LinkedHashMap<String, String> auton  = HashMapManager.getAutonHashMap();
-        LinkedHashMap<String, String> teleop = HashMapManager.getAutonHashMap();
-        LinkedHashMap<String, String> endgame = HashMapManager.getAutonHashMap();
+        LinkedHashMap<String, String> teleop = HashMapManager.getTeleopHashMap();
+        LinkedHashMap<String, String> endgame = HashMapManager.getEndgameHashMap();
 
         // How many snapshots were saved?
         int autonCount  = parseIndex(auton.get("AutonSaveIndex"));

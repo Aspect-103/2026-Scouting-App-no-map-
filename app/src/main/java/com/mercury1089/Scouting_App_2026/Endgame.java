@@ -65,7 +65,7 @@ public class Endgame extends Fragment implements UpdateListener {
     // SNAPSHOT SYSTEM - CSV FORMAT
     private StringBuilder snapshotBuilder;
     private static final String SNAPSHOT_HEADER =
-            "timestamp,collecting,ferrying,missed,startLevel,stopLevel," +
+            "collecting,ferrying,missed,startLevel,stopLevel," +
                     "attemptedClimb,successfulClimbed,climbLocation,robotFellOver";
 
     public static Endgame newInstance() {
@@ -90,9 +90,9 @@ public class Endgame extends Fragment implements UpdateListener {
         super.onStart();
 
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
-        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.AUTON);
+        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.ENDGAME);
         setupHashMap   = HashMapManager.getSetupHashMap();
-        endgameHashMap = HashMapManager.getAutonHashMap();
+        endgameHashMap = HashMapManager.getEndgameHashMap();
 
         // Link views
         collectingCounterToggle           = getView().findViewById(R.id.CollectingCounterToggle);
@@ -350,14 +350,13 @@ public class Endgame extends Fragment implements UpdateListener {
         endgameHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           "None"));
         endgameHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, "LEFT"));
         endgameHashMap.put("RobotFellOver",     noShowSwitch.isChecked() ? "Y" : "N");
-        HashMapManager.putAutonHashMap(endgameHashMap);
+        HashMapManager.putEndgameHashMap(endgameHashMap);
     }
 
     // SNAPSHOT SYSTEM - CSV SERIALIZATION
     private void appendEndgameSnapshot() {
         saveEndgameData();
 
-        long timestamp = System.currentTimeMillis();
         String collecting = getSelectedText(collectingCounterToggle, ">75");
         String ferrying = getSelectedText(ferryingCounterToggle, ">75");
         String missed = getSelectedText(missedCounterToggle, ">75");
@@ -369,8 +368,8 @@ public class Endgame extends Fragment implements UpdateListener {
         String robotFellOver = noShowSwitch.isChecked() ? "Y" : "N";
 
         // Create CSV line
-        String snapshotLine = String.format("%d,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
-                timestamp, collecting, ferrying, missed, startLevel, stopLevel,
+        String snapshotLine = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
+                collecting, ferrying, missed, startLevel, stopLevel,
                 attemptedClimb, successfulClimbed, climbLocation, robotFellOver);
 
         // Append to builder
@@ -378,7 +377,7 @@ public class Endgame extends Fragment implements UpdateListener {
 
         // Save to HashMap for persistence
         endgameHashMap.put("snapshots", snapshotBuilder.toString());
-        HashMapManager.putAutonHashMap(endgameHashMap);
+        HashMapManager.putEndgameHashMap(endgameHashMap);
 
         int snapshotCount = countSnapshots();
         Toast.makeText(context, "Snapshot #" + snapshotCount + " saved", Toast.LENGTH_SHORT).show();
@@ -420,7 +419,7 @@ public class Endgame extends Fragment implements UpdateListener {
         endgameHashMap.put("SuccessfulClimbed", "None");
         endgameHashMap.put("ClimbLocation", "LEFT");
         endgameHashMap.put("RobotFellOver", "N");
-        HashMapManager.putAutonHashMap(endgameHashMap);
+        HashMapManager.putEndgameHashMap(endgameHashMap);
 
         Log.d("Endgame", "UI reset after snapshot save");
     }
@@ -455,7 +454,7 @@ public class Endgame extends Fragment implements UpdateListener {
         if (this.isVisible()) {
             if (isVisibleToUser) {
                 setupHashMap   = HashMapManager.getSetupHashMap();
-                endgameHashMap = HashMapManager.getAutonHashMap();
+                endgameHashMap = HashMapManager.getEndgameHashMap();
                 loadEndgameData();
                 initializeSnapshots();
             } else {

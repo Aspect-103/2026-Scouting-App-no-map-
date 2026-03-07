@@ -71,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
                 HashMapManager.setDefaultValues(HashMapManager.HASH.SETUP);
                 HashMapManager.setDefaultValues(HashMapManager.HASH.AUTON);
                 HashMapManager.setDefaultValues(HashMapManager.HASH.TELEOP);
-                HashMapManager.setDefaultValues(HashMapManager.HASH.CLIMB);
+                HashMapManager.setDefaultValues(HashMapManager.HASH.ENDGAME);
                 Toast.makeText(SettingsActivity.this, "All variables successfully reset.", Toast.LENGTH_SHORT).show();
             }
         });
