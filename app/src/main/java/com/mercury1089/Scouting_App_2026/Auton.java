@@ -19,9 +19,6 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import androidx.fragment.app.Fragment;
 
@@ -32,8 +29,14 @@ import java.util.LinkedHashMap;
 
 public class Auton extends Fragment implements UpdateListener {
 
+    private static final String TAG = "Auton Fragment";
+
     private LinkedHashMap<String, String> setupHashMap;
     private LinkedHashMap<String, String> autonHashMap;
+
+    // Snapshot System (CSV format)
+    private StringBuilder snapshotBuilder;
+    private static final String SNAPSHOT_HEADER = "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver";
 
     // Fuel section
     private RadioGroup collectingCounterToggle;
@@ -50,6 +53,7 @@ public class Auton extends Fragment implements UpdateListener {
     // Other controls
     private Switch noShowSwitch;
     private Button saveButton;
+    private Button resetButton;
     private Button nextButtonAuton;
 
     // Timer & animation
@@ -105,6 +109,7 @@ public class Auton extends Fragment implements UpdateListener {
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
         noShowSwitch                     = getView().findViewById(R.id.NoShowSwitch);
         saveButton                       = getView().findViewById(R.id.SaveButton);
+        resetButton                      = getView().findViewById(R.id.ResetButton);
         nextButtonAuton                  = getView().findViewById(R.id.NextButtonAuton);
         timerID                          = getView().findViewById(R.id.IDAutonSeconds1);
         secondsRemaining                 = getView().findViewById(R.id.AutonSeconds);
@@ -114,11 +119,107 @@ public class Auton extends Fragment implements UpdateListener {
         leftEdgeBar                      = getView().findViewById(R.id.leftEdgeBar);
         rightEdgeBar                     = getView().findViewById(R.id.rightEdgeBar);
 
+        initializeSnapshots();
         loadAutonData();
         setupCounterListeners();
         setupCascadingListeners();
         setupButtonListeners();
         setupTimer();
+    }
+
+    // ─────────────────────────────────────────
+    // SNAPSHOT SYSTEM
+    // ─────────────────────────────────────────
+
+    private void initializeSnapshots() {
+        String snapshotsString = autonHashMap.get("snapshots");
+        if (snapshotsString == null || snapshotsString.isEmpty()) {
+            snapshotBuilder = new StringBuilder();
+            snapshotBuilder.append(SNAPSHOT_HEADER).append("\n");
+        } else {
+            snapshotBuilder = new StringBuilder(snapshotsString);
+            if (!snapshotsString.endsWith("\n")) {
+                snapshotBuilder.append("\n");
+            }
+        }
+    }
+
+    private void appendAutonSnapshot() {
+        if (snapshotBuilder == null) {
+            initializeSnapshots();
+        }
+
+        String snapshotLine = String.format("%d,%d,%d,%s,%s,%s,%s,%s,%s\n",
+                collectingCount,
+                ferryingCount,
+                missedCount,
+                getLevelValue(startLevelToggle),
+                getLevelValue(stopLevelToggle),
+                getSelectedText(attemptedClimbToggle, "DID NOT ATTEMPT"),
+                getSelectedText(successfulClimbedToggle, "None"),
+                getSelectedText(successfullyClimbedLocationToggle, "LEFT"),
+                (noShowSwitch != null && noShowSwitch.isChecked()) ? "1" : "0");
+
+        snapshotBuilder.append(snapshotLine);
+        autonHashMap.put("snapshots", snapshotBuilder.toString());
+        HashMapManager.putAutonHashMap(autonHashMap);
+    }
+
+    private int countSnapshots() {
+        if (snapshotBuilder == null) return 0;
+        String content = snapshotBuilder.toString();
+        int count = 0;
+        for (int i = 0; i < content.length(); i++) {
+            if (content.charAt(i) == '\n') count++;
+        }
+        return count - 1; // Subtract header line
+    }
+
+    public String getSnapshotsAsString() {
+        return snapshotBuilder != null ? snapshotBuilder.toString() : "";
+    }
+
+    public String exportSnapshotsCSV() {
+        return getSnapshotsAsString();
+    }
+
+    // ─────────────────────────────────────────
+    // UI RESET
+    // ─────────────────────────────────────────
+
+    private void resetAutonUI() {
+        // Reset counters
+        collectingCount = 0;
+        ferryingCount = 0;
+        missedCount = 0;
+
+        // Reset level toggles to EMPTY (first button)
+        if (startLevelToggle != null && startLevelToggle.getChildCount() > 0) {
+            startLevelToggle.check(((RadioButton) startLevelToggle.getChildAt(0)).getId());
+        }
+        if (stopLevelToggle != null && stopLevelToggle.getChildCount() > 0) {
+            stopLevelToggle.check(((RadioButton) stopLevelToggle.getChildAt(0)).getId());
+        }
+
+        // Reset climb counters/toggles
+        if (attemptedClimbToggle != null && attemptedClimbToggle.getChildCount() > 0) {
+            attemptedClimbToggle.check(((RadioButton) attemptedClimbToggle.getChildAt(0)).getId());
+        }
+        if (successfulClimbedToggle != null && successfulClimbedToggle.getChildCount() > 0) {
+            successfulClimbedToggle.check(((RadioButton) successfulClimbedToggle.getChildAt(0)).getId());
+        }
+        if (successfullyClimbedLocationToggle != null && successfullyClimbedLocationToggle.getChildCount() > 0) {
+            successfullyClimbedLocationToggle.check(((RadioButton) successfullyClimbedLocationToggle.getChildAt(0)).getId());
+        }
+
+        // Reset switch
+        if (noShowSwitch != null) {
+            noShowSwitch.setChecked(false);
+        }
+
+        // Update cascading logic
+        updateFuelStates();
+        updateClimbStates();
     }
 
     // ─────────────────────────────────────────
@@ -253,21 +354,30 @@ public class Auton extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void setupButtonListeners() {
-        saveButton.setOnClickListener(v -> {
-            // CHANGED: was saveAutonData();
-            appendAutonSnapshot(); // <-- appends instead of overwriting
-            Toast.makeText(context, "Snapshot saved", Toast.LENGTH_SHORT).show();
-        });
+        if (saveButton != null) {
+            saveButton.setOnClickListener(v -> {
+                saveAutonData();
+                appendAutonSnapshot();
+                resetAutonUI();
+                Toast.makeText(context, "Auton snapshot saved", Toast.LENGTH_SHORT).show();
+            });
+        }
 
-        nextButtonAuton.setOnClickListener(v -> {
-            //OPTION A (recommended): only save current state (no extra snapshots)
-            saveAutonData(); // <-- keep as overwrite-only
-            //
-            //OPTION B: if you want Next to also create a snapshot, use this instead:
-            appendAutonSnapshot(); // <-- COMMENT OUT if you don’t want Next to append
+        if (resetButton != null) {
+            resetButton.setOnClickListener(v -> {
+                loadAutonData();
+                Toast.makeText(context, "Changes cancelled", Toast.LENGTH_SHORT).show();
+            });
+        }
 
-            context.tabs.getTabAt(1).select();
-        });
+        if (nextButtonAuton != null) {
+            nextButtonAuton.setOnClickListener(v -> {
+                saveAutonData();
+                appendAutonSnapshot();
+                resetAutonUI();
+                context.tabs.getTabAt(1).select();
+            });
+        }
     }
 
     // ─────────────────────────────────────────
@@ -280,29 +390,55 @@ public class Auton extends Fragment implements UpdateListener {
         timer = new CountDownTimer(20000, 1000) {
             @Override
             public void onTick(long ms) {
+                if (secondsRemaining == null) return;
+
                 long secs = ms / 1000;
-                secondsRemaining.setText(String.valueOf(secs));
+                try {
+                    secondsRemaining.setText(String.valueOf(secs));
+                } catch (Exception e) {
+                    Log.e(TAG, "Error setting seconds remaining: " + e.getMessage());
+                }
+
                 if (!running) return;
 
                 if (secs <= 3 && secs > 0) {
-                    teleopWarning.setVisibility(View.VISIBLE);
-                    timerID.setTextColor(context.getResources().getColor(R.color.banana));
-                    timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
-                    if (vibrator != null) vibrator.vibrate(500);
-                    pulseEdgeBars();
+                    try {
+                        if (teleopWarning != null) {
+                            teleopWarning.setVisibility(View.VISIBLE);
+                        }
+                        if (timerID != null) {
+                            timerID.setTextColor(context.getResources().getColor(R.color.banana));
+                            timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
+                        }
+                        if (vibrator != null) vibrator.vibrate(500);
+                        pulseEdgeBars();
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error in timer warning: " + e.getMessage());
+                    }
                 }
             }
 
             @Override
             public void onFinish() {
                 if (!running) return;
-                secondsRemaining.setText("0");
-                setAllEdgeBars(R.drawable.teleop_warning);
-                timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
-                timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
-                teleopWarning.setVisibility(View.VISIBLE);
-                teleopWarning.setTextColor(getResources().getColor(R.color.white));
-                teleopWarning.setText(getString(R.string.TeleopError));
+
+                try {
+                    if (secondsRemaining != null) {
+                        secondsRemaining.setText("0");
+                    }
+                    setAllEdgeBars(R.drawable.teleop_warning);
+                    if (timerID != null) {
+                        timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
+                        timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
+                    }
+                    if (teleopWarning != null) {
+                        teleopWarning.setVisibility(View.VISIBLE);
+                        teleopWarning.setTextColor(getResources().getColor(R.color.white));
+                        teleopWarning.setText(getString(R.string.TeleopError));
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Error in timer finish: " + e.getMessage());
+                }
             }
         };
 
@@ -313,18 +449,30 @@ public class Auton extends Fragment implements UpdateListener {
     }
 
     private void pulseEdgeBars() {
-        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
-            ObjectAnimator anim = ObjectAnimator.ofFloat(bar, View.ALPHA, 0f, 1f);
-            anim.setDuration(500);
-            anim.setRepeatMode(ObjectAnimator.REVERSE);
-            anim.setRepeatCount(1);
-            anim.start();
+        try {
+            for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+                if (bar != null) {
+                    ObjectAnimator anim = ObjectAnimator.ofFloat(bar, View.ALPHA, 0f, 1f);
+                    anim.setDuration(500);
+                    anim.setRepeatMode(ObjectAnimator.REVERSE);
+                    anim.setRepeatCount(1);
+                    anim.start();
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error pulsing edge bars: " + e.getMessage());
         }
     }
 
     private void setAllEdgeBars(int drawableRes) {
-        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
-            bar.setBackground(getResources().getDrawable(drawableRes));
+        try {
+            for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+                if (bar != null) {
+                    bar.setBackground(getResources().getDrawable(drawableRes));
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting edge bars: " + e.getMessage());
         }
     }
 
@@ -377,28 +525,6 @@ public class Auton extends Fragment implements UpdateListener {
     // DATA PERSISTENCE
     // ─────────────────────────────────────────
 
-
-    private static final String KEY_AUTON_SAVE_INDEX = "AutonSaveIndex";
-    private static final String SNAP_SEP = "__"; // keys look like Collecting__1, Collecting__2, etc.
-
-    private int nextAutonSaveIndex() {
-        String cur = autonHashMap.get(KEY_AUTON_SAVE_INDEX);
-        int idx = 0;
-        try { idx = (cur == null) ? 0 : Integer.parseInt(cur); }
-        catch (NumberFormatException ignored) { idx = 0; }
-
-        idx += 1; // next snapshot number
-        autonHashMap.put(KEY_AUTON_SAVE_INDEX, String.valueOf(idx));
-        return idx;
-    }
-
-    private String snapKey(String baseKey, int idx) {
-        return baseKey + SNAP_SEP + idx;
-    }
-
-
-
-
     private void loadAutonData() {
         collectingCount = parseCount(hm("Collecting", "0"));
         ferryingCount   = parseCount(hm("Ferrying",   "0"));
@@ -406,8 +532,8 @@ public class Auton extends Fragment implements UpdateListener {
 
         // Snap display buttons to loaded counts (re-attaches listeners inside)
         refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,  ferryingCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,    missedCount);
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,     ferryingCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,       missedCount);
 
         // Level toggles — stored as exact button text e.g. "EMPTY", "25%", "FULL"
         selectByText(startLevelToggle, hm("StartLevel", "EMPTY"));
@@ -440,36 +566,6 @@ public class Auton extends Fragment implements UpdateListener {
         HashMapManager.putAutonHashMap(autonHashMap);
     }
 
-
-    private void appendAutonSnapshot() {
-
-        // Keep your existing “current state” save so loadAutonData() still works
-        // (This overwrites the base keys like "Collecting", "Ferrying", etc.)
-        saveAutonData();
-
-        int idx = nextAutonSaveIndex();
-
-        // Optional: save timestamp for each snapshot
-        autonHashMap.put(snapKey("ts", idx), String.valueOf(System.currentTimeMillis()));
-
-        // Snapshot saved in the SAME format (same field names) but indexed so it never overwrites
-        autonHashMap.put(snapKey("Collecting", idx),        String.valueOf(collectingCount));
-        autonHashMap.put(snapKey("Ferrying", idx),          String.valueOf(ferryingCount));
-        autonHashMap.put(snapKey("Missed", idx),            String.valueOf(missedCount));
-        autonHashMap.put(snapKey("StartLevel", idx),        getLevelValue(startLevelToggle));
-        autonHashMap.put(snapKey("StopLevel", idx),         getLevelValue(stopLevelToggle));
-        autonHashMap.put(snapKey("AttemptedClimb", idx),    getSelectedText(attemptedClimbToggle,               "DID NOT ATTEMPT"));
-        autonHashMap.put(snapKey("SuccessfulClimbed", idx), getSelectedText(successfulClimbedToggle,            "None"));
-        autonHashMap.put(snapKey("ClimbLocation", idx),     getSelectedText(successfullyClimbedLocationToggle,  "LEFT"));
-        autonHashMap.put(snapKey("RobotFellOver", idx),     noShowSwitch.isChecked() ? "Y" : "N");
-
-        // Persist appended snapshot
-        HashMapManager.putAutonHashMap(autonHashMap);
-    }
-
-
-
-
     /** API 21-safe HashMap get with default. */
     private String hm(String key, String def) {
         String v = autonHashMap.get(key);
@@ -485,27 +581,29 @@ public class Auton extends Fragment implements UpdateListener {
     // LIFECYCLE
     // ─────────────────────────────────────────
 
-        @Override
-        public void setUserVisibleHint(boolean isVisibleToUser) {
-            super.setUserVisibleHint(isVisibleToUser);
-            if (this.isVisible()) {
-                if (isVisibleToUser) {
-                    setupHashMap = HashMapManager.getSetupHashMap();
-                    autonHashMap = HashMapManager.getAutonHashMap();
-                    loadAutonData();
-                } else {
-                    // CHANGED: was saveAutonData();
-                    // This should NOT append a snapshot—only keep current state updated.
-                    saveAutonData();
-                }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (this.isVisible()) {
+            if (isVisibleToUser) {
+                setupHashMap = HashMapManager.getSetupHashMap();
+                autonHashMap = HashMapManager.getAutonHashMap();
+                initializeSnapshots();
+                loadAutonData();
+            } else {
+                saveAutonData();
             }
         }
+    }
 
     @Override
     public void onStop() {
         super.onStop();
         running = false;
-        if (timer != null) timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 
     @Override

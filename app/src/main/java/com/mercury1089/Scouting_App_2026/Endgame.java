@@ -62,6 +62,12 @@ public class Endgame extends Fragment implements UpdateListener {
     private boolean running = true;
     private MatchActivity context;
 
+    // SNAPSHOT SYSTEM - CSV FORMAT
+    private StringBuilder snapshotBuilder;
+    private static final String SNAPSHOT_HEADER =
+            "timestamp,collecting,ferrying,missed,startLevel,stopLevel," +
+                    "attemptedClimb,successfulClimbed,climbLocation,robotFellOver";
+
     public static Endgame newInstance() {
         Endgame fragment = new Endgame();
         fragment.setArguments(new Bundle());
@@ -102,15 +108,32 @@ public class Endgame extends Fragment implements UpdateListener {
         generateQRButton                  = getView().findViewById(R.id.NextButtonEndGame);
         timerID                           = getView().findViewById(R.id.IDEndGameSeconds1);
         secondsRemaining                  = getView().findViewById(R.id.EndGameSeconds);
+        postMatchWarning                  = getView().findViewById(R.id.PostMatchWarning);
         topEdgeBar                        = getView().findViewById(R.id.topEdgeBar);
         bottomEdgeBar                     = getView().findViewById(R.id.bottomEdgeBar);
         leftEdgeBar                       = getView().findViewById(R.id.leftEdgeBar);
         rightEdgeBar                      = getView().findViewById(R.id.rightEdgeBar);
 
+        // Initialize snapshot system
+        initializeSnapshots();
+
         loadEndgameData();
         setupCascadingListeners();
         setupButtonListeners();
         setupTimer();
+    }
+
+    // SNAPSHOT INITIALIZATION
+    private void initializeSnapshots() {
+        String existingSnapshots = endgameHashMap.get("snapshots");
+        if (existingSnapshots != null && !existingSnapshots.isEmpty()) {
+            snapshotBuilder = new StringBuilder(existingSnapshots);
+            Log.d("Endgame", "Restored " + countSnapshots() + " existing snapshots");
+        } else {
+            snapshotBuilder = new StringBuilder();
+            snapshotBuilder.append(SNAPSHOT_HEADER).append("\n");
+            Log.d("Endgame", "Initialized new snapshot buffer");
+        }
     }
 
     // ─────────────────────────────────────────
@@ -146,7 +169,6 @@ public class Endgame extends Fragment implements UpdateListener {
     private void setupButtonListeners() {
         saveButton.setOnClickListener(v -> {
             appendEndgameSnapshot();
-            Toast.makeText(context, "Snapshot saved", Toast.LENGTH_SHORT).show();
         });
 
         generateQRButton.setOnClickListener(v -> {
@@ -170,34 +192,69 @@ public class Endgame extends Fragment implements UpdateListener {
     private void setupTimer() {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
-        timer = new CountDownTimer(110000, 1000) {
+        timer = new CountDownTimer(160000, 1000) {
             @Override
             public void onTick(long ms) {
                 long secs = ms / 1000;
-                long mins = secs / 60;
-                long rem  = secs % 60;
-                secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
+
+                if (secondsRemaining != null) {
+                    secondsRemaining.setText(String.valueOf(secs));
+                }
+
                 if (!running) return;
 
-                if (secs <= 30 && secs > 0) {
-                    postMatchWarning.setVisibility(View.VISIBLE);
-                    timerID.setTextColor(context.getResources().getColor(R.color.banana));
-                    timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
+                if (secs <= 5 && secs > 0) {
+                    if (postMatchWarning != null) {
+                        postMatchWarning.setVisibility(View.VISIBLE);
+                    }
+
+                    if (timerID != null) {
+                        try {
+                            timerID.setTextColor(getResources().getColor(R.color.banana));
+                            timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
+                        } catch (Exception e) {
+                            Log.e("Endgame", "Timer warning color error: " + e.getMessage());
+                        }
+                    }
+
                     if (vibrator != null) vibrator.vibrate(500);
-                    pulseEdgeBars();
+
+                    try {
+                        pulseEdgeBars();
+                    } catch (Exception e) {
+                        Log.e("Endgame", "Pulse edge bars error: " + e.getMessage());
+                    }
                 }
             }
 
             @Override
             public void onFinish() {
                 if (!running) return;
-                secondsRemaining.setText("0");
+
+                if (secondsRemaining != null) {
+                    secondsRemaining.setText("0");
+                }
+
                 setAllEdgeBars(R.drawable.teleop_warning);
-                timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
-                timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
-                postMatchWarning.setVisibility(View.VISIBLE);
-                postMatchWarning.setTextColor(getResources().getColor(R.color.white));
-                postMatchWarning.setText(getString(R.string.EndGameError));
+
+                if (timerID != null) {
+                    try {
+                        timerID.setTextColor(getResources().getColor(R.color.border_warning));
+                        timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
+                    } catch (Exception e) {
+                        Log.e("Endgame", "Timer finish color error: " + e.getMessage());
+                    }
+                }
+
+                if (postMatchWarning != null) {
+                    postMatchWarning.setVisibility(View.VISIBLE);
+                    try {
+                        postMatchWarning.setTextColor(getResources().getColor(R.color.white));
+                    } catch (Exception e) {
+                        Log.e("Endgame", "Warning text color error: " + e.getMessage());
+                    }
+                    postMatchWarning.setText(getString(R.string.EndGameError));
+                }
             }
         };
 
@@ -209,6 +266,7 @@ public class Endgame extends Fragment implements UpdateListener {
 
     private void pulseEdgeBars() {
         for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+            if (bar == null) continue;
             ObjectAnimator anim = ObjectAnimator.ofFloat(bar, View.ALPHA, 0f, 1f);
             anim.setDuration(500);
             anim.setRepeatMode(ObjectAnimator.REVERSE);
@@ -218,8 +276,14 @@ public class Endgame extends Fragment implements UpdateListener {
     }
 
     private void setAllEdgeBars(int drawableRes) {
-        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar})
-            bar.setBackground(getResources().getDrawable(drawableRes));
+        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+            if (bar == null) continue;
+            try {
+                bar.setBackground(getResources().getDrawable(drawableRes));
+            } catch (Exception e) {
+                Log.e("Endgame", "Edge bar drawable error: " + e.getMessage());
+            }
+        }
     }
 
     // ─────────────────────────────────────────
@@ -258,23 +322,6 @@ public class Endgame extends Fragment implements UpdateListener {
     // DATA PERSISTENCE
     // ─────────────────────────────────────────
 
-    private static final String KEY_ENDGAME_SAVE_INDEX = "EndgameSaveIndex";
-    private static final String SNAP_SEP = "__";
-
-    private int nextEndgameSaveIndex() {
-        String cur = endgameHashMap.get(KEY_ENDGAME_SAVE_INDEX);
-        int idx = 0;
-        try { idx = (cur == null) ? 0 : Integer.parseInt(cur); }
-        catch (NumberFormatException ignored) { idx = 0; }
-        idx += 1;
-        endgameHashMap.put(KEY_ENDGAME_SAVE_INDEX, String.valueOf(idx));
-        return idx;
-    }
-
-    private String snapKey(String baseKey, int idx) {
-        return baseKey + SNAP_SEP + idx;
-    }
-
     private void loadEndgameData() {
         selectByText(collectingCounterToggle, hm("Collecting", ">75"));
         selectByText(ferryingCounterToggle,   hm("Ferrying",   ">75"));
@@ -306,23 +353,91 @@ public class Endgame extends Fragment implements UpdateListener {
         HashMapManager.putAutonHashMap(endgameHashMap);
     }
 
+    // SNAPSHOT SYSTEM - CSV SERIALIZATION
     private void appendEndgameSnapshot() {
         saveEndgameData();
 
-        int idx = nextEndgameSaveIndex();
+        long timestamp = System.currentTimeMillis();
+        String collecting = getSelectedText(collectingCounterToggle, ">75");
+        String ferrying = getSelectedText(ferryingCounterToggle, ">75");
+        String missed = getSelectedText(missedCounterToggle, ">75");
+        String startLevel = getLevelValue(startLevelToggle);
+        String stopLevel = getLevelValue(stopLevelToggle);
+        String attemptedClimb = getSelectedText(attemptedClimbToggle, "DID NOT ATTEMPT");
+        String successfulClimbed = getSelectedText(successfulClimbedToggle, "None");
+        String climbLocation = getSelectedText(successfullyClimbedLocationToggle, "LEFT");
+        String robotFellOver = noShowSwitch.isChecked() ? "Y" : "N";
 
-        endgameHashMap.put(snapKey("ts", idx),                String.valueOf(System.currentTimeMillis()));
-        endgameHashMap.put(snapKey("Collecting", idx),        getSelectedText(collectingCounterToggle, ">75"));
-        endgameHashMap.put(snapKey("Ferrying", idx),          getSelectedText(ferryingCounterToggle,   ">75"));
-        endgameHashMap.put(snapKey("Missed", idx),            getSelectedText(missedCounterToggle,     ">75"));
-        endgameHashMap.put(snapKey("StartLevel", idx),        getLevelValue(startLevelToggle));
-        endgameHashMap.put(snapKey("StopLevel", idx),         getLevelValue(stopLevelToggle));
-        endgameHashMap.put(snapKey("AttemptedClimb", idx),    getSelectedText(attemptedClimbToggle,               "DID NOT ATTEMPT"));
-        endgameHashMap.put(snapKey("SuccessfulClimbed", idx), getSelectedText(successfulClimbedToggle,            "None"));
-        endgameHashMap.put(snapKey("ClimbLocation", idx),     getSelectedText(successfullyClimbedLocationToggle,  "LEFT"));
-        endgameHashMap.put(snapKey("RobotFellOver", idx),     noShowSwitch.isChecked() ? "Y" : "N");
+        // Create CSV line
+        String snapshotLine = String.format("%d,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
+                timestamp, collecting, ferrying, missed, startLevel, stopLevel,
+                attemptedClimb, successfulClimbed, climbLocation, robotFellOver);
 
+        // Append to builder
+        snapshotBuilder.append(snapshotLine);
+
+        // Save to HashMap for persistence
+        endgameHashMap.put("snapshots", snapshotBuilder.toString());
         HashMapManager.putAutonHashMap(endgameHashMap);
+
+        int snapshotCount = countSnapshots();
+        Toast.makeText(context, "Snapshot #" + snapshotCount + " saved", Toast.LENGTH_SHORT).show();
+        Log.d("Endgame", "Snapshot appended: " + snapshotLine.trim());
+
+        // RESET UI
+        resetEndgameUI();
+    }
+
+    private void resetEndgameUI() {
+        // Reset counter toggles
+        selectByText(collectingCounterToggle, ">75");
+        selectByText(ferryingCounterToggle, ">75");
+        selectByText(missedCounterToggle, ">75");
+
+        // Reset level toggles
+        selectByText(startLevelToggle, "EMPTY");
+        selectByText(stopLevelToggle, "EMPTY");
+
+        // Reset climb toggles
+        selectByText(attemptedClimbToggle, "DID NOT ATTEMPT");
+        selectByText(successfulClimbedToggle, "None");
+        selectByText(successfullyClimbedLocationToggle, "LEFT");
+
+        // Reset switch
+        noShowSwitch.setChecked(false);
+
+        // Update cascading logic
+        updateFuelStates();
+        updateClimbStates();
+
+        // Save reset state to HashMap
+        endgameHashMap.put("Collecting", ">75");
+        endgameHashMap.put("Ferrying", ">75");
+        endgameHashMap.put("Missed", ">75");
+        endgameHashMap.put("StartLevel", "EMPTY");
+        endgameHashMap.put("StopLevel", "EMPTY");
+        endgameHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
+        endgameHashMap.put("SuccessfulClimbed", "None");
+        endgameHashMap.put("ClimbLocation", "LEFT");
+        endgameHashMap.put("RobotFellOver", "N");
+        HashMapManager.putAutonHashMap(endgameHashMap);
+
+        Log.d("Endgame", "UI reset after snapshot save");
+    }
+
+    private int countSnapshots() {
+        String content = snapshotBuilder.toString();
+        if (content.isEmpty()) return 0;
+        String[] lines = content.split("\n");
+        return Math.max(0, lines.length - 2);
+    }
+
+    public String getSnapshotsAsString() {
+        return snapshotBuilder.toString();
+    }
+
+    public String exportSnapshotsCSV() {
+        return snapshotBuilder.toString();
     }
 
     private String hm(String key, String def) {
@@ -342,6 +457,7 @@ public class Endgame extends Fragment implements UpdateListener {
                 setupHashMap   = HashMapManager.getSetupHashMap();
                 endgameHashMap = HashMapManager.getAutonHashMap();
                 loadEndgameData();
+                initializeSnapshots();
             } else {
                 saveEndgameData();
             }
@@ -352,7 +468,10 @@ public class Endgame extends Fragment implements UpdateListener {
     public void onStop() {
         super.onStop();
         running = false;
-        if (timer != null) timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 
     @Override

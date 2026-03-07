@@ -65,6 +65,12 @@ public class Teleop extends Fragment implements UpdateListener {
     private int ferryingCount   = 0;
     private int missedCount     = 0;
 
+    // SNAPSHOT SYSTEM - CSV FORMAT
+    private StringBuilder snapshotBuilder;
+    private static final String SNAPSHOT_HEADER =
+            "collecting,ferrying,missed,startLevel,stopLevel," +
+                    "attemptedClimb,successfulClimbed,climbLocation,robotFellOver";
+
     public static Teleop newInstance() {
         Teleop fragment = new Teleop();
         fragment.setArguments(new Bundle());
@@ -111,6 +117,9 @@ public class Teleop extends Fragment implements UpdateListener {
         leftEdgeBar                      = getView().findViewById(R.id.leftEdgeBar);
         rightEdgeBar                     = getView().findViewById(R.id.rightEdgeBar);
 
+        // Initialize snapshot system
+        initializeSnapshots();
+
         loadTeleopData();
         setupCounterListeners();
         setupCascadingListeners();
@@ -118,10 +127,20 @@ public class Teleop extends Fragment implements UpdateListener {
         setupTimer();
     }
 
-    // ─────────────────────────────────────────
-    // COUNTER LISTENERS
-    // ─────────────────────────────────────────
+    // SNAPSHOT INITIALIZATION
+    private void initializeSnapshots() {
+        String existingSnapshots = teleopHashMap.get("snapshots");
+        if (existingSnapshots != null && !existingSnapshots.isEmpty()) {
+            snapshotBuilder = new StringBuilder(existingSnapshots);
+            Log.d("Teleop", "Restored " + countSnapshots() + " existing snapshots");
+        } else {
+            snapshotBuilder = new StringBuilder();
+            snapshotBuilder.append(SNAPSHOT_HEADER).append("\n");
+            Log.d("Teleop", "Initialized new snapshot buffer");
+        }
+    }
 
+    // COUNTER LISTENERS
     private void setupCounterListeners() {
         collectingCounterToggle.setOnCheckedChangeListener((g, id) -> {
             if (id == R.id.CollectingCounter) return;
@@ -200,10 +219,7 @@ public class Teleop extends Fragment implements UpdateListener {
         });
     }
 
-    // ─────────────────────────────────────────
     // CASCADING LOGIC
-    // ─────────────────────────────────────────
-
     private void setupCascadingListeners() {
         startLevelToggle.setOnCheckedChangeListener((g, id) -> updateFuelStates());
         stopLevelToggle.setOnCheckedChangeListener((g, id)  -> updateFuelStates());
@@ -226,14 +242,10 @@ public class Teleop extends Fragment implements UpdateListener {
         setGroupEnabled(successfullyClimbedLocationToggle, "1".equals(attempted) && "1".equals(successful));
     }
 
-    // ─────────────────────────────────────────
     // BUTTON LISTENERS
-    // ─────────────────────────────────────────
-
     private void setupButtonListeners() {
         saveButton.setOnClickListener(v -> {
             appendTeleopSnapshot();
-            Toast.makeText(context, "Snapshot saved", Toast.LENGTH_SHORT).show();
         });
 
         nextButtonEndGame.setOnClickListener(v -> {
@@ -242,41 +254,75 @@ public class Teleop extends Fragment implements UpdateListener {
         });
     }
 
-    // ─────────────────────────────────────────
     // TIMER — 1:50 (110 seconds), warning at 30s
-    // ─────────────────────────────────────────
-
     private void setupTimer() {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
-        timer = new CountDownTimer(110000, 1000) {
+        timer = new CountDownTimer(130000, 1000) {
             @Override
             public void onTick(long ms) {
                 long secs = ms / 1000;
                 long mins = secs / 60;
                 long rem  = secs % 60;
-                secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
+
+                if (secondsRemaining != null) {
+                    secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
+                }
+
                 if (!running) return;
 
                 if (secs <= 30 && secs > 0) {
-                    endgameWarning.setVisibility(View.VISIBLE);
-                    timerID.setTextColor(context.getResources().getColor(R.color.banana));
-                    timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
+                    if (endgameWarning != null) {
+                        endgameWarning.setVisibility(View.VISIBLE);
+                    }
+
+                    if (timerID != null) {
+                        try {
+                            timerID.setTextColor(getResources().getColor(R.color.banana));
+                            timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
+                        } catch (Exception e) {
+                            Log.e("Teleop", "Timer warning color error: " + e.getMessage());
+                        }
+                    }
+
                     if (vibrator != null) vibrator.vibrate(500);
-                    pulseEdgeBars();
+
+                    try {
+                        pulseEdgeBars();
+                    } catch (Exception e) {
+                        Log.e("Teleop", "Pulse edge bars error: " + e.getMessage());
+                    }
                 }
             }
 
             @Override
             public void onFinish() {
                 if (!running) return;
-                secondsRemaining.setText("0:00");
+
+                if (secondsRemaining != null) {
+                    secondsRemaining.setText("0:00");
+                }
+
                 setAllEdgeBars(R.drawable.teleop_warning);
-                timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
-                timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
-                endgameWarning.setVisibility(View.VISIBLE);
-                endgameWarning.setTextColor(getResources().getColor(R.color.white));
-                endgameWarning.setText(getString(R.string.EndGameError));
+
+                if (timerID != null) {
+                    try {
+                        timerID.setTextColor(getResources().getColor(R.color.border_warning));
+                        timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
+                    } catch (Exception e) {
+                        Log.e("Teleop", "Timer finish color error: " + e.getMessage());
+                    }
+                }
+
+                if (endgameWarning != null) {
+                    endgameWarning.setVisibility(View.VISIBLE);
+                    try {
+                        endgameWarning.setTextColor(getResources().getColor(R.color.white));
+                    } catch (Exception e) {
+                        Log.e("Teleop", "Warning text color error: " + e.getMessage());
+                    }
+                    endgameWarning.setText(getString(R.string.EndGameError));
+                }
             }
         };
 
@@ -288,6 +334,7 @@ public class Teleop extends Fragment implements UpdateListener {
 
     private void pulseEdgeBars() {
         for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+            if (bar == null) continue;
             ObjectAnimator anim = ObjectAnimator.ofFloat(bar, View.ALPHA, 0f, 1f);
             anim.setDuration(500);
             anim.setRepeatMode(ObjectAnimator.REVERSE);
@@ -297,14 +344,17 @@ public class Teleop extends Fragment implements UpdateListener {
     }
 
     private void setAllEdgeBars(int drawableRes) {
-        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar})
-            bar.setBackground(getResources().getDrawable(drawableRes));
+        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+            if (bar == null) continue;
+            try {
+                bar.setBackground(getResources().getDrawable(drawableRes));
+            } catch (Exception e) {
+                Log.e("Teleop", "Edge bar drawable error: " + e.getMessage());
+            }
+        }
     }
 
-    // ─────────────────────────────────────────
     // GET / SET HELPERS
-    // ─────────────────────────────────────────
-
     private String getSelectedText(RadioGroup group, String defaultVal) {
         int id = group.getCheckedRadioButtonId();
         if (id == -1) return defaultVal;
@@ -333,28 +383,7 @@ public class Teleop extends Fragment implements UpdateListener {
             group.getChildAt(i).setEnabled(enabled);
     }
 
-    // ─────────────────────────────────────────
     // DATA PERSISTENCE
-    // ─────────────────────────────────────────
-
-    private static final String KEY_TELEOP_SAVE_INDEX = "TeleopSaveIndex";
-    private static final String SNAP_SEP = "__";
-
-    private int nextTeleopSaveIndex() {
-        String cur = teleopHashMap.get(KEY_TELEOP_SAVE_INDEX);
-        int idx = 0;
-        try { idx = (cur == null) ? 0 : Integer.parseInt(cur); }
-        catch (NumberFormatException ignored) { idx = 0; }
-
-        idx += 1;
-        teleopHashMap.put(KEY_TELEOP_SAVE_INDEX, String.valueOf(idx));
-        return idx;
-    }
-
-    private String snapKey(String baseKey, int idx) {
-        return baseKey + SNAP_SEP + idx;
-    }
-
     private void loadTeleopData() {
         collectingCount = parseCount(hm("Collecting", "0"));
         ferryingCount   = parseCount(hm("Ferrying",   "0"));
@@ -390,24 +419,95 @@ public class Teleop extends Fragment implements UpdateListener {
         HashMapManager.putTeleopHashMap(teleopHashMap);
     }
 
+    // SNAPSHOT SYSTEM - CSV SERIALIZATION
     private void appendTeleopSnapshot() {
         saveTeleopData();
 
-        int idx = nextTeleopSaveIndex();
+        String collecting = String.valueOf(collectingCount);
+        String ferrying = String.valueOf(ferryingCount);
+        String missed = String.valueOf(missedCount);
+        String startLevel = getLevelValue(startLevelToggle);
+        String stopLevel = getLevelValue(stopLevelToggle);
+        String attemptedClimb = getSelectedText(attemptedClimbToggle, "DID NOT ATTEMPT");
+        String successfulClimbed = getSelectedText(successfulClimbedToggle, "None");
+        String climbLocation = getSelectedText(successfullyClimbedLocationToggle, "LEFT");
+        String robotFellOver = noShowSwitch.isChecked() ? "Y" : "N";
 
-        teleopHashMap.put(snapKey("ts", idx), String.valueOf(System.currentTimeMillis()));
+        // Create CSV line
+        String snapshotLine = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
+                collecting, ferrying, missed, startLevel, stopLevel,
+                attemptedClimb, successfulClimbed, climbLocation, robotFellOver);
 
-        teleopHashMap.put(snapKey("Collecting", idx),        String.valueOf(collectingCount));
-        teleopHashMap.put(snapKey("Ferrying", idx),          String.valueOf(ferryingCount));
-        teleopHashMap.put(snapKey("Missed", idx),            String.valueOf(missedCount));
-        teleopHashMap.put(snapKey("StartLevel", idx),        getLevelValue(startLevelToggle));
-        teleopHashMap.put(snapKey("StopLevel", idx),         getLevelValue(stopLevelToggle));
-        teleopHashMap.put(snapKey("AttemptedClimb", idx),    getSelectedText(attemptedClimbToggle,               "DID NOT ATTEMPT"));
-        teleopHashMap.put(snapKey("SuccessfulClimbed", idx), getSelectedText(successfulClimbedToggle,            "None"));
-        teleopHashMap.put(snapKey("ClimbLocation", idx),     getSelectedText(successfullyClimbedLocationToggle,  "LEFT"));
-        teleopHashMap.put(snapKey("RobotFellOver", idx),     noShowSwitch.isChecked() ? "Y" : "N");
+        // Append to builder
+        snapshotBuilder.append(snapshotLine);
 
+        // Save to HashMap for persistence
+        teleopHashMap.put("snapshots", snapshotBuilder.toString());
         HashMapManager.putTeleopHashMap(teleopHashMap);
+
+        int snapshotCount = countSnapshots();
+        Toast.makeText(context, "Snapshot #" + snapshotCount + " saved", Toast.LENGTH_SHORT).show();
+        Log.d("Teleop", "Snapshot appended: " + snapshotLine.trim());
+
+        // RESET UI
+        resetTeleopUI();
+    }
+
+    private void resetTeleopUI() {
+        // Reset counters
+        collectingCount = 0;
+        ferryingCount = 0;
+        missedCount = 0;
+
+        // Reset counter displays
+        refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, 0);
+        refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, 0);
+        refreshDisplay(missedCounterToggle, R.id.MissedCounter, 0);
+
+        // Reset level toggles
+        selectByText(startLevelToggle, "EMPTY");
+        selectByText(stopLevelToggle, "EMPTY");
+
+        // Reset climb toggles
+        selectByText(attemptedClimbToggle, "DID NOT ATTEMPT");
+        selectByText(successfulClimbedToggle, "None");
+        selectByText(successfullyClimbedLocationToggle, "LEFT");
+
+        // Reset switch
+        noShowSwitch.setChecked(false);
+
+        // Update cascading logic
+        updateFuelStates();
+        updateClimbStates();
+
+        // Save reset state to HashMap
+        teleopHashMap.put("Collecting", "0");
+        teleopHashMap.put("Ferrying", "0");
+        teleopHashMap.put("Missed", "0");
+        teleopHashMap.put("StartLevel", "EMPTY");
+        teleopHashMap.put("StopLevel", "EMPTY");
+        teleopHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
+        teleopHashMap.put("SuccessfulClimbed", "None");
+        teleopHashMap.put("ClimbLocation", "LEFT");
+        teleopHashMap.put("RobotFellOver", "N");
+        HashMapManager.putTeleopHashMap(teleopHashMap);
+
+        Log.d("Teleop", "UI reset after snapshot save");
+    }
+
+    private int countSnapshots() {
+        String content = snapshotBuilder.toString();
+        if (content.isEmpty()) return 0;
+        String[] lines = content.split("\n");
+        return Math.max(0, lines.length - 2);
+    }
+
+    public String getSnapshotsAsString() {
+        return snapshotBuilder.toString();
+    }
+
+    public String exportSnapshotsCSV() {
+        return snapshotBuilder.toString();
     }
 
     private String hm(String key, String def) {
@@ -420,10 +520,7 @@ public class Teleop extends Fragment implements UpdateListener {
         catch (NumberFormatException e) { return 0; }
     }
 
-    // ─────────────────────────────────────────
     // LIFECYCLE
-    // ─────────────────────────────────────────
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -432,6 +529,7 @@ public class Teleop extends Fragment implements UpdateListener {
                 setupHashMap  = HashMapManager.getSetupHashMap();
                 teleopHashMap = HashMapManager.getTeleopHashMap();
                 loadTeleopData();
+                initializeSnapshots();
             } else {
                 saveTeleopData();
             }
@@ -442,7 +540,10 @@ public class Teleop extends Fragment implements UpdateListener {
     public void onStop() {
         super.onStop();
         running = false;
-        if (timer != null) timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 
     @Override
