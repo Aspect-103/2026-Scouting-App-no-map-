@@ -794,7 +794,6 @@
         android:orientation="vertical"
         android:paddingLeft="10dp"
         app:layout_constraintStart_toEndOf="@id/ColumnTwo"
-        app:layout_constraintStart_toTopof="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- ═════════════════════════════════════════
@@ -945,7 +944,7 @@
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/AchievedLevel2"
+                android:id="@+id/ArchivedLevel2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"

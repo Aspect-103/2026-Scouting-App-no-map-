@@ -197,6 +197,10 @@ public class Auton extends Fragment implements UpdateListener {
         ferryingCount = 0;
         missedCount = 0;
 
+        refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
+
         // Reset level toggles to EMPTY (first button)
         if (startLevelToggle != null && startLevelToggle.getChildCount() > 0) {
             startLevelToggle.check(((RadioButton) startLevelToggle.getChildAt(0)).getId());
@@ -369,7 +373,7 @@ public class Auton extends Fragment implements UpdateListener {
 
         if (resetButton != null) {
             resetButton.setOnClickListener(v -> {
-                loadAutonData();
+                resetAutonUI();
                 Toast.makeText(context, "Changes cancelled", Toast.LENGTH_SHORT).show();
             });
         }
@@ -395,29 +399,34 @@ public class Auton extends Fragment implements UpdateListener {
             @Override
             public void onTick(long ms) {
                 if (secondsRemaining == null) return;
-
                 long secs = ms / 1000;
-                try {
-                    secondsRemaining.setText(String.valueOf(secs));
-                } catch (Exception e) {
-                    Log.e(TAG, "Error setting seconds remaining: " + e.getMessage());
-                }
+                long mins = secs / 60;
+                long rem  = secs % 60;
+
+                secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
 
                 if (!running) return;
 
-                if (secs <= 3 && secs > 0) {
-                    try {
-                        if (teleopWarning != null) {
-                            teleopWarning.setVisibility(View.VISIBLE);
-                        }
-                        if (timerID != null) {
-                            timerID.setTextColor(context.getResources().getColor(R.color.banana));
+                if (secs <= 30 && secs > 0) {
+                    if (teleopWarning != null) {
+                        teleopWarning.setVisibility(View.VISIBLE);
+                    }
+
+                    if (timerID != null) {
+                        try {
+                            timerID.setTextColor(getResources().getColor(R.color.banana));
                             timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
+                        } catch (Exception e) {
+                            Log.e(TAG, "Timer warning color error: " + e.getMessage());
                         }
-                        if (vibrator != null) vibrator.vibrate(500);
+                    }
+
+                    if (vibrator != null) vibrator.vibrate(500);
+
+                    try {
                         pulseEdgeBars();
                     } catch (Exception e) {
-                        Log.e(TAG, "Error in timer warning: " + e.getMessage());
+                        Log.e(TAG, "Pulse edge bars error: " + e.getMessage());
                     }
                 }
             }
