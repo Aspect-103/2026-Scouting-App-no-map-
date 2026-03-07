@@ -947,7 +947,7 @@
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/AchievedLevel1"
+                android:id="@+id/AchievedLevel2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="10dp"
@@ -961,7 +961,7 @@
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/AchievedLevel1"
+                android:id="@+id/AchievedLevel2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="10dp"

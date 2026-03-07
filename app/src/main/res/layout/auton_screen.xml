@@ -794,8 +794,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@id/ColumnTwo" >
-        app:layout_constraintStart_toTopof="@id/ColumnTwo" >
+        app:layout_constraintStart_toEndOf="@id/ColumnTwo"
+        app:layout_constraintTop_toBottomof="parent" >
 
         <!-- ═════════════════════════════════════════
          CLIMBING SECTION  (right column, below Missed)
