@@ -451,207 +451,98 @@
              START SECTION  (right column)
              ═════════════════════════════════════════ -->
 
-        <TextView
-            android:id="@+id/StartTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/StartTitle"
-            android:textColor="@color/sky"
-            android:textSize="@dimen/header_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
-
-        <TextView
-            android:id="@+id/StartDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/StartDesc"
-            android:textColor="@color/bootstrap_brand_secondary_border"
-            android:textSize="@dimen/instruction_text_size"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/StartTitle"
-            app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
-
-        <!-- Start level toggle: EMPTY | 25% | 50% | 75% | FULL -->
         <RadioGroup
-            android:id="@+id/StartLevelToggle"
+            android:id="@+id/ScoredCounterToggle"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/StartDesc"
-            app:layout_constraintTop_toBottomOf="@+id/StartDesc">
+            app:layout_constraintStart_toStartOf="@id/ScoringDesc"
+            app:layout_constraintTop_toBottomOf="@+id/ScoringDesc">
 
             <RadioButton
-                android:id="@+id/StartEmpty"
+                android:id="@+id/ScoredMinus10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/button_states"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-10"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/ScoredMinus5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/ScoredMinus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Scoredounter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:button="@null"
                 android:checked="false"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:paddingHorizontal="12dp"
-                android:text="@string/empty_label"
+                android:padding="8dp"
+                android:text="000"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Start25"
-                android:layout_width="wrap_content"
+                android:id="@+id/ScoredPlus"
+                android:layout_width="44dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/button_states"
+                android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:text="@string/percent_25"
+                android:padding="8dp"
+                android:text="+"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Start50"
+                android:id="@+id/ScoredPlus5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/button_states"
+                android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:text="@string/percent_50"
+                android:text="+5"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Start75"
+                android:id="@+id/ScoredPlus10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/button_states"
+                android:background="@drawable/toggle_right_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:text="@string/percent_75"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <RadioButton
-                android:id="@+id/StartFull"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:paddingHorizontal="12dp"
-                android:text="@string/full_label"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-        </RadioGroup>
-
-        <!-- ═════════════════════════════════════════
-             STOP SECTION  (right column)
-             ═════════════════════════════════════════ -->
-        <TextView
-            android:id="@+id/StopTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/StopTitle"
-            android:textColor="@color/sky"
-            android:textSize="@dimen/header_text_size"
-            app:layout_constraintStart_toStartOf="@+id/StartLevelToggle"
-            app:layout_constraintTop_toBottomOf="@+id/StartLevelToggle" />
-
-        <TextView
-            android:id="@+id/StopDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/StopDesc"
-            android:textColor="@color/bootstrap_brand_secondary_border"
-            android:textSize="@dimen/instruction_text_size"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/StopTitle"
-            app:layout_constraintTop_toBottomOf="@+id/StopTitle" />
-
-        <!-- Stop level toggle: EMPTY | 25% | 50% | 75% | FULL -->
-        <RadioGroup
-            android:id="@+id/StopLevelToggle"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/StopDesc"
-            app:layout_constraintTop_toBottomOf="@+id/StopDesc">
-
-            <RadioButton
-                android:id="@+id/StopEmpty"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_states"
-                android:button="@null"
-                android:checked="false"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:paddingHorizontal="12dp"
-                android:text="@string/empty_label"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <RadioButton
-                android:id="@+id/Stop25"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:text="@string/percent_25"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <RadioButton
-                android:id="@+id/Stop50"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:text="@string/percent_50"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <RadioButton
-                android:id="@+id/Stop75"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:text="@string/percent_75"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <RadioButton
-                android:id="@+id/StopFull"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:paddingHorizontal="12dp"
-                android:text="@string/full_label"
+                android:text="+10"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
         </RadioGroup>

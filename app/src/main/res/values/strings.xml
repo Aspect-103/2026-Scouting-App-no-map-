@@ -55,6 +55,7 @@
     <string name="StopDesc">How full was <b>the robot</b> when it stopped scoring?</string>
     <string name="MissedTitle">MISSED</string>
     <string name="MissedDesc">How much fuel was missed?</string>
+    <string name="ScoringDesc">How much fuel was made?</string>
     <string name="empty_label">EMPTY</string>
     <string name="full_label">FULL</string>
     <string name="percent_25">25<small>%</small></string>
