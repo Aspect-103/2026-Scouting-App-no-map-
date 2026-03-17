@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- disabled -->
+    <item android:state_enabled="false" android:state_selected="false" android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/night"/>
+        </shape>
+    </item>
+    <!-- checked/active -->
+    <item android:state_enabled="true" android:state_selected="true" android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/melon"/>
+        </shape>
+    </item>
+    <!-- default, pressed -->
+    <item android:state_enabled="true" android:state_selected="false" android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/afterdark"/>
+        </shape>
+    </item>
+    <!-- default -->
+    <item android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ocean"/>
+        </shape>
+    </item>
+</selector>

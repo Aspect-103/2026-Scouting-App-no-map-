@@ -1,11 +1,13 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/melon</item>
-        <item name="colorPrimaryDark">@color/bg_general</item>
-        <item name="colorAccent">@color/heading_active</item>
+        <item name="colorOnPrimary">@color/charcoal</item>
+        <item name="colorSecondary">@color/ocean</item>
+        <item name="colorOnSecondary">@color/ice</item>
+        <item name="android:navigationBarColor">@color/night</item>
+        <item name="android:statusBarColor">@color/night</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -109,4 +111,23 @@
         <item name="android:textSize">@dimen/warning_text</item>
     </style>
 
+    <style name="TabText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- SWITCHES / TOGGLES -->
+    <!--
+    <style name="Switch.Style" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorPrimary">@color/melon</item>
+        <item name="colorSurfaceVariant">@color/ocean</item>
+    </style>
+
+    <style name="AppTheme.Switch" parent="AppTheme">
+        <item name="materialSwitchStyle">@style/Switch.Style</item>
+    </style>
+-->
 </resources>

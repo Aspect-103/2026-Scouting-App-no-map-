@@ -1,8 +1,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true" android:state_enabled="true"
         android:drawable="@drawable/toggle_left_active" />
-    <!--<item android:state_selected="true" android:state_enabled="false"
-        android:drawable="@drawable/thumb_active_disabled" />-->
+    <!-- pressed -->
+    <item
+        android:state_enabled="true"
+        android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/melon"/>
+            <corners android:topLeftRadius="5dp" android:bottomLeftRadius="5dp" />
+        </shape>
+    </item>
     <item android:state_enabled="false"
         android:drawable="@drawable/toggle_left_disabled" />
     <item android:drawable="@drawable/toggle_left_default" />

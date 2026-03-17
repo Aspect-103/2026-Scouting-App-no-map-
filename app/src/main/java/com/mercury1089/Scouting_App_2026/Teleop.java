@@ -16,12 +16,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.mercury1089.Scouting_App_2026.listeners.UpdateListener;
 import com.mercury1089.Scouting_App_2026.utils.GenUtils;
 
@@ -52,7 +52,7 @@ public class Teleop extends Fragment implements UpdateListener {
     private RadioGroup successfullyClimbedLocationToggle;
 
     // Other controls
-    private Switch noShowSwitch;
+    private MaterialSwitch noShowSwitch;
     private Button saveButton;
     private Button resetButton;
     private Button nextButtonTeleop;

@@ -4,7 +4,6 @@
     <!-- space = &#32; -->
     <!-- new line = \n -->
 
-
     <!-- Headings -->
     <!-- Titles -->
     <string name="app_name">Scouting App 2026</string>
@@ -55,7 +54,7 @@
     <string name="StopDesc">How full was <b>the robot</b> when it stopped scoring?</string>
     <string name="MissedTitle">MISSED</string>
     <string name="MissedDesc">How much fuel was missed?</string>
-    <string name="ScoringDesc">How much fuel was made?</string>
+    <string name="ScoringDesc">How much fuel was scored?</string>
     <string name="empty_label">EMPTY</string>
     <string name="full_label">FULL</string>
     <string name="percent_25">25<small>%</small></string>
@@ -69,11 +68,11 @@
     <string name="FuelPassed">How much FUEL was passed to their alliance zone or partner(s)?</string>
 
     <string name="ClimbingTitle">CLIMBING</string>
-    <string name="AttemptedCLimbLevelDesc">What level did they attempt to climb to?</string>
+    <string name="AttemptedCLimbLevelDesc">What level did they <b>attempt</b> to climb to?</string>
     <string name="DNA">NO ATTEMPT</string>
-    <string name="SuccessfullyClimbed">What level did they successfully climb to?</string>
+    <string name="SuccessfullyClimbed">What level did they <b>successfully</b> climb to?</string>
     <string name="SuccessfulClimbedLevel">NONE</string>
-    <string name="TowerClimbPlacement">What side of <b>the tower</b> did they climb on?</string>
+    <string name="TowerClimbPlacement">What <b>side</b> of the tower did they climb on?</string>
     <string name="Left">LEFT</string>
     <string name="Center">CENTER</string>
     <string name="Right">RIGHT</string>
@@ -98,13 +97,13 @@
     <!-- ID Fields -->
     <string name="ResetID">RESET APP</string>
     <string name="GoBack">BACK</string>
-    <string name="QRCache">QR Code Cache</string>
+    <string name="QRCache">CACHED QR CODES</string>
 
     <!-- Directions -->
     <string name="ResetDirections">If a QR code fails to generate or the app is displaying persistent and incorrect active states, tap the button below.</string>
 
     <!-- Button Texts -->
-    <string name="ResetButton">RESET ALL VARIABLES</string>
+    <string name="ResetButton">RESET</string>
     <string name="QRCacheItem">Team Number: %1$s &#160;&#160;&#160;&#160;&#160;&#160; Match Number: %2$s</string>
 
 
@@ -115,7 +114,7 @@
     <string name="Done">DONE</string>
     <string name="Cancel">CANCEL</string>
     <string name="Reset">RESET</string>
-    <string name="Save">Save</string>
+    <string name="Save">SAVE</string>
 
     <!-- Exit Popup -->
     <string name="ExitWarning">Are you sure that you want to leave? All data will be lost!</string>
@@ -166,16 +165,16 @@
 
     <!-- Password -->
     <string name="IDPassword">PASSWORD</string>
-    <string name="IDPasswordInstructions">Please enter a password to access the Settings screen</string>
+    <string name="IDPasswordInstructions">Please enter the password to access the Settings screen.</string>
     <string name="IDPasswordSettings">PASSWORD SETTINGS</string>
     <string name="IDPasswordRequiredConfirm">Password protect app settings?</string>
 
     <!-- Button Text -->
-    <string name="SetupNext">(RE)BUILD THE NEXT MATCH</string>
+    <string name="SetupNext">BUILD THE NEXT MATCH</string>
     <string name="Scanned">Scanned?</string>
     <string name="NextMatch">SET UP NEXT MATCH</string>
     <string name="ToggleInstructions">Tap on the toggle to record if the options are true (on) or false (off).</string>
-    <string name="PreloadNote">Preloaded Fuel</string>
+    <string name="Preload">PRELOADED FUEL</string>
     <string name="Fuel">FUEL</string>
     <string name="Amp">AMP</string>
 </resources>

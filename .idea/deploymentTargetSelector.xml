@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-03-05T16:10:30.518828Z">
+        <DropdownSelection timestamp="2026-03-15T22:34:51.431281200Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/srikar_muthyala/.android/avd/Srikar_Testing.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Mercury1089\.android\avd\New_Robotics_Tablet_API_33.avd" />
             </handle>
           </Target>
         </DropdownSelection>

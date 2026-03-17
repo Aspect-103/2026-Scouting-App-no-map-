@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.mercury1089.Scouting_App_2026.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -33,13 +33,10 @@ public final class EnterPasswordPopupBinding implements ViewBinding {
   public final TextView IDPassword;
 
   @NonNull
-  public final TextView IDPasswordConfirm;
-
-  @NonNull
   public final EditText PasswordField;
 
   @NonNull
-  public final Switch SettingsPasswordSwitch;
+  public final MaterialSwitch SettingsPasswordSwitch;
 
   @NonNull
   public final RadioGroup radioGroup;
@@ -49,13 +46,12 @@ public final class EnterPasswordPopupBinding implements ViewBinding {
 
   private EnterPasswordPopupBinding(@NonNull ConstraintLayout rootView,
       @NonNull Button CancelButton, @NonNull Button DoneButton, @NonNull TextView IDPassword,
-      @NonNull TextView IDPasswordConfirm, @NonNull EditText PasswordField,
-      @NonNull Switch SettingsPasswordSwitch, @NonNull RadioGroup radioGroup, @NonNull View view2) {
+      @NonNull EditText PasswordField, @NonNull MaterialSwitch SettingsPasswordSwitch,
+      @NonNull RadioGroup radioGroup, @NonNull View view2) {
     this.rootView = rootView;
     this.CancelButton = CancelButton;
     this.DoneButton = DoneButton;
     this.IDPassword = IDPassword;
-    this.IDPasswordConfirm = IDPasswordConfirm;
     this.PasswordField = PasswordField;
     this.SettingsPasswordSwitch = SettingsPasswordSwitch;
     this.radioGroup = radioGroup;
@@ -107,12 +103,6 @@ public final class EnterPasswordPopupBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.IDPasswordConfirm;
-      TextView IDPasswordConfirm = ViewBindings.findChildViewById(rootView, id);
-      if (IDPasswordConfirm == null) {
-        break missingId;
-      }
-
       id = R.id.PasswordField;
       EditText PasswordField = ViewBindings.findChildViewById(rootView, id);
       if (PasswordField == null) {
@@ -120,7 +110,7 @@ public final class EnterPasswordPopupBinding implements ViewBinding {
       }
 
       id = R.id.SettingsPasswordSwitch;
-      Switch SettingsPasswordSwitch = ViewBindings.findChildViewById(rootView, id);
+      MaterialSwitch SettingsPasswordSwitch = ViewBindings.findChildViewById(rootView, id);
       if (SettingsPasswordSwitch == null) {
         break missingId;
       }
@@ -138,7 +128,7 @@ public final class EnterPasswordPopupBinding implements ViewBinding {
       }
 
       return new EnterPasswordPopupBinding((ConstraintLayout) rootView, CancelButton, DoneButton,
-          IDPassword, IDPasswordConfirm, PasswordField, SettingsPasswordSwitch, radioGroup, view2);
+          IDPassword, PasswordField, SettingsPasswordSwitch, radioGroup, view2);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,54 +1,55 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'com.mercury1089.Scouting_App_2026'
+    namespace = 'com.mercury1089.Scouting_App_2026'
     compileSdkVersion 35
+    
     defaultConfig {
         applicationId "com.mercury1089.scoutingapp2025"
         minSdkVersion 21
-        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 35
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
+
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
-    namespace 'com.mercury1089.Scouting_App_2026'
+
+    packagingOptions {
+        resources {
+            pickFirst "assets/typicons-v207.ttf"
+            pickFirst "assets/fontawesome-webfont-v470.ttf"
+            pickFirst "assets/MaterialIcons-Regular.ttf"
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.gridlayout:gridlayout:1.1.0'
-    final def var = implementation 'com.android.support:appcompat-v7:28.0.0'
-    var
-    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
-    final def var1 = implementation 'com.android.support:design:28.0.0'
-    var1
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.13.0'
+
     testImplementation 'junit:junit:4.13.2'
-    final def var2 = androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    var2
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.beardedhen:androidbootstrap:2.3.2'
-//    implementation 'com.google.zxing:core:3.4.0'
-//    implementation 'com.google.zxing:javase:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
     implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'androidx.fragment:fragment:1.1.0'
-
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.github.kenglxn.QRGen:android:3.0.1'
-
-
 }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,38 +34,20 @@ public final class SettingsPasswordBinding implements ViewBinding {
   public final EditText PasswordField;
 
   @NonNull
-  public final ImageView bottomEdgeBar;
-
-  @NonNull
-  public final ImageView leftEdgeBar;
-
-  @NonNull
-  public final ImageView rightEdgeBar;
-
-  @NonNull
   public final TextView textView3;
-
-  @NonNull
-  public final ImageView topEdgeBar;
 
   @NonNull
   public final View view3;
 
   private SettingsPasswordBinding(@NonNull ConstraintLayout rootView, @NonNull Button CancelButton,
       @NonNull Button ConfirmButton, @NonNull TextView IDPassword, @NonNull EditText PasswordField,
-      @NonNull ImageView bottomEdgeBar, @NonNull ImageView leftEdgeBar,
-      @NonNull ImageView rightEdgeBar, @NonNull TextView textView3, @NonNull ImageView topEdgeBar,
-      @NonNull View view3) {
+      @NonNull TextView textView3, @NonNull View view3) {
     this.rootView = rootView;
     this.CancelButton = CancelButton;
     this.ConfirmButton = ConfirmButton;
     this.IDPassword = IDPassword;
     this.PasswordField = PasswordField;
-    this.bottomEdgeBar = bottomEdgeBar;
-    this.leftEdgeBar = leftEdgeBar;
-    this.rightEdgeBar = rightEdgeBar;
     this.textView3 = textView3;
-    this.topEdgeBar = topEdgeBar;
     this.view3 = view3;
   }
 
@@ -121,33 +102,9 @@ public final class SettingsPasswordBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.bottomEdgeBar;
-      ImageView bottomEdgeBar = ViewBindings.findChildViewById(rootView, id);
-      if (bottomEdgeBar == null) {
-        break missingId;
-      }
-
-      id = R.id.leftEdgeBar;
-      ImageView leftEdgeBar = ViewBindings.findChildViewById(rootView, id);
-      if (leftEdgeBar == null) {
-        break missingId;
-      }
-
-      id = R.id.rightEdgeBar;
-      ImageView rightEdgeBar = ViewBindings.findChildViewById(rootView, id);
-      if (rightEdgeBar == null) {
-        break missingId;
-      }
-
       id = R.id.textView3;
       TextView textView3 = ViewBindings.findChildViewById(rootView, id);
       if (textView3 == null) {
-        break missingId;
-      }
-
-      id = R.id.topEdgeBar;
-      ImageView topEdgeBar = ViewBindings.findChildViewById(rootView, id);
-      if (topEdgeBar == null) {
         break missingId;
       }
 
@@ -158,8 +115,7 @@ public final class SettingsPasswordBinding implements ViewBinding {
       }
 
       return new SettingsPasswordBinding((ConstraintLayout) rootView, CancelButton, ConfirmButton,
-          IDPassword, PasswordField, bottomEdgeBar, leftEdgeBar, rightEdgeBar, textView3,
-          topEdgeBar, view3);
+          IDPassword, PasswordField, textView3, view3);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

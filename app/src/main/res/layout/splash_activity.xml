@@ -12,18 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/target"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="200dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:id="@+id/LightningBolt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/lightning_bolt"
-        android:layout_marginLeft="75dp"
+        android:alpha="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="parent" />
 
     <TextView
@@ -34,9 +35,8 @@
         android:fontFamily="@font/futura_medium_condensed_bt"
         android:textColor="@color/melon"
         android:textSize="48sp"
-        android:layout_marginBottom="100dp"
         android:alpha="0.0"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Target"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

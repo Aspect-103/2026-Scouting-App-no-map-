@@ -29,9 +29,6 @@ public final class ActivitySettingsBinding implements ViewBinding {
   public final Button ClearQRCodesButton;
 
   @NonNull
-  public final TextView IDSettings;
-
-  @NonNull
   public final TextView IDSettingsDirections;
 
   @NonNull
@@ -41,34 +38,58 @@ public final class ActivitySettingsBinding implements ViewBinding {
   public final ImageButton MuteButton;
 
   @NonNull
+  public final TextView PasswordHeader;
+
+  @NonNull
   public final Button PasswordSettingsButton;
+
+  @NonNull
+  public final TextView QRCacheHeader;
 
   @NonNull
   public final ListView QRCodeListView;
 
   @NonNull
+  public final View QRDivider;
+
+  @NonNull
+  public final View ResetDivider;
+
+  @NonNull
+  public final TextView ResetHeader;
+
+  @NonNull
   public final TextView SettingsHeader;
 
   @NonNull
-  public final TextView textView2;
+  public final TextView SettingsTitle;
+
+  @NonNull
+  public final ConstraintLayout rowOne;
 
   private ActivitySettingsBinding(@NonNull ConstraintLayout rootView, @NonNull Button BackButton,
-      @NonNull Button ClearQRCodesButton, @NonNull TextView IDSettings,
-      @NonNull TextView IDSettingsDirections, @NonNull Button LocalStorageResetButton,
-      @NonNull ImageButton MuteButton, @NonNull Button PasswordSettingsButton,
-      @NonNull ListView QRCodeListView, @NonNull TextView SettingsHeader,
-      @NonNull TextView textView2) {
+      @NonNull Button ClearQRCodesButton, @NonNull TextView IDSettingsDirections,
+      @NonNull Button LocalStorageResetButton, @NonNull ImageButton MuteButton,
+      @NonNull TextView PasswordHeader, @NonNull Button PasswordSettingsButton,
+      @NonNull TextView QRCacheHeader, @NonNull ListView QRCodeListView, @NonNull View QRDivider,
+      @NonNull View ResetDivider, @NonNull TextView ResetHeader, @NonNull TextView SettingsHeader,
+      @NonNull TextView SettingsTitle, @NonNull ConstraintLayout rowOne) {
     this.rootView = rootView;
     this.BackButton = BackButton;
     this.ClearQRCodesButton = ClearQRCodesButton;
-    this.IDSettings = IDSettings;
     this.IDSettingsDirections = IDSettingsDirections;
     this.LocalStorageResetButton = LocalStorageResetButton;
     this.MuteButton = MuteButton;
+    this.PasswordHeader = PasswordHeader;
     this.PasswordSettingsButton = PasswordSettingsButton;
+    this.QRCacheHeader = QRCacheHeader;
     this.QRCodeListView = QRCodeListView;
+    this.QRDivider = QRDivider;
+    this.ResetDivider = ResetDivider;
+    this.ResetHeader = ResetHeader;
     this.SettingsHeader = SettingsHeader;
-    this.textView2 = textView2;
+    this.SettingsTitle = SettingsTitle;
+    this.rowOne = rowOne;
   }
 
   @Override
@@ -110,12 +131,6 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.IDSettings;
-      TextView IDSettings = ViewBindings.findChildViewById(rootView, id);
-      if (IDSettings == null) {
-        break missingId;
-      }
-
       id = R.id.IDSettingsDirections;
       TextView IDSettingsDirections = ViewBindings.findChildViewById(rootView, id);
       if (IDSettingsDirections == null) {
@@ -134,9 +149,21 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.PasswordHeader;
+      TextView PasswordHeader = ViewBindings.findChildViewById(rootView, id);
+      if (PasswordHeader == null) {
+        break missingId;
+      }
+
       id = R.id.PasswordSettingsButton;
       Button PasswordSettingsButton = ViewBindings.findChildViewById(rootView, id);
       if (PasswordSettingsButton == null) {
+        break missingId;
+      }
+
+      id = R.id.QRCacheHeader;
+      TextView QRCacheHeader = ViewBindings.findChildViewById(rootView, id);
+      if (QRCacheHeader == null) {
         break missingId;
       }
 
@@ -146,21 +173,46 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.QRDivider;
+      View QRDivider = ViewBindings.findChildViewById(rootView, id);
+      if (QRDivider == null) {
+        break missingId;
+      }
+
+      id = R.id.ResetDivider;
+      View ResetDivider = ViewBindings.findChildViewById(rootView, id);
+      if (ResetDivider == null) {
+        break missingId;
+      }
+
+      id = R.id.ResetHeader;
+      TextView ResetHeader = ViewBindings.findChildViewById(rootView, id);
+      if (ResetHeader == null) {
+        break missingId;
+      }
+
       id = R.id.SettingsHeader;
       TextView SettingsHeader = ViewBindings.findChildViewById(rootView, id);
       if (SettingsHeader == null) {
         break missingId;
       }
 
-      id = R.id.textView2;
-      TextView textView2 = ViewBindings.findChildViewById(rootView, id);
-      if (textView2 == null) {
+      id = R.id.SettingsTitle;
+      TextView SettingsTitle = ViewBindings.findChildViewById(rootView, id);
+      if (SettingsTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.rowOne;
+      ConstraintLayout rowOne = ViewBindings.findChildViewById(rootView, id);
+      if (rowOne == null) {
         break missingId;
       }
 
       return new ActivitySettingsBinding((ConstraintLayout) rootView, BackButton,
-          ClearQRCodesButton, IDSettings, IDSettingsDirections, LocalStorageResetButton, MuteButton,
-          PasswordSettingsButton, QRCodeListView, SettingsHeader, textView2);
+          ClearQRCodesButton, IDSettingsDirections, LocalStorageResetButton, MuteButton,
+          PasswordHeader, PasswordSettingsButton, QRCacheHeader, QRCodeListView, QRDivider,
+          ResetDivider, ResetHeader, SettingsHeader, SettingsTitle, rowOne);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

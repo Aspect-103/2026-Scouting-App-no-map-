@@ -26,7 +26,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans_italic"
         android:text="@string/GenerateQRDescription"
-        android:textColor="@color/bootstrap_brand_secondary_border"
+        android:textColor="@color/sky"
         android:textSize="@dimen/instruction_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

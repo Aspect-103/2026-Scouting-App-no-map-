@@ -32,14 +32,18 @@ public final class ExitConfirmPopupBinding implements ViewBinding {
   @NonNull
   public final TextView IDQRWarningDirections;
 
+  @NonNull
+  public final View view;
+
   private ExitConfirmPopupBinding(@NonNull ConstraintLayout rootView, @NonNull Button CancelConfirm,
       @NonNull Button ExitConfirm, @NonNull TextView IDExit,
-      @NonNull TextView IDQRWarningDirections) {
+      @NonNull TextView IDQRWarningDirections, @NonNull View view) {
     this.rootView = rootView;
     this.CancelConfirm = CancelConfirm;
     this.ExitConfirm = ExitConfirm;
     this.IDExit = IDExit;
     this.IDQRWarningDirections = IDQRWarningDirections;
+    this.view = view;
   }
 
   @Override
@@ -93,8 +97,14 @@ public final class ExitConfirmPopupBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.view;
+      View view = ViewBindings.findChildViewById(rootView, id);
+      if (view == null) {
+        break missingId;
+      }
+
       return new ExitConfirmPopupBinding((ConstraintLayout) rootView, CancelConfirm, ExitConfirm,
-          IDExit, IDQRWarningDirections);
+          IDExit, IDQRWarningDirections, view);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

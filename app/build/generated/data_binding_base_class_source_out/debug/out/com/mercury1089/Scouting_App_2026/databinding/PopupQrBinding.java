@@ -36,15 +36,19 @@ public final class PopupQrBinding implements ViewBinding {
   @NonNull
   public final ImageView imageView;
 
+  @NonNull
+  public final View view2;
+
   private PopupQrBinding(@NonNull ConstraintLayout rootView, @NonNull Button GoBackButton,
       @NonNull TextView IDMatchNumberQR, @NonNull TextView IDScouterNameQR,
-      @NonNull TextView IDTeamNumberQR, @NonNull ImageView imageView) {
+      @NonNull TextView IDTeamNumberQR, @NonNull ImageView imageView, @NonNull View view2) {
     this.rootView = rootView;
     this.GoBackButton = GoBackButton;
     this.IDMatchNumberQR = IDMatchNumberQR;
     this.IDScouterNameQR = IDScouterNameQR;
     this.IDTeamNumberQR = IDTeamNumberQR;
     this.imageView = imageView;
+    this.view2 = view2;
   }
 
   @Override
@@ -104,8 +108,14 @@ public final class PopupQrBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.view2;
+      View view2 = ViewBindings.findChildViewById(rootView, id);
+      if (view2 == null) {
+        break missingId;
+      }
+
       return new PopupQrBinding((ConstraintLayout) rootView, GoBackButton, IDMatchNumberQR,
-          IDScouterNameQR, IDTeamNumberQR, imageView);
+          IDScouterNameQR, IDTeamNumberQR, imageView, view2);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

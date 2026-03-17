@@ -13,6 +13,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.mercury1089.Scouting_App_2026.utils.ListAdapter;
 
 import java.util.LinkedHashMap;
@@ -85,7 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
                 dialog.setContentView(R.layout.enter_password_popup);
 
                 TextView passwordField = dialog.findViewById(R.id.PasswordField);
-                Switch requirePasswordSwitch = dialog.findViewById(R.id.SettingsPasswordSwitch);
+                MaterialSwitch requirePasswordSwitch = dialog.findViewById(R.id.SettingsPasswordSwitch);
                 Button doneButton = dialog.findViewById(R.id.DoneButton);
                 Button cancelButton = dialog.findViewById(R.id.CancelButton);
 

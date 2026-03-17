@@ -3,8 +3,38 @@
     <!--  Non focused states -->
     <item android:state_enabled="false"
         android:drawable="@drawable/button_large_disabled" />
-    <!--  Focused states -->
+    <!-- active, pressed -->
+    <item android:state_pressed="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <size
+                android:height="55dp"
+                android:width="400dp" />
+            <corners android:radius="5dp"/>
+            <solid android:color="@color/rust"/>
+            <padding
+                android:top="16dp"
+                android:bottom="16dp"/>
+        </shape>
+    </item>
+    <!-- active -->
     <item android:state_selected="true"
         android:drawable="@drawable/button_large_active" />
+
+    <!-- default, pressed -->
+    <item android:state_pressed="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <size
+                android:height="55dp"
+                android:width="400dp" />
+            <corners android:radius="5dp"/>
+            <solid android:color="@color/afterdark"/>
+            <padding
+                android:top="16dp"
+                android:bottom="16dp"/>
+        </shape>
+    </item>
+    <!-- default -->
     <item android:drawable="@drawable/button_large_default" />
 </selector>

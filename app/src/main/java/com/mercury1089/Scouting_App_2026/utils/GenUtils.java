@@ -1,8 +1,7 @@
 package com.mercury1089.Scouting_App_2026.utils;
 
 import android.content.Context;
-
-import com.beardedhen.androidbootstrap.BootstrapButton;
+import android.widget.Button;
 import com.mercury1089.Scouting_App_2026.R;
 import androidx.core.content.ContextCompat;
 
@@ -14,20 +13,17 @@ public class GenUtils {
         return ContextCompat.getColor(context, id);
     }
 
-    public static void defaultButtonState (Context context, BootstrapButton button) {
+    public static void defaultButtonState (Context context, Button button) {
         button.setBackgroundColor(GenUtils.getAColor(context, R.color.light));
         button.setTextColor(GenUtils.getAColor(context, R.color.grey));
-        button.setRounded(true);
     }
-    public static void selectedButtonState(Context context, BootstrapButton button) {
+    public static void selectedButtonState(Context context, Button button) {
         button.setBackgroundColor(GenUtils.getAColor(context, R.color.orange));
         button.setTextColor(GenUtils.getAColor(context, R.color.light));
-        button.setRounded(true);
     }
-    public static void disabledButtonState(Context context, BootstrapButton button) {
+    public static void disabledButtonState(Context context, Button button) {
         button.setBackgroundColor(GenUtils.getAColor(context, R.color.grey));
         button.setTextColor(GenUtils.getAColor(context, R.color.light));
-        button.setRounded(true);
         button.setEnabled(false);
     }
 

@@ -7,15 +7,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
-import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.mercury1089.Scouting_App_2026.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -23,13 +25,28 @@ import java.lang.String;
 
 public final class ActivityPregameBinding implements ViewBinding {
   @NonNull
-  private final ScrollView rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
-  public final Button BlueButton;
+  public final RadioGroup AllianceToggle;
+
+  @NonNull
+  public final LinearLayoutCompat AllianceWrapper;
+
+  @NonNull
+  public final RadioButton BlueButton;
 
   @NonNull
   public final Button ClearButton;
+
+  @NonNull
+  public final RadioGroup CollectingCounterToggle;
+
+  @NonNull
+  public final LinearLayoutCompat ColumnOne;
+
+  @NonNull
+  public final LinearLayoutCompat ColumnTwo;
 
   @NonNull
   public final EditText FirstAlliancePartnerInput;
@@ -44,10 +61,7 @@ public final class ActivityPregameBinding implements ViewBinding {
   public final TextView IDMatchNumber;
 
   @NonNull
-  public final TextView IDNoShow;
-
-  @NonNull
-  public final TextView IDPreloadNote;
+  public final TextView IDPreload;
 
   @NonNull
   public final TextView IDScouterName;
@@ -65,28 +79,28 @@ public final class ActivityPregameBinding implements ViewBinding {
   public final TextView IDTeamNumber;
 
   @NonNull
-  public final TextView IDToggleInstructions;
-
-  @NonNull
   public final EditText MatchNumberInput;
 
   @NonNull
-  public final RadioGroup MissedToggle;
+  public final MaterialSwitch NoShowSwitch;
 
   @NonNull
-  public final Switch NoShowSwitch;
+  public final TextView NoShowText;
 
   @NonNull
-  public final TextView PreloadedCargoDisplay;
+  public final LinearLayoutCompat PreloadWrapper;
 
   @NonNull
-  public final ImageButton PreloadedCargoMinus;
+  public final RadioButton PreloadedCargoDisplay;
 
   @NonNull
-  public final ImageButton PreloadedCargoPlus;
+  public final RadioButton PreloadedCargoMinus;
 
   @NonNull
-  public final Button RedButton;
+  public final RadioButton PreloadedCargoPlus;
+
+  @NonNull
+  public final RadioButton RedButton;
 
   @NonNull
   public final EditText ScouterNameInput;
@@ -98,7 +112,10 @@ public final class ActivityPregameBinding implements ViewBinding {
   public final ImageButton SettingsButton;
 
   @NonNull
-  public final Button StartButton;
+  public final MaterialButton StartButton;
+
+  @NonNull
+  public final LinearLayoutCompat SwitchWrapper;
 
   @NonNull
   public final EditText TeamNumberInput;
@@ -106,38 +123,45 @@ public final class ActivityPregameBinding implements ViewBinding {
   @NonNull
   public final ConstraintLayout mainActivity;
 
-  private ActivityPregameBinding(@NonNull ScrollView rootView, @NonNull Button BlueButton,
-      @NonNull Button ClearButton, @NonNull EditText FirstAlliancePartnerInput,
+  private ActivityPregameBinding(@NonNull ConstraintLayout rootView,
+      @NonNull RadioGroup AllianceToggle, @NonNull LinearLayoutCompat AllianceWrapper,
+      @NonNull RadioButton BlueButton, @NonNull Button ClearButton,
+      @NonNull RadioGroup CollectingCounterToggle, @NonNull LinearLayoutCompat ColumnOne,
+      @NonNull LinearLayoutCompat ColumnTwo, @NonNull EditText FirstAlliancePartnerInput,
       @NonNull TextView IDAllianceColor, @NonNull TextView IDAlliancePartners,
-      @NonNull TextView IDMatchNumber, @NonNull TextView IDNoShow, @NonNull TextView IDPreloadNote,
-      @NonNull TextView IDScouterName, @NonNull TextView IDSetup,
-      @NonNull TextView IDSetupDirections, @NonNull TextView IDStartDirections,
-      @NonNull TextView IDTeamNumber, @NonNull TextView IDToggleInstructions,
-      @NonNull EditText MatchNumberInput, @NonNull RadioGroup MissedToggle,
-      @NonNull Switch NoShowSwitch, @NonNull TextView PreloadedCargoDisplay,
-      @NonNull ImageButton PreloadedCargoMinus, @NonNull ImageButton PreloadedCargoPlus,
-      @NonNull Button RedButton, @NonNull EditText ScouterNameInput,
-      @NonNull EditText SecondAlliancePartnerInput, @NonNull ImageButton SettingsButton,
-      @NonNull Button StartButton, @NonNull EditText TeamNumberInput,
+      @NonNull TextView IDMatchNumber, @NonNull TextView IDPreload, @NonNull TextView IDScouterName,
+      @NonNull TextView IDSetup, @NonNull TextView IDSetupDirections,
+      @NonNull TextView IDStartDirections, @NonNull TextView IDTeamNumber,
+      @NonNull EditText MatchNumberInput, @NonNull MaterialSwitch NoShowSwitch,
+      @NonNull TextView NoShowText, @NonNull LinearLayoutCompat PreloadWrapper,
+      @NonNull RadioButton PreloadedCargoDisplay, @NonNull RadioButton PreloadedCargoMinus,
+      @NonNull RadioButton PreloadedCargoPlus, @NonNull RadioButton RedButton,
+      @NonNull EditText ScouterNameInput, @NonNull EditText SecondAlliancePartnerInput,
+      @NonNull ImageButton SettingsButton, @NonNull MaterialButton StartButton,
+      @NonNull LinearLayoutCompat SwitchWrapper, @NonNull EditText TeamNumberInput,
       @NonNull ConstraintLayout mainActivity) {
     this.rootView = rootView;
+    this.AllianceToggle = AllianceToggle;
+    this.AllianceWrapper = AllianceWrapper;
     this.BlueButton = BlueButton;
     this.ClearButton = ClearButton;
+    this.CollectingCounterToggle = CollectingCounterToggle;
+    this.ColumnOne = ColumnOne;
+    this.ColumnTwo = ColumnTwo;
     this.FirstAlliancePartnerInput = FirstAlliancePartnerInput;
     this.IDAllianceColor = IDAllianceColor;
     this.IDAlliancePartners = IDAlliancePartners;
     this.IDMatchNumber = IDMatchNumber;
-    this.IDNoShow = IDNoShow;
-    this.IDPreloadNote = IDPreloadNote;
+    this.IDPreload = IDPreload;
     this.IDScouterName = IDScouterName;
     this.IDSetup = IDSetup;
     this.IDSetupDirections = IDSetupDirections;
     this.IDStartDirections = IDStartDirections;
     this.IDTeamNumber = IDTeamNumber;
-    this.IDToggleInstructions = IDToggleInstructions;
     this.MatchNumberInput = MatchNumberInput;
-    this.MissedToggle = MissedToggle;
     this.NoShowSwitch = NoShowSwitch;
+    this.NoShowText = NoShowText;
+    this.PreloadWrapper = PreloadWrapper;
     this.PreloadedCargoDisplay = PreloadedCargoDisplay;
     this.PreloadedCargoMinus = PreloadedCargoMinus;
     this.PreloadedCargoPlus = PreloadedCargoPlus;
@@ -146,13 +170,14 @@ public final class ActivityPregameBinding implements ViewBinding {
     this.SecondAlliancePartnerInput = SecondAlliancePartnerInput;
     this.SettingsButton = SettingsButton;
     this.StartButton = StartButton;
+    this.SwitchWrapper = SwitchWrapper;
     this.TeamNumberInput = TeamNumberInput;
     this.mainActivity = mainActivity;
   }
 
   @Override
   @NonNull
-  public ScrollView getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -177,8 +202,20 @@ public final class ActivityPregameBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.AllianceToggle;
+      RadioGroup AllianceToggle = ViewBindings.findChildViewById(rootView, id);
+      if (AllianceToggle == null) {
+        break missingId;
+      }
+
+      id = R.id.AllianceWrapper;
+      LinearLayoutCompat AllianceWrapper = ViewBindings.findChildViewById(rootView, id);
+      if (AllianceWrapper == null) {
+        break missingId;
+      }
+
       id = R.id.BlueButton;
-      Button BlueButton = ViewBindings.findChildViewById(rootView, id);
+      RadioButton BlueButton = ViewBindings.findChildViewById(rootView, id);
       if (BlueButton == null) {
         break missingId;
       }
@@ -186,6 +223,24 @@ public final class ActivityPregameBinding implements ViewBinding {
       id = R.id.ClearButton;
       Button ClearButton = ViewBindings.findChildViewById(rootView, id);
       if (ClearButton == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingCounterToggle;
+      RadioGroup CollectingCounterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingCounterToggle == null) {
+        break missingId;
+      }
+
+      id = R.id.ColumnOne;
+      LinearLayoutCompat ColumnOne = ViewBindings.findChildViewById(rootView, id);
+      if (ColumnOne == null) {
+        break missingId;
+      }
+
+      id = R.id.ColumnTwo;
+      LinearLayoutCompat ColumnTwo = ViewBindings.findChildViewById(rootView, id);
+      if (ColumnTwo == null) {
         break missingId;
       }
 
@@ -213,15 +268,9 @@ public final class ActivityPregameBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.IDNoShow;
-      TextView IDNoShow = ViewBindings.findChildViewById(rootView, id);
-      if (IDNoShow == null) {
-        break missingId;
-      }
-
-      id = R.id.IDPreloadNote;
-      TextView IDPreloadNote = ViewBindings.findChildViewById(rootView, id);
-      if (IDPreloadNote == null) {
+      id = R.id.IDPreload;
+      TextView IDPreload = ViewBindings.findChildViewById(rootView, id);
+      if (IDPreload == null) {
         break missingId;
       }
 
@@ -255,50 +304,50 @@ public final class ActivityPregameBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.IDToggleInstructions;
-      TextView IDToggleInstructions = ViewBindings.findChildViewById(rootView, id);
-      if (IDToggleInstructions == null) {
-        break missingId;
-      }
-
       id = R.id.MatchNumberInput;
       EditText MatchNumberInput = ViewBindings.findChildViewById(rootView, id);
       if (MatchNumberInput == null) {
         break missingId;
       }
 
-      id = R.id.MissedToggle;
-      RadioGroup MissedToggle = ViewBindings.findChildViewById(rootView, id);
-      if (MissedToggle == null) {
-        break missingId;
-      }
-
       id = R.id.NoShowSwitch;
-      Switch NoShowSwitch = ViewBindings.findChildViewById(rootView, id);
+      MaterialSwitch NoShowSwitch = ViewBindings.findChildViewById(rootView, id);
       if (NoShowSwitch == null) {
         break missingId;
       }
 
+      id = R.id.NoShowText;
+      TextView NoShowText = ViewBindings.findChildViewById(rootView, id);
+      if (NoShowText == null) {
+        break missingId;
+      }
+
+      id = R.id.PreloadWrapper;
+      LinearLayoutCompat PreloadWrapper = ViewBindings.findChildViewById(rootView, id);
+      if (PreloadWrapper == null) {
+        break missingId;
+      }
+
       id = R.id.PreloadedCargoDisplay;
-      TextView PreloadedCargoDisplay = ViewBindings.findChildViewById(rootView, id);
+      RadioButton PreloadedCargoDisplay = ViewBindings.findChildViewById(rootView, id);
       if (PreloadedCargoDisplay == null) {
         break missingId;
       }
 
       id = R.id.PreloadedCargoMinus;
-      ImageButton PreloadedCargoMinus = ViewBindings.findChildViewById(rootView, id);
+      RadioButton PreloadedCargoMinus = ViewBindings.findChildViewById(rootView, id);
       if (PreloadedCargoMinus == null) {
         break missingId;
       }
 
       id = R.id.PreloadedCargoPlus;
-      ImageButton PreloadedCargoPlus = ViewBindings.findChildViewById(rootView, id);
+      RadioButton PreloadedCargoPlus = ViewBindings.findChildViewById(rootView, id);
       if (PreloadedCargoPlus == null) {
         break missingId;
       }
 
       id = R.id.RedButton;
-      Button RedButton = ViewBindings.findChildViewById(rootView, id);
+      RadioButton RedButton = ViewBindings.findChildViewById(rootView, id);
       if (RedButton == null) {
         break missingId;
       }
@@ -322,8 +371,14 @@ public final class ActivityPregameBinding implements ViewBinding {
       }
 
       id = R.id.StartButton;
-      Button StartButton = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton StartButton = ViewBindings.findChildViewById(rootView, id);
       if (StartButton == null) {
+        break missingId;
+      }
+
+      id = R.id.SwitchWrapper;
+      LinearLayoutCompat SwitchWrapper = ViewBindings.findChildViewById(rootView, id);
+      if (SwitchWrapper == null) {
         break missingId;
       }
 
@@ -339,12 +394,14 @@ public final class ActivityPregameBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityPregameBinding((ScrollView) rootView, BlueButton, ClearButton,
-          FirstAlliancePartnerInput, IDAllianceColor, IDAlliancePartners, IDMatchNumber, IDNoShow,
-          IDPreloadNote, IDScouterName, IDSetup, IDSetupDirections, IDStartDirections, IDTeamNumber,
-          IDToggleInstructions, MatchNumberInput, MissedToggle, NoShowSwitch, PreloadedCargoDisplay,
+      return new ActivityPregameBinding((ConstraintLayout) rootView, AllianceToggle,
+          AllianceWrapper, BlueButton, ClearButton, CollectingCounterToggle, ColumnOne, ColumnTwo,
+          FirstAlliancePartnerInput, IDAllianceColor, IDAlliancePartners, IDMatchNumber, IDPreload,
+          IDScouterName, IDSetup, IDSetupDirections, IDStartDirections, IDTeamNumber,
+          MatchNumberInput, NoShowSwitch, NoShowText, PreloadWrapper, PreloadedCargoDisplay,
           PreloadedCargoMinus, PreloadedCargoPlus, RedButton, ScouterNameInput,
-          SecondAlliancePartnerInput, SettingsButton, StartButton, TeamNumberInput, mainActivity);
+          SecondAlliancePartnerInput, SettingsButton, StartButton, SwitchWrapper, TeamNumberInput,
+          mainActivity);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

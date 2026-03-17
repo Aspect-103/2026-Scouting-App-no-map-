@@ -39,9 +39,15 @@ public class SplashActivity extends AppCompatActivity {
 
                 int lightningBoltSpeed = 200;
 
-                ObjectAnimator animatorX = ObjectAnimator.ofFloat(lightningBolt, View.X, 100, 200).setDuration(lightningBoltSpeed);
-                ObjectAnimator animatorY = ObjectAnimator.ofFloat(lightningBolt, View.Y, -200, 350).setDuration(lightningBoltSpeed);
+                // Calculate the exact center of the screen for the lightning bolt
+                float targetX = (constraintLayout.getWidth() - lightningBolt.getWidth()) / 2f;
+                float targetY = (constraintLayout.getHeight() - lightningBolt.getHeight()) / 2f;
+
+                // Animate from off-screen top to the calculated center
+                ObjectAnimator animatorX = ObjectAnimator.ofFloat(lightningBolt, View.X, targetX - 50, targetX).setDuration(lightningBoltSpeed);
+                ObjectAnimator animatorY = ObjectAnimator.ofFloat(lightningBolt, View.Y, -lightningBolt.getHeight(), targetY).setDuration(lightningBoltSpeed);
                 ObjectAnimator animatorAlpha = ObjectAnimator.ofFloat(lightningBolt, View.ALPHA, 0, 1).setDuration(lightningBoltSpeed);
+                
                 ObjectAnimator animatorScreenAlphaOff = ObjectAnimator.ofFloat(constraintLayout, View.ALPHA, 1, 0).setDuration(100);
                 ObjectAnimator animatorTextAlpha = ObjectAnimator.ofFloat(developersText, View.ALPHA, 0, .5f).setDuration(0);
                 ObjectAnimator animatorScreenAlphaOn = ObjectAnimator.ofFloat(constraintLayout, View.ALPHA, 0, 1).setDuration(100);
@@ -99,8 +105,13 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void fadeOutStep(float deltaVolume){
-        mediaPlayer.setVolume(volume, volume);
-        volume -= deltaVolume;
-
+        if (mediaPlayer != null) {
+            try {
+                mediaPlayer.setVolume(volume, volume);
+                volume -= deltaVolume;
+            } catch (IllegalStateException e) {
+                // Handle case where media player is released
+            }
+        }
     }
 }

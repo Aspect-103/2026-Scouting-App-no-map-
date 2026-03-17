@@ -26,11 +26,15 @@ public final class PopupQrCachedBinding implements ViewBinding {
   @NonNull
   public final ImageView imageView;
 
+  @NonNull
+  public final View view2;
+
   private PopupQrCachedBinding(@NonNull ConstraintLayout rootView, @NonNull Button CloseButton,
-      @NonNull ImageView imageView) {
+      @NonNull ImageView imageView, @NonNull View view2) {
     this.rootView = rootView;
     this.CloseButton = CloseButton;
     this.imageView = imageView;
+    this.view2 = view2;
   }
 
   @Override
@@ -72,7 +76,13 @@ public final class PopupQrCachedBinding implements ViewBinding {
         break missingId;
       }
 
-      return new PopupQrCachedBinding((ConstraintLayout) rootView, CloseButton, imageView);
+      id = R.id.view2;
+      View view2 = ViewBindings.findChildViewById(rootView, id);
+      if (view2 == null) {
+        break missingId;
+      }
+
+      return new PopupQrCachedBinding((ConstraintLayout) rootView, CloseButton, imageView, view2);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

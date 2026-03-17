@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.mercury1089.Scouting_App_2026.SettingsActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
         <activity android:name="com.mercury1089.Scouting_App_2026.PregameActivity"
             android:screenOrientation="landscape"/>
         <activity android:name="com.mercury1089.Scouting_App_2026.MatchActivity"
