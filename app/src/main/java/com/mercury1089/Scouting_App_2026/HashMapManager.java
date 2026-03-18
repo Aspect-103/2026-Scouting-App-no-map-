@@ -334,8 +334,7 @@ public class HashMapManager{
                 autonHashMap.put("Collecting", "0");
                 autonHashMap.put("Ferrying", "0");
                 autonHashMap.put("Missed", "0");
-                autonHashMap.put("StartLevel", "EMPTY");
-                autonHashMap.put("StopLevel", "EMPTY");
+                autonHashMap.put("Scored", "0");
                 autonHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
                 autonHashMap.put("SuccessfulClimbed", "None");
                 autonHashMap.put("ClimbLocation", "Null");
@@ -353,8 +352,7 @@ public class HashMapManager{
                 teleopHashMap.put("Collecting", "0");
                 teleopHashMap.put("Ferrying", "0");
                 teleopHashMap.put("Missed", "0");
-                teleopHashMap.put("StartLevel", "EMPTY");
-                teleopHashMap.put("StopLevel", "EMPTY");
+                teleopHashMap.put("Scored", "0");
                 teleopHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
                 teleopHashMap.put("SuccessfulClimbed", "None");
                 teleopHashMap.put("ClimbLocation", "Null");
@@ -372,8 +370,7 @@ public class HashMapManager{
                 endgameHashMap.put("Collecting", "0");
                 endgameHashMap.put("Ferrying", "0");
                 endgameHashMap.put("Missed", "0");
-                endgameHashMap.put("StartLevel", "EMPTY");
-                endgameHashMap.put("StopLevel", "EMPTY");
+                endgameHashMap.put("Scored", "0");
                 endgameHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
                 endgameHashMap.put("SuccessfulClimbed", "None");
                 endgameHashMap.put("ClimbLocation", "Null");
