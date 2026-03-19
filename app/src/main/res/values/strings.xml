@@ -11,7 +11,7 @@
     <string name="SetupTitle">PRE-MATCH SETUP</string>
     <string name="StartingPositionTitle">STARTING POSITION</string>
     <string name="ClearTitle">CLEAR THIS SCREEN?</string>
-    <string name="ExitTitle">EXIT</string>
+    <string name="ExitTitle">ARE YOU SURE YOU WANT TO QUIT?</string>
     <string name="ScoringTitle">SCORING</string>
     <string name="TeleopTitle">TELEOP</string>
     <string name="EndGameTitle">ENDGAME</string>
@@ -110,14 +110,15 @@
     <!-- MatchActivity -->
     <!-- Universal -->
     <string name="DefaultValue">000</string>
-    <string name="Exit">Exit</string>
+    <string name="Exit">EXIT</string>
+    <string name="Quit">QUIT</string>
     <string name="Done">DONE</string>
     <string name="Cancel">CANCEL</string>
     <string name="Reset">RESET</string>
     <string name="Save">SAVE</string>
 
     <!-- Exit Popup -->
-    <string name="ExitWarning">Are you sure that you want to leave? All data will be lost!</string>
+    <string name="ExitWarning">All data will be lost!</string>
 
     <!-- Auton -->
     <string name="AutonSeconds">AUTON SECONDS REMAINING</string>

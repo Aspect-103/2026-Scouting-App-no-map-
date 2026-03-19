@@ -81,7 +81,7 @@ public class Teleop extends Fragment implements UpdateListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = (MatchActivity) getActivity();
         try {
-            return inflater.inflate(R.layout.teleop_screen, container, false);
+            return inflater.inflate(R.layout.screen_teleop, container, false);
         } catch (InflateException e) {
             Log.d(TAG, "Inflate error: " + e.getMessage());
             throw e;
